@@ -5,6 +5,10 @@ module LocaleLab
 
     attr_accessor :value
 
+    def self.all
+      TranslationCollection.all
+    end
+
     def initialize(file, locale, key, value)
       @file   = file
       @locale = locale

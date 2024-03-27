@@ -4,12 +4,9 @@ module LocaleLab
       @files   = LocaleLab::TranslationFile.all
       @locales = @files.flat_map(&:locales).sort.uniq
 
-      @translations        = LocaleLab::TranslationFile.available_translations
-      @translations_by_key = @translations.group_by(&:key)
-
-      @incomplete = @translations_by_key.find_all do |key, translations|
-        translations.size < @locales.size || translations.any?(&:incomplete?)
-      end.map(&:first)
+      @translations        = LocaleLab::Translation.all
+      @incomplete          = @translations.missing
+      @translations_by_key = @translations.by_key
     end
   end
 end

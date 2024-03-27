@@ -10,14 +10,10 @@ module LocaleLab
     end
 
     def self.all
-      Thread.current[:locale_lab_translation_files] ||= files.map do |file|
+      Thread.current[
+        :locale_lab_translation_files
+      ] ||= files.map do |file|
         new(file)
-      end
-    end
-
-    def self.available_translations
-      all.flat_map do |file|
-        file.translations
       end
     end
 
