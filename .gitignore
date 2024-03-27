@@ -1,10 +1,24 @@
-/.bundle/
-/doc/
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*.yml
+/log/*.pid
+/test/dummy/log/*.log
+/test/dummy/tmp/
+/.sass-cache
+/tmp
+.DS_Store
+*.swp
+
+# Ignore uploads.
+/test/dummy/storage/
+
+# Ignore compilations.
+/doc/
 /pkg/
-/tmp/
+
+# Ignore the default SQLite database.
 /test/dummy/db/*.sqlite3
 /test/dummy/db/*.sqlite3-*
-/test/dummy/log/*.log
-/test/dummy/storage/
-/test/dummy/tmp/
