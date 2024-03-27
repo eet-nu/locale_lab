@@ -12,5 +12,9 @@ module LocaleLab
       @value  = value
     end
 
+    def incomplete?
+      value.blank?
+    end
+
   end
 end

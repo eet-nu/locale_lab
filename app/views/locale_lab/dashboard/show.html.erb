@@ -1,10 +1,19 @@
-<h2>Translation files</h2>
+<h2>Translation Files</h2>
 <ul>
   <% @files.each do |file| %>
     <li><strong><%= file.relative_path %>:</strong> <%= file.locales.to_sentence %></li>
   <% end %>
 </ul>
 <p><strong>Available locales:</strong> <%= @locales.to_sentence %></p>
+
+<% if @incomplete.present? %>
+  <h2>Incomplete Keys</h2>
+  <ul>
+    <% @incomplete.each do |incomplete| %>
+      <li><%= incomplete %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <h2>Available Keys</h2>
 <ul>
