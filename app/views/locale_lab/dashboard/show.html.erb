@@ -6,6 +6,32 @@
 </ul>
 <p><strong>Available locales:</strong> <%= @locales.to_sentence %></p>
 
+<% if @folders.present? %>
+  <h2>Folders</h2>
+  <ul>
+    <% @folders.each do |folder| %>
+      <li><%= link_to folder, locale_lab.folder_path(folder) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @root_keys.present? %>
+  <h2>Root Keys</h2>
+  <ul>
+    <% @root_keys.each do |key| %>
+      <li>
+        <strong><%= key %>:</strong>
+        <dl>
+          <% @translations_by_key[key].each do |translation| %>
+            <dt><%= translation.locale %> <small>(<%= translation.file.relative_path %>)</small></dt>
+            <dd><pre><%= translation.value %></pre></dd>
+          <% end %>
+        </dl>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <% if @incomplete.present? %>
   <h2>Incomplete Keys</h2>
   <ul>
@@ -14,18 +40,3 @@
     <% end %>
   </ul>
 <% end %>
-
-<h2>Available Keys</h2>
-<ul>
-  <% @translations_by_key.each do |key, translations| %>
-    <li>
-      <strong><%= key %>:</strong>
-      <dl>
-        <% translations.each do |translation| %>
-          <dt><%= translation.locale %> <small>(<%= translation.file.relative_path %>)</small></dt>
-          <dd><pre><%= translation.value %></pre></dd>
-        <% end %>
-      </dl>
-    </li>
-  <% end %>
-</ul>

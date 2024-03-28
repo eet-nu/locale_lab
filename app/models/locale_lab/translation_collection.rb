@@ -2,7 +2,7 @@ module LocaleLab
   class TranslationCollection
     include Enumerable
 
-    attr_reader :translations
+    attr_reader :translations, :path
 
     ### CLASS METHODS:
 
@@ -12,10 +12,19 @@ module LocaleLab
       ] ||= new(TranslationFile.all.flat_map(&:translations))
     end
 
+    def self.navigate(path)
+      matching = all.translations.find_all do |translation|
+        translation.key.starts_with?(path)
+      end
+
+      new(matching, path)
+    end
+
     ### INSTANCE METHODS:
 
-    def initialize(translations)
+    def initialize(translations, path = nil)
       @translations = translations
+      @path         = path
     end
 
     def each(&block)
@@ -26,6 +35,12 @@ module LocaleLab
       @by_key ||= translations.group_by(&:key)
     end
 
+    def with_key(key)
+      translations.find_all do |translation|
+        translation.key == key
+      end
+    end
+
     def locales
       translations.map(&:locale).uniq
     end
@@ -34,6 +49,26 @@ module LocaleLab
       by_key.find_all do |key, translations|
         translations.size < locales.size || translations.any?(&:incomplete?)
       end.map(&:first)
+    end
+
+    def parent_folder
+      @parent_folder ||= path.split('.').tap(&:pop).join('.').presence if path
+    end
+
+    def folders
+      @folders = (translations.map(&:key) - keys).map do |key|
+        relative = path ? key.delete_prefix(path).delete_prefix('.')
+                        : key
+        relative.split('.').first
+      end.uniq.map do |folder|
+        path ? "#{path}.#{folder}" : folder
+      end
+    end
+
+    def keys
+      @keys ||= translations.find_all do |translation|
+        translation.folder == path
+      end.map(&:key).uniq
     end
   end
 end

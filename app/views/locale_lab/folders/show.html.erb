@@ -1,0 +1,29 @@
+<h2>Subfolders</h2>
+<ul>
+  <% if @translations.parent_folder %>
+    <li><%= link_to '..', locale_lab.folder_path(@translations.parent_folder) %></li>
+  <% else %>
+    <li><%= link_to '..', locale_lab.root_path %></li>
+  <% end %>
+  <% @folders.each do |folder| %>
+    <li><%= link_to folder, locale_lab.folder_path(folder) %></li>
+  <% end %>
+</ul>
+
+
+<% if @keys.present? %>
+  <h2>Keys</h2>
+  <ul>
+    <% @keys.each do |key| %>
+      <li>
+        <strong><%= key %>:</strong>
+        <dl>
+          <% @translations_by_key[key].each do |translation| %>
+            <dt><%= translation.locale %> <small>(<%= translation.file.relative_path %>)</small></dt>
+            <dd><pre><%= translation.value %></pre></dd>
+          <% end %>
+        </dl>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
