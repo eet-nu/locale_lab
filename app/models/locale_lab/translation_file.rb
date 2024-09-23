@@ -31,6 +31,11 @@ module LocaleLab
       @path = path
     end
 
+    def reload
+      @data         = nil
+      @translations = nil
+    end
+
     def relative_path
       path.gsub("#{Rails.root}/", '')
     end
@@ -47,6 +52,39 @@ module LocaleLab
       @translations ||= data.flat_map do |locale, hash|
         hash_to_translations(hash, locale)
       end
+    end
+
+    def to_hash
+      result = {}
+
+      translations.each do |translation|
+        path    = "#{translation.locale}.#{translation.key}"
+        keys    = path.split('.')
+        last    = keys.pop
+        current = result
+
+        keys.each do |key|
+          current = current[key] ||= {}
+        end
+
+        current[last] = translation.value
+      end
+
+      result
+    end
+
+    def to_yaml
+      to_hash.to_yaml(line_width: 1024 * 1024)
+    end
+
+    def save
+      contents = to_yaml
+
+      file = File.open(path, 'w')
+      file.puts contents
+      file.close
+
+      reload
     end
 
     private
