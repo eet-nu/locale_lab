@@ -1,0 +1,20 @@
+<%=
+  render 'navigation', navigation: @navigation
+%>
+
+<h2><%= @navigation.path %></h2>
+<% if @translations.present? %>
+  <ul>
+    <% @translations.each do |key, translations| %>
+      <li>
+        <strong><%= key %>:</strong>
+        <dl>
+          <% translations.each do |translation| %>
+            <dt><%= translation.locale %> <small>(<%= translation.file.relative_path %>)</small></dt>
+            <dd><pre><%= translation.value %></pre></dd>
+          <% end %>
+        </dl>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

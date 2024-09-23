@@ -10,7 +10,7 @@
   <h2>Folders</h2>
   <ul>
     <% @folders.each do |folder| %>
-      <li><%= link_to folder, locale_lab.folder_path(folder) %></li>
+      <li><%= link_to folder, locale_lab.translation_path(folder) %></li>
     <% end %>
   </ul>
 <% end %>

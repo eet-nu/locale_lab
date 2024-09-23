@@ -1,0 +1,27 @@
+<aside id="translations-explorer">
+  <h2>Navigation</h2>
+  <ul>
+    <% if navigation.parent_folder %>
+      <li class="folder folder-up">
+        <%= link_to '..', locale_lab.translation_path(navigation.parent_folder) %>
+      </li>
+    <% else %>
+      <li class="folder folder-up">
+        <%= link_to '..', locale_lab.root_path %>
+      </li>
+    <% end %>
+
+    <% navigation.folders.each do |folder| %>
+      <li class="folder">
+        <%= link_to folder, locale_lab.translation_path(folder) %>
+      </li>
+    <% end %>
+
+    <% navigation.keys.each do |key| %>
+      <% label = key.split('.').last %>
+      <li class="key">
+        <%= link_to label, locale_lab.translation_path(key) %>
+      </li>
+    <% end %>
+  </ul>
+</aside>

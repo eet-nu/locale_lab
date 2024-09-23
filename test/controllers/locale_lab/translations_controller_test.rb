@@ -1,7 +1,7 @@
 require "test_helper"
 
 module LocaleLab
-  class FoldersControllerTest < ActionDispatch::IntegrationTest
+  class TranslationsControllerTest < ActionDispatch::IntegrationTest
     include Engine.routes.url_helpers
 
     # test "the truth" do

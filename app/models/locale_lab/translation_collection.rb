@@ -9,7 +9,9 @@ module LocaleLab
     def self.all
       Thread.current[
         :locale_lab_translation_collection
-      ] ||= new(TranslationFile.all.flat_map(&:translations))
+      ] ||= new(
+        TranslationFile.all.flat_map(&:translations)
+      )
     end
 
     def self.navigate(path)
@@ -25,6 +27,18 @@ module LocaleLab
     def initialize(translations, path = nil)
       @translations = translations
       @path         = path
+    end
+
+    def root?
+      path.empty?
+    end
+
+    def folder?
+      !key?
+    end
+
+    def key?
+      with_key(path).present?
     end
 
     def each(&block)
@@ -52,7 +66,7 @@ module LocaleLab
     end
 
     def parent_folder
-      @parent_folder ||= path.split('.').tap(&:pop).join('.').presence if path
+      @parent_folder ||= path && path.split('.').tap(&:pop).join('.').presence
     end
 
     def folders
@@ -67,7 +81,13 @@ module LocaleLab
 
     def keys
       @keys ||= translations.find_all do |translation|
-        translation.folder == path
+        translation.folder == path || translation.key == path
+      end.map(&:key).uniq
+    end
+
+    def matching_keys
+      @matching_keys ||= translations.find_all do |translation|
+        translation.folder == path || translation.folder.starts_with?("#{path}.")
       end.map(&:key).uniq
     end
   end
