@@ -6,7 +6,7 @@ module LocaleLab
     ### CLASS METHODS:
 
     def self.files
-      Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
+      LocaleLab.locale_files
     end
 
     def self.all

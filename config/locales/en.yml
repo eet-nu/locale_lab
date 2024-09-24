@@ -1,0 +1,17 @@
+---
+en:
+  locale_lab:
+    dashboard:
+      show:
+        files: Translation files
+        available_locales_html: "<strong>Available locales:</strong> %{locales}"
+        incomplete_title: Incomplete keys
+    translations:
+      navigation:
+        title: Navigation
+      new:
+        title: New translation
+        path: 'Path:'
+        create: Create
+      show:
+        new: New

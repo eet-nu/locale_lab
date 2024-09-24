@@ -1,42 +1,25 @@
-<h2>Translation Files</h2>
+<%=
+  render 'locale_lab/translations/navigation', navigation: @browser, path: nil
+%>
+
+<h2><%= t '.files' %></h2>
 <ul>
   <% @files.each do |file| %>
-    <li><strong><%= file.relative_path %>:</strong> <%= file.locales.to_sentence %></li>
+    <li>
+      <strong><%= file.relative_path %>:</strong>
+      <%= file.locales.to_sentence %>
+    </li>
   <% end %>
 </ul>
-<p><strong>Available locales:</strong> <%= @locales.to_sentence %></p>
-
-<% if @folders.present? %>
-  <h2>Folders</h2>
-  <ul>
-    <% @folders.each do |folder| %>
-      <li><%= link_to folder, locale_lab.translation_path(folder) %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% if @root_keys.present? %>
-  <h2>Root Keys</h2>
-  <ul>
-    <% @root_keys.each do |key| %>
-      <li>
-        <strong><%= key %>:</strong>
-        <dl>
-          <% @translations_by_key[key].each do |translation| %>
-            <dt><%= translation.locale %> <small>(<%= translation.file.relative_path %>)</small></dt>
-            <dd><pre><%= translation.value %></pre></dd>
-          <% end %>
-        </dl>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<p>
+  <%= t '.available_locales_html', locales: @locales.to_sentence %>
+</p>
 
 <% if @incomplete.present? %>
-  <h2>Incomplete Keys</h2>
+  <h2><%= t '.incomplete_title' %></h2>
   <ul>
     <% @incomplete.each do |incomplete| %>
-      <li><%= incomplete %></li>
+      <li><%= link_to incomplete, locale_lab.translation_path(incomplete) %></li>
     <% end %>
   </ul>
 <% end %>
