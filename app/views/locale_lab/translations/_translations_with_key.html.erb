@@ -11,7 +11,7 @@
         <%= form_with url: locale_lab.translation_path(key), method: :put do |f| %>
           <%= f.hidden_field :locale, value: translation.locale %>
           <%= f.label        id,      label %>
-          <%= f.text_area    :value,  value: translation.value, id: id %>
+          <%= f.text_area    :value,  value: translation.value, id: id, data: { controller: 'autogrow', action: 'input->autogrow#grow change->autogrow#grow paste->autogrow#grow' } %>
           <%= f.submit 'Save' %>
         <% end %>
       </li>
