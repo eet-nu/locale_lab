@@ -70,12 +70,17 @@ module LocaleLab
     end
 
     def folders
-      @folders = (translations.map(&:key) - keys).map do |key|
-        relative = path ? key.delete_prefix(path).delete_prefix('.')
-                        : key
-        relative.split('.').first
-      end.uniq.map do |folder|
-        path ? "#{path}.#{folder}" : folder
+      @folders ||= begin
+        prefix  = path ? "#{path}." : ''
+
+        puts "prefix: #{prefix.inspect}, translations: #{translations.size}"
+
+        x = translations
+          .select { |trans| trans.key.starts_with?(prefix)        }
+          .map    { |trans| trans.key[prefix.length..-1].presence }
+          .select { |objct| objct.present? && objct.include?('.') }
+          .map    { |objct| "#{prefix}#{objct.split('.').first}"  }
+          .uniq
       end
     end
 

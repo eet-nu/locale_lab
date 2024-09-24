@@ -32,6 +32,9 @@ module LocaleLab
     end
 
     def reload
+      Thread.current[:locale_lab_translation_collection] = nil
+      Thread.current[:locale_lab_translation_files]      = nil
+
       @data         = nil
       @translations = nil
     end
@@ -85,6 +88,13 @@ module LocaleLab
       file.close
 
       reload
+    end
+
+    def create(locale, key)
+      return if translations.any? { |t| t.locale == locale && t.key == key }
+
+      translations.push Translation.new(self, locale, key, '')
+      save
     end
 
     private

@@ -1,20 +1,26 @@
 <%=
-  render 'navigation', navigation: @navigation
+  render 'navigation', navigation: @browser, path: @navigation.path
 %>
 
-<h2><%= @navigation.path %></h2>
+<header>
+  <h2><%= @navigation.path %></h2>
+  <ul class="actions">
+    <li>
+      <%=
+        link_to 'New', locale_lab.new_translation_path(scope: @navigation.path)
+      %>
+    </li>
+  </ul>
+</header>
+
 <% if @translations.present? %>
   <ul>
     <% @translations.each do |key, translations| %>
-      <li>
-        <strong><%= key %>:</strong>
-        <dl>
-          <% translations.each do |translation| %>
-            <dt><%= translation.locale %> <small>(<%= translation.file.relative_path %>)</small></dt>
-            <dd><pre><%= translation.value %></pre></dd>
-          <% end %>
-        </dl>
-      </li>
+      <%=
+        render 'translations_with_key',
+          key:          key,
+          translations: translations
+      %>
     <% end %>
   </ul>
 <% end %>

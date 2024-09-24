@@ -1,0 +1,20 @@
+<li>
+  <strong>📃 <%= key %>:</strong>
+  <ul>
+    <% translations.each do |translation| %>
+      <li>
+        <%
+          id    = key.gsub('.', '_') + "_#{translation.locale}"
+          label = content_tag(:span, translation.locale) + " " +
+                  content_tag(:small, "(#{translation.file.relative_path})")
+        %>
+        <%= form_with url: locale_lab.translation_path(key), method: :put do |f| %>
+          <%= f.hidden_field :locale, value: translation.locale %>
+          <%= f.label        id,      label %>
+          <%= f.text_area    :value,  value: translation.value, id: id %>
+          <%= f.submit 'Save' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>

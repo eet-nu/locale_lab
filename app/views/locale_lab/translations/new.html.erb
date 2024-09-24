@@ -1,0 +1,7 @@
+<h1>New translation</h1>
+<%= form_with url: locale_lab.translations_path, method: :post do |f| %>
+  <%= f.label      :path, 'Path:'       %>
+  <%= f.text_field :path, value: @path %>
+
+  <%= f.submit 'Create' %>
+<% end %>
