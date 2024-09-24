@@ -22,6 +22,18 @@ module LocaleLab
       ]
     end
 
+    def destroy
+      @navigation = LocaleLab::Translation.navigate(params[:id])
+
+      LocaleLab::Translation.destroy(params[:id])
+
+      if @navigation.parent_folder
+        redirect_to action: 'show', id: @navigation.parent_folder
+      else
+        redirect_to action: 'new'
+      end
+    end
+
     def new
       @path = ""
       @path.prepend("#{params[:scope]}.") if params[:scope].present?

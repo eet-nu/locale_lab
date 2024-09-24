@@ -26,6 +26,19 @@ module LocaleLab
       end
     end
 
+    def self.destroy(path)
+      LocaleLab::TranslationFile.all.each do |file|
+        translations = file.translations.find_all { |t| t.key == path }
+        next unless translations.present?
+
+        translations.each do |translation|
+          file.translations.delete(translation)
+        end
+
+        file.save
+      end
+    end
+
     def initialize(file, locale, key, value)
       @file   = file
       @locale = locale

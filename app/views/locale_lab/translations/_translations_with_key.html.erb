@@ -1,5 +1,15 @@
 <li>
   <strong>📃 <%= key %>:</strong>
+  <%=
+    button_to 'Destroy', locale_lab.translation_path(key),
+      method: :delete,
+      form:   {
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: 'Are you sure?'
+        }
+      }
+  %>
   <ul>
     <% translations.each do |translation| %>
       <li>
