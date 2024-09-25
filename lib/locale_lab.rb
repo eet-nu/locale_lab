@@ -7,4 +7,10 @@ module LocaleLab
   def self.locale_files
     @@locale_files ||= Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
   end
+
+  mattr_writer :default_locale
+
+  def self.default_locale
+    @@default_locale ||= 'en'
+  end
 end

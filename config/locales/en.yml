@@ -15,3 +15,6 @@ en:
         create: Create
       show:
         new: New
+      translations_with_key:
+        destroy: Destroy
+        confirm_destroy: Are you sure?
