@@ -7,9 +7,7 @@ module LocaleLab
     ### CLASS METHODS:
 
     def self.all
-      Thread.current[
-        :locale_lab_translation_collection
-      ] ||= new(
+      LocaleLab.cache[:translation_collection] ||= new(
         TranslationFile.all.flat_map(&:translations)
       )
     end

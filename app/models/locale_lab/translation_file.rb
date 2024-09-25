@@ -10,9 +10,7 @@ module LocaleLab
     end
 
     def self.all
-      Thread.current[
-        :locale_lab_translation_files
-      ] ||= files.map do |file|
+      LocaleLab.cache[:translation_files] ||= files.map do |file|
         new(file)
       end
     end
@@ -32,8 +30,7 @@ module LocaleLab
     end
 
     def reload
-      Thread.current[:locale_lab_translation_collection] = nil
-      Thread.current[:locale_lab_translation_files]      = nil
+      LocaleLab.reload
 
       @data         = nil
       @translations = nil
