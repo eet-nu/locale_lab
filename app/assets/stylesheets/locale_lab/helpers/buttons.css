@@ -1,0 +1,34 @@
+/*
+** Buttons
+*/
+
+/* Default buttons */
+.button { 
+
+  &:hover {  }
+}
+
+/* Icon buttons */
+.icon-button {
+  display: flex;
+  align-items: center;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: #FF0000;
+  }
+
+  &:hover {
+
+    svg {
+      fill: #000;
+    }
+  }
+}
+
+/* Dropdown buttons */
+.dropdown-button {
+
+  &:hover {  }
+}

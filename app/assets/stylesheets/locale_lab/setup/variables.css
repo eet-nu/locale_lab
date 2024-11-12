@@ -1,0 +1,104 @@
+:root {
+
+  /*
+  ** Base colors
+  */
+
+  /* Brand colors */
+  --base-color-brand-100: #ADAFF1;
+  --base-color-brand-200: #989BF9;
+  --base-color-brand-300: #7073E7;
+  --base-color-brand-400: #4549DF;
+  --base-color-brand-500: #3337C6;
+  --base-color-brand-600: #2529BD;
+  --base-color-brand-700: #1317AD;
+  --base-color-brand-800: #070C9D;
+  --base-color-brand-900: #00024D;
+
+  /* Neutral colors */
+  --base-color-neutral-000:  #FFF;
+  --base-color-neutral-100:  #FCFCFC;
+  --base-color-neutral-200:  #F9F9F9;
+  --base-color-neutral-300:  #EBEBEB;
+  --base-color-neutral-400:  #E0E0E0;
+  --base-color-neutral-500:  #D4D4D4;
+  --base-color-neutral-600:  #BFBFBF;
+  --base-color-neutral-700:  #A6A6A6;
+  --base-color-neutral-800:  #8C8C8C;
+  --base-color-neutral-900:  #737373;
+  --base-color-neutral-1000: #595959;
+  --base-color-neutral-1100: #3D3D3D;
+  --base-color-neutral-1200: #222222;
+
+  /* Red colors */
+  --base-color-red-100: #F1ADAD;
+  --base-color-red-200: #F99898;
+  --base-color-red-300: #E77070;
+  --base-color-red-400: #DF4545;
+  --base-color-red-500: #C63333;
+  --base-color-red-600: #BD2525;
+  --base-color-red-700: #AD1313;
+  --base-color-red-800: #9D0707;
+  --base-color-red-900: #4D0000;
+
+  /* Green colors */
+  --base-color-green-100: #ADF1B9;
+  --base-color-green-200: #98F9AA;
+  --base-color-green-300: #70E786;
+  --base-color-green-400: #45DF61;
+  --base-color-green-500: #33C64E;
+  --base-color-green-600: #25BD41;
+  --base-color-green-700: #13AD2F;
+  --base-color-green-800: #079D23;
+  --base-color-green-900: #004D0E;
+
+  /* Orange colors */
+  --base-color-orange-100: #F1D2AD;
+  --base-color-orange-200: #F9CD98;
+  --base-color-orange-300: #E7B270;
+  --base-color-orange-400: #DF9945;
+  --base-color-orange-500: #C68433;
+  --base-color-orange-600: #BD7925;
+  --base-color-orange-700: #AD6713;
+  --base-color-orange-800: #9D5A07;
+  --base-color-orange-900: #4D2A00;
+
+  /* Yellow colors */
+  --base-color-yellow-100: #F1E9AD;
+  --base-color-yellow-200: #F9EE98;
+  --base-color-yellow-300: #E7DA70;
+  --base-color-yellow-400: #DFCD45;
+  --base-color-yellow-500: #C6B533;
+  --base-color-yellow-600: #BDAC25;
+  --base-color-yellow-700: #AD9B13;
+  --base-color-yellow-800: #9D8B07;
+  --base-color-yellow-900: #4D4400;
+
+  /*
+  ** Functional colors 
+  */
+
+  /* Border colors */
+  --borderColor-default: var(--base-color-neutral-400);
+
+  /* Foreground colors */
+  --fgColor-default: var(--base-color-neutral-1200);
+  --fgColor-muted:   var(--base-color-neutral-1000);
+  --fgColor-white:   var(--base-color-neutral-000);
+
+  /* Background colors */
+  --bgColor-card:  var(--base-color-neutral-100);
+  --bgColor-white: var(--base-color-neutral-000);
+
+  /*
+  ** Base sizes
+  */
+  --base-size-0:  0px;
+  --base-size-2:  2px;
+  --base-size-4:  4px;
+  --base-size-6:  6px;
+  --base-size-8:  8px;
+  --base-size-16: 16px;
+  --base-size-24: 24px;
+  --base-size-32: 32px;
+}
