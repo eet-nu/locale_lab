@@ -26,6 +26,34 @@ module LocaleLab
       end
     end
 
+    def self.copy(from_path, to_path)
+      return false if from_path.empty?
+      return false if to_path.empty?
+
+      self.create(to_path)
+
+      old_translations = self.navigate(from_path)
+      new_translations = self.navigate(to_path)
+
+      old_translations.translations.each do |old_translation|
+        new_translations.translations.find do |new_translation|
+          if new_translation.locale == old_translation.locale
+            new_translation.value = old_translation.value
+            new_translation.save
+          end
+        end
+      end
+    end
+
+    def self.move(from_path, to_path)
+      return false if from_path.empty?
+      return false if to_path.empty?
+
+      if self.copy(from_path, to_path)
+        self.destroy(from_path)
+      end
+    end
+
     def self.destroy(path)
       LocaleLab::TranslationFile.all.each do |file|
         translations = file.translations.find_all { |t| t.key == path }
