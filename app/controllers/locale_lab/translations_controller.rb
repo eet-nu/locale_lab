@@ -74,5 +74,14 @@ module LocaleLab
         render 'show', status: :unprocessable_entity
       end
     end
+
+    def move
+      if LocaleLab::Translation.move(params[:id], params[:new_id])
+        redirect_to action: 'show', id: params[:new_id]
+      else
+        flash.now[:error] = 'Something went wrong, please check for errors and try again.'
+        redirect_to action: 'show', id: params[:id]
+      end
+    end
   end
 end
