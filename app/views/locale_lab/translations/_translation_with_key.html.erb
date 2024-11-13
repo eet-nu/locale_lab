@@ -4,13 +4,22 @@
 %>
 <li>
   <%= turbo_frame_tag(id) do %>
-    <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-form' } do |f| %>
+    <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-form', translation_form_text_area_value: translation.value } do |f| %>
       <%= f.hidden_field :locale, value: translation.locale %>
       <%= f.label        id,      label %>
-      <%= f.text_area    :value,  value: translation.value, id: id, data: {
+
+      <%= f.text_area :value, value: translation.value, id: id, data: {
         controller: 'autogrow',
         translation_form_target: 'textArea',
-        action: 'input->autogrow#grow change->autogrow#grow paste->autogrow#grow focus->translation-form#focus blur->translation-form#submitIfChanged' } %>
+        action: %w[
+          input->autogrow#grow
+          change->autogrow#grow
+          paste->autogrow#grow
+          blur->translation-form#submitIfChanged
+          input->translation-form#toggleDiscardButton
+        ].join(' ') } %>
+
+      <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-form#discard', translation_form_target: 'discardButton' } %>
       <%= f.submit 'Save', tabindex: '-1', data: { translation_form_target: 'submitButton' } %>
     <% end %>
   <% end %>

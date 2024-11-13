@@ -6,29 +6,38 @@ export default class extends Controller {
     textArea: String
   }
 
-  static targets = ['textArea', 'submitButton']
+  static targets = ['textArea', 'submitButton', 'discardButton']
 
   connect() {
-    this.element.addEventListener("submit", this.disableButton.bind(this));
+    this.element.addEventListener('submit', this.disableSubmitButton.bind(this));
   }
 
   get textareaChanged() {
     return this.textAreaValue !== this.textAreaTarget.value
   }
 
-  disableButton(event) {
-    if (this.hasSubmitButtonTarget) {
-      this.submitButtonTarget.disabled = true;
-    }
+  disableSubmitButton(event) {
+    this.submitButtonTarget.disabled = true;
   }
 
-  focus() {
-    this.textAreaValue = this.textAreaTarget.value
+  discard(event) {
+    // preventDefault because else the form will submit
+    event.preventDefault()
+    this.textAreaTarget.value = this.textAreaValue
+    this.toggleDiscardButton()
+  }
+
+  toggleDiscardButton() {
+    this.discardButtonTarget.disabled = !this.textareaChanged
   }
 
   submitIfChanged() {
-    if (this.textareaChanged) {
-      this.element.requestSubmit()
-    }
+    // Wait a little, the user can have clicked the discard button while
+    // the textarea was active, that also triggers the blur event
+    setTimeout(() => {
+      if (this.textareaChanged) {
+        this.element.requestSubmit()
+      }
+    }, 500)
   }
 }
