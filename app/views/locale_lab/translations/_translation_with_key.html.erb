@@ -4,22 +4,22 @@
 %>
 <li class="translations-card-locale">
   <%= turbo_frame_tag(id) do %>
-    <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-form', translation_form_text_area_value: translation.value } do |f| %>
+    <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-value', translation_value_text_area_value: translation.value } do |f| %>
       <%= f.hidden_field :locale, value: translation.locale %>
       <%= f.label        id,      label %>
 
       <%= f.text_area :value, value: translation.value, id: id, data: {
         controller: 'autogrow',
-        translation_form_target: 'textArea',
+        translation_value_target: 'textArea',
         action: %w[
           input->autogrow#grow
           change->autogrow#grow
           paste->autogrow#grow
-          blur->translation-form#submitIfChanged
-          input->translation-form#toggleDiscardButton
+          blur->translation-value#submitIfChanged
+          input->translation-value#toggleDiscardButton
         ].join(' ') } %>
 
-      <!-- 
+      <!--
         TODO:
         <ul class="translations-card-locale-states">
           ...
@@ -27,8 +27,8 @@
       -->
 
       <ul class="translations-card-locale-actions">
-        <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-form#discard', translation_form_target: 'discardButton' } %>
-        <%= f.submit 'Save', tabindex: '-1', data: { translation_form_target: 'submitButton' } %>
+        <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
+        <%= f.submit 'Save', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
       </ul>
     <% end %>
   <% end %>
