@@ -1,7 +1,18 @@
 .current-application {
+  margin-bottom: var(--base-size-24);
 
-  .app,
+  .application,
   .branch {
     display: block;
+  }
+
+  .application {
+    font-weight: var(--text-body-weight-bold);
+    margin-bottom: var(--base-size-2);
+  }
+
+  .branch {
+    color: var(--fgColor-brand);
+    font-weight: var(--text-body-weight-medium);
   }
 }

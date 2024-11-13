@@ -1,7 +1,7 @@
 :root {
 
   /*
-  ** Base colors
+  ** Foundational
   */
 
   /* Brand colors */
@@ -74,25 +74,7 @@
   --base-color-yellow-800: #9D8B07;
   --base-color-yellow-900: #4D4400;
 
-  /*
-  ** Functional colors 
-  */
-
-  /* Border colors */
-  --borderColor-default: var(--base-color-neutral-400);
-
-  /* Foreground colors */
-  --fgColor-default: var(--base-color-neutral-1200);
-  --fgColor-muted:   var(--base-color-neutral-1000);
-  --fgColor-white:   var(--base-color-neutral-000);
-
-  /* Background colors */
-  --bgColor-card:  var(--base-color-neutral-100);
-  --bgColor-white: var(--base-color-neutral-000);
-
-  /*
-  ** Base sizes
-  */
+  /* Sizes */
   --base-size-0:  0px;
   --base-size-2:  2px;
   --base-size-4:  4px;
@@ -102,9 +84,46 @@
   --base-size-24: 24px;
   --base-size-32: 32px;
 
+  /* Font-families */
+  --base-text-fontFamily-system: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Font sizes */
+  --base-text-size-small:  14px;
+  --base-text-size-normal: 16px;
+
+  /* Line heights */
+  --base-text-lineHeight-normal: 19px;
+
+  /* Font-weights */
+  --base-text-weight-normal:   400;
+  --base-text-weight-medium:   500;
+  --base-text-weight-semibold: 600;
+  --base-text-weight-bold:     700;
 
   /*
-  ** Typography
+  ** Functional
   */
-  --fontFamily-system: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* Border colors */
+  --borderColor-default: var(--base-color-neutral-400);
+
+  /* Foreground colors */
+  --fgColor-default: var(--base-color-neutral-1200);
+  --fgColor-muted:   var(--base-color-neutral-1000);
+  --fgColor-white:   var(--base-color-neutral-000);
+  --fgColor-brand:   var(--base-color-brand-300);
+
+  /* Background colors */
+  --bgColor-body:  var(--base-color-neutral-200);
+  --bgColor-card:  var(--base-color-neutral-100);
+  --bgColor-white: var(--base-color-neutral-000);
+
+  /* Body text */
+  --text-body:                   var(--base-text-fontFamily-system);
+  --text-body-fontSize-normal:   var(--base-text-size-normal);
+  --text-body-lineHeight-normal: var(--base-text-lineHeight-normal);
+  --text-body-weight-normal:     var(--base-text-weight-normal);
+  --text-body-weight-medium:     var(--base-text-weight-medium);
+  --text-body-weight-semibold:   var(--base-text-weight-semibold);
+  --text-body-weight-bold:       var(--base-text-weight-bold);
 }
