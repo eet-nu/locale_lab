@@ -4,7 +4,7 @@ parts   = key.split('.')
 current = parts.pop
 %>
 
-<li class="translations-card" data-controller="translation-key" data-translation-key-hidden-class="display: none">
+<li class="translations-card" data-controller="translation-key" data-translation-key-hidden-class="display-none">
   <ul class="translations-card-header">
     <li class="translations-card-key">
       <% parts.each.with_index do |part, index| %>
@@ -43,7 +43,7 @@ current = parts.pop
     </li>
   </ul>
 
-  <div class="hidden" data-translation-key-target="moveForm">
+  <div class="display-none" data-translation-key-target="moveForm">
     <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
       <%=
         f.text_field :new_id, value: key,
