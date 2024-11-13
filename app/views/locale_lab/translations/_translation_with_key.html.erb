@@ -27,8 +27,12 @@
       -->
 
       <ul class="translations-card-locale-actions">
-        <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
-        <%= f.submit 'Save', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
+        <li>
+          <%= f.submit 'Save', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
+        </li>
+        <li>
+          <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
+        </li>
       </ul>
     <% end %>
   <% end %>

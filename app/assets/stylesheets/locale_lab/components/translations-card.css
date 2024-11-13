@@ -36,5 +36,6 @@
 }
 
 .translations-card-locale-actions {
+  display: flex;
   width: 100%;
 }
