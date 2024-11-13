@@ -50,7 +50,7 @@ current = parts.pop
     </li>
   </ul>
 
-  <div class="hidden" data-translation-key-target="form">
+  <div class="hidden" data-translation-key-target="moveForm">
     <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
       <%=
         f.text_field :new_id, value: key,
