@@ -1,8 +1,8 @@
 .sidebar {
   width: 384px;
-  border: 1px solid #ccc;
 }
 
 .content {
+  flex: 1;
   padding-left: 40px;
 }

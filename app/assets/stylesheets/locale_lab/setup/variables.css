@@ -101,4 +101,10 @@
   --base-size-16: 16px;
   --base-size-24: 24px;
   --base-size-32: 32px;
+
+
+  /*
+  ** Typography
+  */
+  --fontFamily-system: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }

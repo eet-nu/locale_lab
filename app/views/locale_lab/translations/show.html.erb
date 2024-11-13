@@ -3,26 +3,28 @@
 %>
 
 <div class="content">
-  <header>
-    <h2><%= @navigation.path %></h2>
-    <ul class="actions">
-      <li>
-        <%=
-          link_to t('.new'), locale_lab.new_translation_path(scope: @navigation.path)
-        %>
-      </li>
-    </ul>
-  </header>
+  <div class="translations-overview">
+    <header>
+      <h2><%= @navigation.path %></h2>
+      <ul class="actions">
+        <li>
+          <%=
+            link_to t('.new'), locale_lab.new_translation_path(scope: @navigation.path)
+          %>
+        </li>
+      </ul>
+    </header>
 
-  <% if @translations.present? %>
-    <ul>
-      <% @translations.each do |key, translations| %>
-        <%=
-          render 'translations_with_key',
-            key:          key,
-            translations: translations
-        %>
-      <% end %>
-    </ul>
-  <% end %>
+    <% if @translations.present? %>
+      <ul>
+        <% @translations.each do |key, translations| %>
+          <%=
+            render 'translations_with_key',
+              key:          key,
+              translations: translations
+          %>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 </div>

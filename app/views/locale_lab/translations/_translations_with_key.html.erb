@@ -1,17 +1,29 @@
-<li>
-  <strong>📃 <%= key %>:</strong>
-  <%=
-    button_to t('.destroy'), locale_lab.translation_path(key),
-      method: :delete,
-      tabindex: '-1',
-      form:   {
-        data: {
-          turbo_method:  :delete,
-          turbo_confirm: t('.confirm_destroy')
-        }
-      }
-  %>
-  <ul>
+<li class="translations-card">
+  <ul class="translations-card-header">
+    <li class="translations-card-key">
+      <strong>📃 <%= key %>:</strong>
+    </li>
+
+    <li class="translations-card-actions">
+      <ul>
+        <li>
+          <%=
+            button_to t('.destroy'), locale_lab.translation_path(key),
+              method: :delete,
+              tabindex: '-1',
+              form:   {
+                data: {
+                  turbo_method:  :delete,
+                  turbo_confirm: t('.confirm_destroy')
+                }
+              }
+          %>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul class="translations-card-locales">
     <% translations.each do |translation| %>
       <%= render 'translation_with_key', key: key, translation: translation %>
     <% end %>

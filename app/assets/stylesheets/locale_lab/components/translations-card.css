@@ -1,0 +1,40 @@
+.translations-card { 
+  border: 1px solid #000;
+}
+
+.translations-card-header {
+  display: flex;
+  align-items: center;
+}
+
+.translations-card-key { }
+
+.translations-card-actions {
+  margin-left: auto;
+}
+
+.translations-card-locales { }
+
+.translations-card-locale {
+
+  form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    label {
+
+      small {
+        display: none;
+      }
+    }
+
+    textarea {
+      flex: 1;
+    }
+  }
+}
+
+.translations-card-locale-actions {
+  width: 100%;
+}

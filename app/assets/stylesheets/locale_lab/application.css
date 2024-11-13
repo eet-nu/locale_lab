@@ -16,6 +16,7 @@
 ** Setup
 */
 @import "setup/variables.css";
+@import "setup/reset.css";
 @import "setup/outlines.css";
 @import "setup/layout.css";
 
@@ -30,4 +31,6 @@
 */
 @import "components/current-application.css";
 @import "components/translations-explorer.css";
-@import "components/translation-cards.css";
+@import "components/translations-card.css";
+
+/* test */

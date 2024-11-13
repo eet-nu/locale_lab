@@ -2,7 +2,7 @@
   id    = key.gsub('.', '_') + "_#{translation.locale}"
   label = content_tag(:span, translation.locale) + " " + content_tag(:small, "(#{translation.file.relative_path})")
 %>
-<li>
+<li class="translations-card-locale">
   <%= turbo_frame_tag(id) do %>
     <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-form', translation_form_text_area_value: translation.value } do |f| %>
       <%= f.hidden_field :locale, value: translation.locale %>
@@ -19,8 +19,17 @@
           input->translation-form#toggleDiscardButton
         ].join(' ') } %>
 
-      <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-form#discard', translation_form_target: 'discardButton' } %>
-      <%= f.submit 'Save', tabindex: '-1', data: { translation_form_target: 'submitButton' } %>
+      <!-- 
+        TODO:
+        <ul class="translations-card-locale-states">
+          ...
+        </ul>
+      -->
+
+      <ul class="translations-card-locale-actions">
+        <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-form#discard', translation_form_target: 'discardButton' } %>
+        <%= f.submit 'Save', tabindex: '-1', data: { translation_form_target: 'submitButton' } %>
+      </ul>
     <% end %>
   <% end %>
 </li>
