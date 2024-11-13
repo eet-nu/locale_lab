@@ -45,6 +45,13 @@ current = parts.pop
     </li>
   </ul>
 
+  <div class="hidden" data-translation-key-target="form">
+    <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
+      <%= f.text_field :new_id, value: key, style: 'width: 500px;' %>
+      <%= f.submit %>
+    <% end %>
+  </div>
+
   <ul class="translations-card-locales">
     <% translations.each do |translation| %>
       <%= render 'translation_with_key', key: key, translation: translation %>
