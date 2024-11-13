@@ -1,0 +1,8 @@
+.sidebar {
+  width: 384px;
+  border: 1px solid #ccc;
+}
+
+.content {
+  padding-left: 40px;
+}

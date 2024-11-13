@@ -1,0 +1,7 @@
+.current-application {
+
+  .app,
+  .branch {
+    display: block;
+  }
+}
