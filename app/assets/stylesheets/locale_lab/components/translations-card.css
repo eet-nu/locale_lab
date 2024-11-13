@@ -11,6 +11,10 @@
 
 .translations-card-actions {
   margin-left: auto;
+
+  ul {
+    display: flex;
+  }
 }
 
 .translations-card-locales { }

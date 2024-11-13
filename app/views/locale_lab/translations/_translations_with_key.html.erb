@@ -4,14 +4,7 @@ parts   = key.split('.')
 current = parts.pop
 %>
 
-<style>
-    .hidden {
-        display: none;
-    }
-</style>
-
-
-<li class="translations-card" data-controller="translation-key" data-translation-key-hidden-class="hidden">
+<li class="translations-card" data-controller="translation-key" data-translation-key-hidden-class="display: none">
   <ul class="translations-card-header">
     <li class="translations-card-key">
       <% parts.each.with_index do |part, index| %>
