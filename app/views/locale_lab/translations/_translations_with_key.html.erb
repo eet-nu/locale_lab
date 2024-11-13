@@ -1,7 +1,17 @@
+<%
+parts   = key.split('.')
+current = parts.pop
+%>
 <li class="translations-card">
   <ul class="translations-card-header">
     <li class="translations-card-key">
-      <strong>📃 <%= key %>:</strong>
+      <strong>
+        <% parts.each.with_index do |part, index| %>
+          <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')) %>
+          <span>.</span>
+        <% end %>
+        <strong><%= current %></strong>
+      </strong>
     </li>
 
     <li class="translations-card-actions">
