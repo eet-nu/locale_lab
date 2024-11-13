@@ -3,6 +3,7 @@
   <%=
     button_to t('.destroy'), locale_lab.translation_path(key),
       method: :delete,
+      tabindex: '-1',
       form:   {
         data: {
           turbo_method:  :delete,

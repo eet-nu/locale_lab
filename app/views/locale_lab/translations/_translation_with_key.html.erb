@@ -11,7 +11,7 @@
         controller: 'autogrow',
         translation_form_target: 'textArea',
         action: 'input->autogrow#grow change->autogrow#grow paste->autogrow#grow focus->translation-form#focus blur->translation-form#submitIfChanged' } %>
-      <%= f.submit 'Save', data: { translation_form_target: 'submitButton' } %>
+      <%= f.submit 'Save', tabindex: '-1', data: { translation_form_target: 'submitButton' } %>
     <% end %>
   <% end %>
 </li>
