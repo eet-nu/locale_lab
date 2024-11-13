@@ -2,7 +2,15 @@
 parts   = key.split('.')
 current = parts.pop
 %>
-<li class="translations-card">
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
+
+<li class="translations-card" data-controller="translation-key" data-translation-key-hidden-class="hidden">
   <ul class="translations-card-header">
     <li class="translations-card-key">
       <strong>
@@ -28,6 +36,10 @@ current = parts.pop
                 }
               }
           %>
+        </li>
+
+        <li>
+          <%= button_tag t('.move'), type: 'button', data: { action: 'click->translation-key#toggleForm' } %>
         </li>
       </ul>
     </li>
