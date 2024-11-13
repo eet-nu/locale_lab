@@ -1,25 +1,27 @@
 <%=
-  render 'locale_lab/translations/navigation', navigation: @browser, path: nil
+  render 'shared/locale_lab/sidebar', navigation: @browser, path: nil
 %>
 
-<h2><%= t '.files' %></h2>
-<ul>
-  <% @files.each do |file| %>
-    <li>
-      <strong><%= file.relative_path %>:</strong>
-      <%= file.locales.to_sentence %>
-    </li>
-  <% end %>
-</ul>
-<p>
-  <%= t '.available_locales_html', locales: @locales.to_sentence %>
-</p>
-
-<% if @incomplete.present? %>
-  <h2><%= t '.incomplete_title' %></h2>
+<div class="content">
+  <h2><%= t '.files' %></h2>
   <ul>
-    <% @incomplete.each do |incomplete| %>
-      <li><%= link_to incomplete, locale_lab.translation_path(incomplete) %></li>
+    <% @files.each do |file| %>
+      <li>
+        <strong><%= file.relative_path %>:</strong>
+        <%= file.locales.to_sentence %>
+      </li>
     <% end %>
   </ul>
-<% end %>
+  <p>
+    <%= t '.available_locales_html', locales: @locales.to_sentence %>
+  </p>
+
+  <% if @incomplete.present? %>
+    <h2><%= t '.incomplete_title' %></h2>
+    <ul>
+      <% @incomplete.each do |incomplete| %>
+        <li><%= link_to incomplete, locale_lab.translation_path(incomplete) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
