@@ -1,0 +1,17 @@
+<%
+  id    = key.gsub('.', '_') + "_#{translation.locale}"
+  label = content_tag(:span, translation.locale) + " " + content_tag(:small, "(#{translation.file.relative_path})")
+%>
+<li>
+  <%= turbo_frame_tag(id) do %>
+    <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-form' } do |f| %>
+      <%= f.hidden_field :locale, value: translation.locale %>
+      <%= f.label        id,      label %>
+      <%= f.text_area    :value,  value: translation.value, id: id, data: {
+        controller: 'autogrow',
+        translation_form_target: 'textArea',
+        action: 'input->autogrow#grow change->autogrow#grow paste->autogrow#grow focus->translation-form#focus blur->translation-form#submitIfChanged' } %>
+      <%= f.submit 'Save', data: { translation_form_target: 'submitButton' } %>
+    <% end %>
+  <% end %>
+</li>
