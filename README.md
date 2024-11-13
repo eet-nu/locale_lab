@@ -4,7 +4,14 @@ Short description and motivation.
 ## Usage
 How to use my plugin.
 
-## Installation
+## Installation as a standalone application
+`puma-dev link -n locale-lab`
+
+`bundle install`
+
+Visit [https://locale-lab.test](http://locale-lab.test)
+
+## Installation as a gem in you project
 Add this line to your application's Gemfile:
 
 ```ruby
