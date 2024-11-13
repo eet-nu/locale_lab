@@ -1,4 +1,5 @@
 <%
+key_id  = key.underscore.gsub('.', '_')
 parts   = key.split('.')
 current = parts.pop
 %>
@@ -13,13 +14,17 @@ current = parts.pop
 <li class="translations-card" data-controller="translation-key" data-translation-key-hidden-class="hidden">
   <ul class="translations-card-header">
     <li class="translations-card-key">
-      <strong>
-        <% parts.each.with_index do |part, index| %>
-          <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')) %>
-          <span>.</span>
-        <% end %>
-        <strong><%= current %></strong>
-      </strong>
+      <% parts.each.with_index do |part, index| %>
+        <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')) %>
+        <span>.</span>
+      <% end %>
+      <strong><%= current %></strong>
+      <%=
+        link_to t('.copy_to_clipboard'), "#rename_#{key_id}_input",
+          data: {
+            action: 'translation-key#copyKeyToClipboard'
+          }
+      %>
     </li>
 
     <li class="translations-card-actions">
@@ -47,7 +52,14 @@ current = parts.pop
 
   <div class="hidden" data-translation-key-target="form">
     <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
-      <%= f.text_field :new_id, value: key, style: 'width: 500px;' %>
+      <%=
+        f.text_field :new_id, value: key,
+          id:    "rename_#{key_id}_input",
+          style: 'width: 500px;',
+          data: {
+            translation_key_target: 'input'
+          }
+      %>
       <%= f.submit %>
     <% end %>
   </div>
