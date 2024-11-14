@@ -8,6 +8,7 @@ module LocaleLab
 
     initializer 'locale_lab.assets' do |app|
       app.config.assets.paths << root.join('app/javascript')
+      app.config.assets.paths << root.join('vendor/javascript')
       app.config.assets.precompile += %w[ locale_lab_manifest ]
     end
 
