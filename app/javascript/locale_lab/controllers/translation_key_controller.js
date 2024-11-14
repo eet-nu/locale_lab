@@ -6,10 +6,6 @@ export default class extends Controller {
 
   static classes = ['hidden']
 
-  connect() {
-    console.log('connected')
-  }
-
   copyKeyToClipboard (event) {
     if (this.hasInputTarget) {
       if (event) {
