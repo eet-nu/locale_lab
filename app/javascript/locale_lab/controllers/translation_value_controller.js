@@ -8,6 +8,8 @@ export default class extends Controller {
 
   static targets = ['textArea', 'submitButton', 'discardButton']
 
+  static outlets = ['editor']
+
   connect() {
     this.element.addEventListener('submit', this.disableSubmitButton.bind(this));
   }
@@ -18,6 +20,14 @@ export default class extends Controller {
 
   disableSubmitButton(event) {
     this.submitButtonTarget.disabled = true;
+  }
+
+  editInEditor() {
+    this.editorOutlet.show(this.textAreaTarget.value)
+    this.editorOutlet.onSave((new_value) => {
+      this.textAreaTarget.value = new_value
+      this.submitIfChanged()
+    });
   }
 
   discard(event) {
