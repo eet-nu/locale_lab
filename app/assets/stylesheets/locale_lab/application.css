@@ -21,7 +21,7 @@
 @import "setup/layout.css";
 
 /*
-** Helpers 
+** Helpers
 */
 @import "helpers/wrappers.css";
 @import "helpers/buttons.css";
@@ -33,3 +33,4 @@
 @import "components/current-application.css";
 @import "components/translations-explorer.css";
 @import "components/translations-card.css";
+@import "components/editor.css";

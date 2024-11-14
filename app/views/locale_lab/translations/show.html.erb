@@ -28,3 +28,8 @@
     <% end %>
   </div>
 </div>
+
+<div data-controller="editor" data-editor-hidden-class="display-none" class="editor display-none">
+  <button data-action="click->editor#close" data-editor-target="closeButton">Close</button>
+  <button data-action="click->editor#save" data-editor-target="saveButton">Save</button>
+</div>
