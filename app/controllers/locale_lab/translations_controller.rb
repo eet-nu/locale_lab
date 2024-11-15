@@ -83,6 +83,15 @@ module LocaleLab
       end
     end
 
+    def duplicate
+      if LocaleLab::Translation.copy(params[:id], params[:new_id])
+        redirect_to action: 'show', id: params[:new_id]
+      else
+        flash.now[:error] = 'Something went wrong, please check for errors and try again.'
+        redirect_to action: 'show', id: params[:id]
+      end
+    end
+
     private
 
     def load_navigation

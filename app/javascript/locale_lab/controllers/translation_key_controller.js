@@ -2,7 +2,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
 
-  static targets = ['moveForm', 'input']
+  static targets = ['moveForm', 'duplicateForm', 'input']
 
   static classes = ['hidden']
 
@@ -21,8 +21,21 @@ export default class extends Controller {
     }
   }
 
-  toggleForm() {
+  toggleMoveForm() {
+    this.hideDuplicateForm()
     this.moveFormTarget.classList.toggle(this.hiddenClass)
   }
 
+  hideMoveForm() {
+    this.moveFormTarget.classList.add(this.hiddenClass)
+  }
+
+  toggleDuplicateForm() {
+    this.hideMoveForm()
+    this.duplicateFormTarget.classList.toggle(this.hiddenClass)
+  }
+
+  hideDuplicateForm() {
+    this.duplicateFormTarget.classList.add(this.hiddenClass)
+  }
 }

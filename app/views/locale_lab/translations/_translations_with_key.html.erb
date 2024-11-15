@@ -38,7 +38,11 @@ current = parts.pop
         </li>
 
         <li>
-          <%= button_tag t('.move'), type: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleForm' } %>
+          <%= button_tag t('.move'), type: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleMoveForm' } %>
+        </li>
+
+        <li>
+          <%= button_tag t('.duplicate'), type: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleDuplicateForm' } %>
         </li>
       </ul>
     </li>
@@ -46,6 +50,7 @@ current = parts.pop
 
   <ul class="display-none" data-translation-key-target="moveForm">
     <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
+      <%= t('.move') %>
       <%=
         f.text_field :new_id, value: key,
           id:    "rename_#{key_id}_input",
@@ -53,6 +58,18 @@ current = parts.pop
           data: {
             translation_key_target: 'input'
           }
+      %>
+      <%= f.submit %>
+    <% end %>
+  </ul>
+
+  <ul class="display-none" data-translation-key-target="duplicateForm">
+    <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put do |f| %>
+      <%= t('.duplicate') %>
+      <%=
+        f.text_field :new_id, value: "#{key}_copy",
+          id:    "duplicate_#{key_id}_input",
+          style: 'width: 500px;'
       %>
       <%= f.submit %>
     <% end %>
