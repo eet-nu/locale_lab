@@ -1,12 +1,12 @@
 module LocaleLab
   class TranslationsController < ApplicationController
+    before_action :load_navigation, only: %i[show update destroy]
+
     def index
       redirect_to locale_lab.dashboard_url
     end
 
     def show
-      @navigation = LocaleLab::Translation.navigate(params[:id])
-
       if @navigation.key?
         @keys    = @navigation.keys
         @browser = LocaleLab::Translation.navigate(@navigation.parent_folder)
@@ -20,11 +20,11 @@ module LocaleLab
           [key, @navigation.with_key(key)]
         end
       ]
+
+      @yamls = yamls
     end
 
     def destroy
-      @navigation = LocaleLab::Translation.navigate(params[:id])
-
       LocaleLab::Translation.destroy(params[:id])
 
       if @navigation.parent_folder
@@ -55,7 +55,6 @@ module LocaleLab
     end
 
     def update
-      @navigation = LocaleLab::Translation.navigate(params[:id])
       @translation = @navigation.translations.find do |translation|
         translation.key == params[:id] && translation.locale == params[:locale]
       end
@@ -81,6 +80,28 @@ module LocaleLab
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
         redirect_to action: 'show', id: params[:id]
+      end
+    end
+
+    private
+
+    def load_navigation
+      @navigation = LocaleLab::Translation.navigate(params[:id])
+    end
+
+    def yamls
+      if request.method == 'GET'
+        keys = params[:id].split('.')
+      else
+        keys = request.referer.split('/').last.split('.')
+      end
+
+      TranslationFile.all.map do |file|
+        locale = file.locales.first
+        {
+          locale: locale,
+          content: file.data[locale].dig(*keys).to_yaml.sub(/^---/, '').strip
+        }
       end
     end
   end
