@@ -19,33 +19,26 @@ export default class extends Controller {
     this.loadEditor()
   }
 
-  get interpolationTemplate()
-  {
+  get interpolationTemplate() {
     let decorator = new MatchDecorator({
       regexp: /%\{([^}]+)\}/g,
       decoration: (m) => Decoration.mark({ class: 'interpolation' }),
     });
 
-    return ViewPlugin.define(
-      (view) => ({
+    return ViewPlugin.define((view) => ({
         decorations: decorator.createDeco(view),
         update(u) {
           this.decorations = decorator.updateDeco(u, this.decorations);
-        },
-      }),
-      {
-        decorations: (v) => v.decorations,
-      }
+        }
+      }), { decorations: (v) => v.decorations }
     );
   }
 
-  get value()
-  {
+  get value() {
     return this.editor.state.doc.toString().trim()
   }
 
-  set content(content)
-  {
+  set content(content) {
     this.editor.dispatch({
       changes: {
         from: 0,
@@ -57,8 +50,7 @@ export default class extends Controller {
     this.updateToMinNumberOfLines()
   }
 
-  get editorView()
-  {
+  get editorView() {
     const editorView = new EditorView({
       state: EditorState.create({
         mode: 'text/html',
@@ -102,8 +94,7 @@ export default class extends Controller {
     this.content = ''
   }
 
-  show(content)
-  {
+  show(content) {
     if (this.currentEventListener) {
       this.element.removeEventListener('saving', this.currentEventListener);
     }
@@ -123,14 +114,12 @@ export default class extends Controller {
     this.element.addEventListener('saving', eventListener);
   }
 
-  save()
-  {
+  save() {
     this.element.dispatchEvent(new Event('saving'));
     this.close();
   }
 
-  loadEditor()
-  {
+  loadEditor() {
     if (this.hasWrapperTarget) {
       this.wrapperTarget.prepend(this.editor);
     }
