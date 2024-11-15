@@ -23,7 +23,7 @@ export default class extends Controller {
   }
 
   editInEditor() {
-    this.editorOutlet.show(this.textAreaTarget.value)
+    this.editorOutlet.show(this.textAreaTarget.value, this.editorOutlet.html)
     this.editorOutlet.onSave((new_value) => {
       this.textAreaTarget.value = new_value
       this.submitIfChanged()

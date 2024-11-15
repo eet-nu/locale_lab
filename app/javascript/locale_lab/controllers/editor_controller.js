@@ -1,9 +1,10 @@
 import { Controller } from '@hotwired/stimulus'
 
 import { basicSetup } from 'codemirror';
-import { EditorState } from '@codemirror/state';
+import { EditorState, StateEffect } from '@codemirror/state';
 import { EditorView, ViewPlugin, Decoration, MatchDecorator } from '@codemirror/view';
 import { html } from '@codemirror/lang-html';
+import { yaml } from '@codemirror/lang-yaml';
 
 export default class extends Controller {
 
@@ -12,8 +13,6 @@ export default class extends Controller {
   static values = {
     minimumLines: { type: Number, default: 10 }
   }
-
-  static classes = ['hidden']
 
   connect() {
     this.loadEditor()
@@ -52,10 +51,7 @@ export default class extends Controller {
 
   get editorView() {
     const editorView = new EditorView({
-      state: EditorState.create({
-        mode: 'text/html',
-        extensions: [basicSetup, html(), this.interpolationTemplate],
-      }),
+      state: EditorState.create({mode: 'text/html'}),
     });
 
     editorView.dom.setAttribute('data-editor-target', 'editor');
@@ -89,18 +85,32 @@ export default class extends Controller {
   }
 
   close() {
-    this.element.classList.add(this.hiddenClass)
     this.element.close()
     this.content = ''
   }
 
-  show(content) {
+  get editorExtensions() {
+    return [basicSetup, this.interpolationTemplate]
+  }
+
+  get yaml() {
+    return yaml()
+  }
+
+  get html() {
+    return html()
+  }
+
+  show(content, contentType) {
     if (this.currentEventListener) {
       this.element.removeEventListener('saving', this.currentEventListener);
     }
 
+    this.editor.dispatch({
+      effects: StateEffect.reconfigure.of([...this.editorExtensions, contentType])
+    });
+
     this.content = content
-    this.element.classList.remove(this.hiddenClass)
     this.element.showModal()
     this.editor.focus()
   }
