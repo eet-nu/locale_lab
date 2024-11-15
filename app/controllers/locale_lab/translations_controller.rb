@@ -64,10 +64,10 @@ module LocaleLab
         @translation.value = params[:value]
         @translation.save
 
-        if @navigation.parent_folder
-          redirect_to action: 'show', id: @navigation.parent_folder
-        else
-          redirect_to action: 'show', id: params[:id]
+        respond_to do |format|
+          @yamls = yamls
+          format.turbo_stream
+          return
         end
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
