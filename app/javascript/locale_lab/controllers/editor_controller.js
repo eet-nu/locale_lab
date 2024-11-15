@@ -2,7 +2,8 @@ import { Controller } from '@hotwired/stimulus'
 
 import { basicSetup } from 'codemirror';
 import { EditorState, StateEffect } from '@codemirror/state';
-import { EditorView, ViewPlugin, Decoration, MatchDecorator } from '@codemirror/view';
+import { EditorView, ViewPlugin, Decoration, MatchDecorator, keymap } from '@codemirror/view';
+import { indentWithTab } from "@codemirror/commands"
 import { html } from '@codemirror/lang-html';
 import { yaml } from '@codemirror/lang-yaml';
 
@@ -90,7 +91,7 @@ export default class extends Controller {
   }
 
   get editorExtensions() {
-    return [basicSetup, this.interpolationTemplate]
+    return [basicSetup, keymap.of([indentWithTab]), this.interpolationTemplate]
   }
 
   get yaml() {
