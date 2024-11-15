@@ -8,12 +8,13 @@ current = parts.pop
   <ul class="translations-card-header">
     <li class="translations-card-key">
       <% parts.each.with_index do |part, index| %>
-        <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')) %>
+        <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')), tabindex: '-1' %>
         <span>.</span>
       <% end %>
       <strong><%= current %></strong>
       <%=
         link_to t('.copy_to_clipboard'), "#rename_#{key_id}_input",
+          tabindex: '-1',
           data: {
             action: 'translation-key#copyKeyToClipboard'
           }
@@ -37,7 +38,7 @@ current = parts.pop
         </li>
 
         <li>
-          <%= button_tag t('.move'), type: 'button', data: { action: 'click->translation-key#toggleForm' } %>
+          <%= button_tag t('.move'), type: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleForm' } %>
         </li>
       </ul>
     </li>
