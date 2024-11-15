@@ -7,7 +7,7 @@ import { html } from '@codemirror/lang-html';
 
 export default class extends Controller {
 
-  static targets = ['editor']
+  static targets = ['editor', 'wrapper']
 
   static values = {
     minimumLines: { type: Number, default: 10 }
@@ -71,10 +71,8 @@ export default class extends Controller {
     return editorView.dom;
   }
 
-  get editor()
-  {
-    if (this.hasEditorTarget)
-    {
+  get editor() {
+    if (this.hasEditorTarget) {
       return EditorView.findFromDOM(this.editorTarget)
     }
 
@@ -98,9 +96,9 @@ export default class extends Controller {
     })
   }
 
-  close()
-  {
+  close() {
     this.element.classList.add(this.hiddenClass)
+    this.element.close()
     this.content = ''
   }
 
@@ -112,6 +110,7 @@ export default class extends Controller {
 
     this.content = content
     this.element.classList.remove(this.hiddenClass)
+    this.element.showModal()
     this.editor.focus()
   }
 
@@ -132,6 +131,8 @@ export default class extends Controller {
 
   loadEditor()
   {
-    this.element.prepend(this.editor);
+    if (this.hasWrapperTarget) {
+      this.wrapperTarget.prepend(this.editor);
+    }
   }
 }
