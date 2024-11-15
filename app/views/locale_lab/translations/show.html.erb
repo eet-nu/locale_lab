@@ -4,16 +4,7 @@
 
 <div class="content">
   <div class="translations-overview">
-    <header>
-      <h2><%= @navigation.path %></h2>
-      <ul class="actions">
-        <li>
-          <%=
-            link_to t('.new'), locale_lab.new_translation_path(scope: @navigation.path)
-          %>
-        </li>
-      </ul>
-    </header>
+    <%= render 'navigation_overview' %>
 
     <% if @translations.present? %>
       <ul>
@@ -29,7 +20,7 @@
   </div>
 </div>
 
-<dialog data-controller="editor" class="editor" data-editor-hidden-class="display-none">
+<dialog data-controller="editor" class="editor">
   <div data-editor-target="wrapper">
     <button data-action="click->editor#close" data-editor-target="closeButton">Close</button>
     <button data-action="click->editor#save" data-editor-target="saveButton">Save</button>

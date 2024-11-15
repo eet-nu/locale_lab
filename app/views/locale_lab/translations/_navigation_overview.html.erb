@@ -1,0 +1,19 @@
+<%= turbo_frame_tag('navigation_overview') do %>
+  <header>
+    <h2><%= @navigation.path %></h2>
+    <ul class="actions">
+      <li>
+        <%=
+          link_to t('.new'), locale_lab.new_translation_path(scope: @navigation.path)
+        %>
+      </li>
+      <li>
+        <% @yamls.each do |yaml| %>
+          <%=
+            button_tag t('.edit_yaml', language: yaml[:locale]), type: 'button', data: { controller: 'yaml', yaml_yaml_value: yaml[:content], yaml_editor_outlet: '.editor', action: 'click->yaml#editInEditor' }
+          %>
+        <% end %>
+      </li>
+    </ul>
+  </header>
+<% end %>
