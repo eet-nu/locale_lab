@@ -3,7 +3,7 @@
   label = content_tag(:span, translation.locale) + " " + content_tag(:small, "(#{translation.file.relative_path})")
 %>
 
-<li class="translations-card-locale">
+<li class="key-locale-translation">
   <%= turbo_frame_tag(id) do %>
     <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-value', translation_value_text_area_value: translation.value, translation_value_editor_outlet: '.editor' } do |f| %>
       <%= f.hidden_field :locale, value: translation.locale %>
@@ -27,15 +27,15 @@
         </ul>
       -->
 
-      <ul class="translations-card-locale-actions">
+      <ul class="key-locale-translation-actions">
         <li>
-          <%= f.submit 'Save', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
+          <%= f.submit 'Save', class: 'button primary-button', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
         </li>
         <li>
-          <%= f.button 'Discard', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
+          <%= f.button 'Discard', class: 'button secondary-button', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
         </li>
         <li>
-          <%= f.button 'Editor', tabindex: '-1', type: 'button', data: { action: 'click->translation-value#editInEditor' } %>
+          <%= f.button 'Editor', class: 'button secondary-button', tabindex: '-1', type: 'button', data: { action: 'click->translation-value#editInEditor' } %>
         </li>
       </ul>
     <% end %>

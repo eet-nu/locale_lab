@@ -5,14 +5,14 @@
   */
 
   /* Brand colors */
-  --base-color-brand-100: #ADAFF1;
-  --base-color-brand-200: #989BF9;
+  --base-color-brand-100: #E1E2FF;
+  --base-color-brand-200: #B1B3FF;
   --base-color-brand-300: #7073E7;
-  --base-color-brand-400: #4549DF;
+  --base-color-brand-400: #4347D6;
   --base-color-brand-500: #3337C6;
-  --base-color-brand-600: #2529BD;
-  --base-color-brand-700: #1317AD;
-  --base-color-brand-800: #070C9D;
+  --base-color-brand-600: #262ABE;
+  --base-color-brand-700: #151AA4;
+  --base-color-brand-800: #090C7A;
   --base-color-brand-900: #00024D;
 
   /* Neutral colors */
@@ -77,14 +77,16 @@
   /* Sizes */
   --base-size-0:  0px;
   --base-size-2:  2px;
-  --base-size-4:  4px;
+  --base-size-4:  8px;
   --base-size-6:  6px;
   --base-size-8:  8px;
+  --base-size-12: 12px;
   --base-size-16: 16px;
   --base-size-24: 24px;
   --base-size-32: 32px;
+  --base-size-40: 40px;
 
-  /* Font-families */
+  /* Font families */
   --base-text-fontFamily-system: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 
   /* Font sizes */
@@ -93,8 +95,9 @@
 
   /* Line heights */
   --base-text-lineHeight-normal: 19px;
+  --base-text-lineHeight-small:  16px;
 
-  /* Font-weights */
+  /* Font weights */
   --base-text-weight-normal:   400;
   --base-text-weight-medium:   500;
   --base-text-weight-semibold: 600;
@@ -103,6 +106,17 @@
   /*
   ** Functional
   */
+
+  /* Body text */
+  --text-body-fontFamily:        var(--base-text-fontFamily-system);
+  --text-body-fontSize-normal:   var(--base-text-size-normal);
+  --text-body-lineHeight-normal: var(--base-text-lineHeight-normal);
+  --text-body-weight-normal:     var(--base-text-weight-normal);
+  --text-body-weight-medium:     var(--base-text-weight-medium);
+  --text-body-weight-semibold:   var(--base-text-weight-semibold);
+  --text-body-weight-bold:       var(--base-text-weight-bold);
+
+  /* Display text */
 
   /* Border colors */
   --borderColor-default: var(--base-color-neutral-400);
@@ -115,15 +129,40 @@
 
   /* Background colors */
   --bgColor-body:  var(--base-color-neutral-200);
-  --bgColor-card:  var(--base-color-neutral-100);
   --bgColor-white: var(--base-color-neutral-000);
 
-  /* Body text */
-  --text-body:                   var(--base-text-fontFamily-system);
-  --text-body-fontSize-normal:   var(--base-text-size-normal);
-  --text-body-lineHeight-normal: var(--base-text-lineHeight-normal);
-  --text-body-weight-normal:     var(--base-text-weight-normal);
-  --text-body-weight-medium:     var(--base-text-weight-medium);
-  --text-body-weight-semibold:   var(--base-text-weight-semibold);
-  --text-body-weight-bold:       var(--base-text-weight-bold);
+  /* Primary button */
+  --primaryButton-bgColor-rest:      var(--base-color-brand-100);
+  --primaryButton-bgColor-hover:     var(--base-color-neutral-000);
+  --primaryButton-bgColor-focus:     var(--base-color-neutral-000);
+
+  --primaryButton-borderColor-rest:  var(--base-color-brand-200);
+  --primaryButton-borderColor-hover: var(--base-color-neutral-000);
+  --primaryButton-borderColor-focus: var(--base-color-neutral-000);
+
+  /* Secondary button */
+  --secondaryButton-bgColor-rest:      var(--base-color-neutral-200);
+  --secondaryButton-bgColor-hover:     var(--base-color-neutral-000);
+  --secondaryButton-bgColor-focus:     var(--base-color-neutral-000);
+
+  --secondaryButton-borderColor-rest:  var(--base-color-neutral-400);
+  --secondaryButton-borderColor-hover: var(--base-color-neutral-000);
+  --secondaryButton-borderColor-focus: var(--base-color-neutral-000);
+
+  /* Icon button */
+  --iconButton-bgColor-hover: var(--base-color-neutral-400);
+
+  /* Cards */
+  --card-bgColor:      var(--base-color-neutral-100);
+  --card-borderColor:  var(--borderColor-default);
+  --card-borderRadius: var(--base-size-12);
+}
+
+/*
+** Dark mode: Functional
+*/
+@media (prefers-color-scheme: dark) {
+  :root {
+
+  }
 }

@@ -4,9 +4,9 @@ parts   = key.split('.')
 current = parts.pop
 %>
 
-<li class="translations-card" data-controller="translation-key" data-translation-key-hidden-class="display-none">
-  <ul class="translations-card-header">
-    <li class="translations-card-key">
+<li class="card key" data-controller="translation-key" data-translation-key-hidden-class="display-none">
+  <ul class="key-header">
+    <li class="key-header-label">
       <% parts.each.with_index do |part, index| %>
         <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')), tabindex: '-1' %>
         <span>.</span>
@@ -14,6 +14,7 @@ current = parts.pop
       <strong><%= current %></strong>
       <%=
         link_to t('.copy_to_clipboard'), "#rename_#{key_id}_input",
+          class: 'button',
           tabindex: '-1',
           data: {
             action: 'translation-key#copyKeyToClipboard'
@@ -21,12 +22,13 @@ current = parts.pop
       %>
     </li>
 
-    <li class="translations-card-actions">
+    <li class="key-header-actions">
       <ul>
         <li>
           <%=
-            button_to t('.destroy'), locale_lab.translation_path(key),
+            link_to t('.destroy'), locale_lab.translation_path(key),
               method: :delete,
+              class: 'button',
               tabindex: '-1',
               form:   {
                 data: {
@@ -38,46 +40,50 @@ current = parts.pop
         </li>
 
         <li>
-          <%= button_tag t('.move'), type: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleMoveForm' } %>
+          <%= button_tag t('.move'), type: 'button', class: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleMoveForm' } %>
         </li>
 
         <li>
-          <%= button_tag t('.duplicate'), type: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleDuplicateForm' } %>
+          <%= button_tag t('.duplicate'), type: 'button', class: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleDuplicateForm' } %>
         </li>
       </ul>
     </li>
   </ul>
 
-  <ul class="display-none" data-translation-key-target="moveForm">
-    <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
-      <%= t('.move') %>
-      <%=
-        f.text_field :new_id, value: key,
-          id:    "rename_#{key_id}_input",
-          style: 'width: 500px;',
-          data: {
-            translation_key_target: 'input'
-          }
-      %>
-      <%= f.submit %>
-    <% end %>
-  </ul>
+  <ul class="key-body">
+    <li>
+      <ul class="display-none" data-translation-key-target="moveForm">
+        <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
+          <%= t('.move') %>
+          <%=
+            f.text_field :new_id, value: key,
+              id:    "rename_#{key_id}_input",
+              style: 'width: 500px;',
+              data: {
+                translation_key_target: 'input'
+              }
+          %>
+          <%= f.submit %>
+        <% end %>
+      </ul>
 
-  <ul class="display-none" data-translation-key-target="duplicateForm">
-    <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put do |f| %>
-      <%= t('.duplicate') %>
-      <%=
-        f.text_field :new_id, value: "#{key}_copy",
-          id:    "duplicate_#{key_id}_input",
-          style: 'width: 500px;'
-      %>
-      <%= f.submit %>
-    <% end %>
-  </ul>
+      <ul class="display-none" data-translation-key-target="duplicateForm">
+        <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put do |f| %>
+          <%= t('.duplicate') %>
+          <%=
+            f.text_field :new_id, value: "#{key}_copy",
+              id:    "duplicate_#{key_id}_input",
+              style: 'width: 500px;'
+          %>
+          <%= f.submit %>
+        <% end %>
+      </ul>
 
-  <ul class="translations-card-locales">
-    <% translations.each do |translation| %>
-      <%= render 'translation_with_key', key: key, translation: translation %>
-    <% end %>
-  </ul>
+      <ul class="key-locales">
+        <% translations.each do |translation| %>
+          <%= render 'translation_with_key', key: key, translation: translation %>
+        <% end %>
+      </ul>
+    </li>
+  </ul> 
 </li>

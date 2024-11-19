@@ -1,0 +1,19 @@
+.key-overview { }
+
+.key-overview-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--base-size-24);
+
+  .actions, .actions ul {
+    display: flex;
+  }
+
+  .actions li {
+    margin-right: var(--base-size-8);
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

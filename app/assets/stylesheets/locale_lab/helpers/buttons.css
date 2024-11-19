@@ -2,27 +2,70 @@
 ** Buttons
 */
 
-/* Default buttons */
-.button { 
+a, button,
+input[type="submit"] {
 
-  &:hover {  }
-}
+  /* Default buttons */
+  &.button {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: var(--base-text-size-small);
+    color: var(--fgColor-default);
+    height: var(--base-size-32);
+    padding: 0 var(--base-size-16);
+    border: 1px solid #000;
+    border-radius: var(--base-size-8);
 
-/* Icon buttons */
-.icon-button {
-  display: flex;
-  align-items: center;
-
-  svg {
-    width: 18px;
-    height: 18px;
-    fill: #FF0000;
+    &:hover {  }
   }
 
-  &:hover {
+  /* Primary buttons */
+  &.primary-button {
+    background-color: var(--primaryButton-bgColor-rest);
+    border: 1px solid var(--primaryButton-borderColor-rest);
+
+    &:hover {
+      background-color: var(--primaryButton-bgColor-hover);
+      border: 1px solid var(--primaryButton-borderColor-hover);
+    }
+  }
+
+  /* Secondary buttons */
+  &.secondary-button { 
+    background-color: var(--secondaryButton-bgColor-rest);
+    border: 1px solid var(--secondaryButton-borderColor-rest);
+
+    &:hover {
+      background-color: var(--secondaryButton-bgColor-hover);
+      border: 1px solid var(--secondaryButton-borderColor-hover);
+    }
+  }
+
+  /* Dropdown buttons */
+  &.dropdown-button { 
+
+    &:hover {
+
+    }
+  }
+
+  /* Icon buttons */
+  &.icon-button {
+    display: flex;
+    align-items: center;
 
     svg {
-      fill: #000;
+      width: 18px;
+      height: 18px;
+      fill: #FF0000;
+    }
+
+    &:hover {
+
+      svg {
+        fill: #000;
+      }
     }
   }
 }

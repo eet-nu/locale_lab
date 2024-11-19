@@ -1,8 +1,13 @@
+.sidebar,
+.content {
+  padding-top: var(--base-size-24);
+}
+
 .sidebar {
   width: 384px;
 }
 
 .content {
-  flex: 1;
-  padding-left: 40px;
+  width: calc(100% - 384px);
+  padding-left: var(--base-size-40);
 }

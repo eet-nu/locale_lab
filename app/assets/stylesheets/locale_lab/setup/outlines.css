@@ -2,5 +2,19 @@ body {
   background: var(--bgColor-body);
   font-size: var(--text-body-fontSize-normal);
   line-height: var(--text-body-lineHeight-normal);
-  font-family: var(--text-body);
+  font-family: var(--text-body-fontFamily);
+}
+
+input, textarea, button {
+  font-size: var(--text-body-fontSize-normal);
+  line-height: var(--text-body-lineHeight-normal);
+  font-family: var(--text-body); 
+}
+
+input, textarea {
+  height: var(--base-size-32);
+  background: var(--bgColor-white);
+  padding: var(--base-size-6) var(--base-size-12);
+  border: 1px solid var(--borderColor-default);
+  border-radius: var(--base-size-6);
 }
