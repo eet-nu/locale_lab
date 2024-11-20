@@ -8,19 +8,27 @@
           <%= t('.new') %>
         <% end %>
       </li>
-      <li>
-        <ul>
-          <!--- TODO: This should become a dropdown -->
-          <% @yamls.each do |yaml| %>
-            <li>
-              <%=
-                button_tag yaml[:locale].upcase, type: 'button', class: 'button secondary-button', data: { controller: 'yaml', yaml_yaml_value: yaml[:content],
-                  yaml_editor_outlet: '.editor', action: 'click->yaml#editInEditor' }
-              %>
-            </li>
-          <% end %>
-        </ul>
-      </li>
+      <% unless @navigation.key? %>
+        <li>
+          <ul>
+            <!--- TODO: This should become a dropdown -->
+            <% @yamls.each do |yaml| %>
+              <li><%= rand %>>
+                <%=
+                  button_tag yaml[:locale].upcase, type: 'button', class: 'button secondary-button', data: {
+                    controller:         'yaml',
+                    yaml_yaml_value:    yaml[:content],
+                    yaml_action_value:  locale_lab.yaml_translation_path(@navigation.path),
+                    yaml_locale_value:  yaml[:locale],
+                    yaml_editor_outlet: '.editor',
+                    action:             'click->yaml#editInEditor'
+                  }
+                %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
     </ul>
   </header>
 <% end %>
