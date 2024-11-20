@@ -9,10 +9,11 @@
       </li>
       <li>
         <ul>
+          <!--- TODO: This should become a dropdown -->
           <% @yamls.each do |yaml| %>
             <li>
               <%=
-                button_tag t('.edit_yaml', language: yaml[:locale]), type: 'button', class: 'button', data: { controller: 'yaml', yaml_yaml_value: yaml[:content], 
+                button_tag yaml[:locale].upcase, type: 'button', class: 'button', data: { controller: 'yaml', yaml_yaml_value: yaml[:content],
                   yaml_editor_outlet: '.editor', action: 'click->yaml#editInEditor' }
               %>
             </li>
