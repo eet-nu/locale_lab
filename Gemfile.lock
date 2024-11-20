@@ -84,6 +84,7 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    awesome_print (1.9.2)
     base64 (0.2.0)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
@@ -215,6 +216,7 @@ PLATFORMS
   arm64-darwin-24
 
 DEPENDENCIES
+  awesome_print
   better_errors
   binding_of_caller
   locale_lab!
