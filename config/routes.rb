@@ -5,6 +5,7 @@ LocaleLab::Engine.routes.draw do
     member do
       put :move
       put :duplicate
+      put :yaml
     end
   end
 end

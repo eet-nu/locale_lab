@@ -1,6 +1,6 @@
 module LocaleLab
   class TranslationsController < ApplicationController
-    before_action :load_navigation, only: %i[show update destroy]
+    before_action :load_navigation, only: %i[show update destroy yaml]
 
     def index
       redirect_to locale_lab.dashboard_url
@@ -90,6 +90,16 @@ module LocaleLab
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
         redirect_to action: 'show', id: params[:id]
       end
+    end
+
+    def yaml
+      new_hash = YAML.safe_load(params[:value].to_s)
+
+      LocaleLab::TranslationFile.all.each do |file|
+        file.merge!(params[:id], new_hash) if file.locale == params[:locale]
+      end
+
+      redirect_to action: 'show', id: params[:id]
     end
 
     private

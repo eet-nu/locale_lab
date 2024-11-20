@@ -44,8 +44,21 @@ module LocaleLab
       @data ||= YAML.load_file(path)
     end
 
+    def merge!(location, hash)
+      @translations = nil
+      location = ['en'] + location.split('.')
+
+      location[0..-2].reduce(@data) { |acc, key| acc[key] }[location.last] = hash
+
+      save
+    end
+
     def locales
       data.keys
+    end
+
+    def locale
+      data.keys.first
     end
 
     def translations

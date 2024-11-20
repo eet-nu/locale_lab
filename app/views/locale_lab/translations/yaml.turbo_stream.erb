@@ -1,0 +1,14 @@
+<%
+  id = @translation.key.gsub('.', '_') + "_#{@translation.locale}"
+%>
+
+<%=
+  turbo_stream.replace(id,
+    partial: 'translation_with_key',
+    locals: { key: @translation.key, translation: @translation }
+  )
+%>
+
+<%=
+  turbo_stream.replace('navigation_overview', partial: 'navigation_overview')
+%>
