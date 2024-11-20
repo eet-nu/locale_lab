@@ -25,7 +25,7 @@
   <%= form_with method: :put, data: { editor_target: 'form', action: 'submit->editor#submit' } do |f| %>
     <div data-editor-target="wrapper">
       <%= f.hidden_field :locale, data: { editor_target: 'locale' } %>
-      <%= f.text_area    :value,  data: { editor_target: 'textarea' } %>
+      <%= f.text_area    :value,  data: { editor_target: 'textarea' }, class: 'display-none' %>
       <%= f.submit       t('.save') %>
       <%= f.button       t('.discard'), type: 'button', data: { action: 'click->editor#close' } %>
     </div>
