@@ -26,7 +26,7 @@ current = parts.pop
       <ul>
         <li>
           <%=
-            link_to t('.destroy'), locale_lab.translation_path(key),
+            button_to t('.destroy'), locale_lab.translation_path(key),
               method: :delete,
               class: 'button',
               tabindex: '-1',
@@ -40,50 +40,53 @@ current = parts.pop
         </li>
 
         <li>
-          <%= button_tag t('.move'), type: 'button', class: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleMoveForm' } %>
+          <%= button_tag t('.move'), type: 'button', class: 'button', tabindex: '-1', data: { action: 'click->translation-key#showMoveForm' } %>
         </li>
 
         <li>
-          <%= button_tag t('.duplicate'), type: 'button', class: 'button', tabindex: '-1', data: { action: 'click->translation-key#toggleDuplicateForm' } %>
+          <%= button_tag t('.duplicate'), type: 'button', class: 'button', tabindex: '-1', data: { action: 'click->translation-key#showDuplicateForm' } %>
         </li>
       </ul>
     </li>
   </ul>
 
+
+  <dialog data-translation-key-target="moveForm">
+    <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
+      <%= t('.move') %>
+      <%=
+        f.text_field :new_id, value: key,
+                     id:    "rename_#{key_id}_input",
+                     style: 'width: 500px;',
+                     data: {
+                       translation_key_target: 'input'
+                     }
+      %>
+      <%= f.submit %>
+      <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideMoveForm' } %>
+    <% end %>
+  </dialog>
+
+  <dialog data-translation-key-target="duplicateForm">
+    <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put do |f| %>
+      <%= t('.duplicate') %>
+      <%=
+        f.text_field :new_id, value: "#{key}_copy",
+                     id:    "duplicate_#{key_id}_input",
+                     style: 'width: 500px;'
+      %>
+      <%= f.submit %>
+      <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideDuplicateForm' } %>
+    <% end %>
+  </dialog>
+
   <ul class="key-body">
     <li>
-      <ul class="display-none" data-translation-key-target="moveForm">
-        <%= form_with url: locale_lab.move_translation_path(key), method: :put do |f| %>
-          <%= t('.move') %>
-          <%=
-            f.text_field :new_id, value: key,
-              id:    "rename_#{key_id}_input",
-              style: 'width: 500px;',
-              data: {
-                translation_key_target: 'input'
-              }
-          %>
-          <%= f.submit %>
-        <% end %>
-      </ul>
-
-      <ul class="display-none" data-translation-key-target="duplicateForm">
-        <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put do |f| %>
-          <%= t('.duplicate') %>
-          <%=
-            f.text_field :new_id, value: "#{key}_copy",
-              id:    "duplicate_#{key_id}_input",
-              style: 'width: 500px;'
-          %>
-          <%= f.submit %>
-        <% end %>
-      </ul>
-
       <ul class="key-locales">
         <% translations.each do |translation| %>
           <%= render 'translation_with_key', key: key, translation: translation %>
         <% end %>
       </ul>
     </li>
-  </ul> 
+  </ul>
 </li>

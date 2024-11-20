@@ -29,13 +29,13 @@
 
       <ul class="key-locale-translation-actions">
         <li>
-          <%= f.submit 'Save', class: 'button primary-button', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
+          <%= f.submit t('.save'), class: 'button primary-button', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
         </li>
         <li>
-          <%= f.button 'Discard', class: 'button secondary-button', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
+          <%= f.button t('.discard'), class: 'button secondary-button', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
         </li>
         <li>
-          <%= f.button 'Editor', class: 'button secondary-button', tabindex: '-1', type: 'button', data: { action: 'click->translation-value#editInEditor' } %>
+          <%= f.button t('.edit_in_editor'), class: 'button secondary-button', tabindex: '-1', type: 'button', data: { action: 'click->translation-value#editInEditor' } %>
         </li>
       </ul>
     <% end %>

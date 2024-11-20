@@ -21,21 +21,21 @@ export default class extends Controller {
     }
   }
 
-  toggleMoveForm() {
+  showMoveForm() {
     this.hideDuplicateForm()
-    this.moveFormTarget.classList.toggle(this.hiddenClass)
+    this.moveFormTarget.showModal()
   }
 
   hideMoveForm() {
-    this.moveFormTarget.classList.add(this.hiddenClass)
+    this.moveFormTarget.close()
   }
 
-  toggleDuplicateForm() {
+  showDuplicateForm() {
     this.hideMoveForm()
-    this.duplicateFormTarget.classList.toggle(this.hiddenClass)
+    this.duplicateFormTarget.showModal()
   }
 
   hideDuplicateForm() {
-    this.duplicateFormTarget.classList.add(this.hiddenClass)
+    this.duplicateFormTarget.close()
   }
 }
