@@ -1,6 +1,9 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
+  
+  static values = { height: String }
+
   connect () {
     if (!this.element.value == '') {
       this.grow()
@@ -12,7 +15,7 @@ export default class extends Controller {
       this.element.removeAttribute('rows')
     }
 
-    this.element.style.height = 'auto'
+    this.element.style.height = this.heightValue
     this.element.style.height = this.element.scrollHeight + 'px'
   }
 }

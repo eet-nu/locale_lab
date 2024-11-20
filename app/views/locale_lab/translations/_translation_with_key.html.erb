@@ -11,6 +11,7 @@
 
       <%= f.text_area :value, value: translation.value, id: id, data: {
         controller: 'autogrow',
+        autogrow_height_value: '36px',
         translation_value_target: 'textArea',
         action: %w[
           input->autogrow#grow
