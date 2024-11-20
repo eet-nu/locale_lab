@@ -3,19 +3,25 @@ nl:
   locale_lab:
     dashboard:
       show:
-        files: Translation files
-        available_locales_html: "<strong>Available locales:</strong> %{locales}"
+        files: Vertalingsbestanden
+        available_locales_html: "<strong>Beschikbare vertalingen:</strong> %{locales}"
         incomplete_title: Incomplete keys
     translations:
       navigation:
-        title: Navigation
+        title: Navigatie
       new:
-        title: New translation
-        path: 'Path:'
-        create: Create
+        title: Nieuwe vertaling
+        path: 'Pad:'
+        create: Aanmaken
       show:
-        new: New
+        new: Nieuw
       translations_with_key:
-        destroy: Destroy
-        confirm_destroy: Are you sure?
+        destroy: Verwijder
+        confirm_destroy: Weet je het zeker?
         copy_to_clipboard: Kopieer
+        move: Verplaats
+        duplicate: Dupliceer
+      translation_with_key:
+        discard: Annuleer
+        save: Opslaan
+        edit_in_editor: Editor

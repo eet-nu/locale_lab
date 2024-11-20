@@ -19,3 +19,9 @@ en:
         destroy: Destroy
         confirm_destroy: Are you sure?
         copy_to_clipboard: Copy
+        move: Move
+        duplicate: Duplicate
+      translation_with_key:
+        discard: Discard
+        save: Save
+        edit_in_editor: Editor
