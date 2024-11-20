@@ -20,9 +20,14 @@
   </div>
 </div>
 
-<dialog data-controller="editor" class="editor">
-  <div data-editor-target="wrapper">
-    <button data-action="click->editor#close" data-editor-target="closeButton">Close</button>
-    <button data-action="click->editor#save" data-editor-target="saveButton">Save</button>
-  </div>
+<dialog data-controller="editor" class="editor" data-editor-hidden-class="display-none">
+  <div data-editor-target="errors" class="display-none"></div>
+  <%= form_with method: :put, data: { editor_target: 'form', action: 'submit->editor#submit' } do |f| %>
+    <div data-editor-target="wrapper">
+      <%= f.hidden_field :locale, data: { editor_target: 'locale' } %>
+      <%= f.text_area    :value,  data: { editor_target: 'textarea' } %>
+      <%= f.submit       t('.save') %>
+      <%= f.button       t('.discard'), type: 'button', data: { action: 'click->editor#close' } %>
+    </div>
+  <% end %>
 </dialog>

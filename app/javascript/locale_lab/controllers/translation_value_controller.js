@@ -3,7 +3,9 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
 
   static values = {
-    textArea: String
+    textArea: String,
+    action:   String,
+    locale:   String
   }
 
   static targets = ['textArea', 'submitButton', 'discardButton']
@@ -23,11 +25,11 @@ export default class extends Controller {
   }
 
   editInEditor() {
-    this.editorOutlet.show(this.textAreaTarget.value, this.editorOutlet.html)
-    this.editorOutlet.onSave((new_value) => {
-      this.textAreaTarget.value = new_value
-      this.submitIfChanged()
-    });
+    this.editorOutlet.action  = this.element.action
+    this.editorOutlet.locale  = this.localeValue
+    this.editorOutlet.content = this.textAreaTarget.value
+    this.editorOutlet.type    = this.editorOutlet.html
+    this.editorOutlet.show()
   }
 
   discard(event) {

@@ -5,7 +5,17 @@
 
 <li class="key-locale-translation">
   <%= turbo_frame_tag(id) do %>
-    <%= form_with url: locale_lab.translation_path(key), method: :put, data: { controller: 'translation-value', translation_value_text_area_value: translation.value, translation_value_editor_outlet: '.editor' } do |f| %>
+
+    <%
+      data = {
+        controller: 'translation-value',
+        translation_value_text_area_value: translation.value,
+        translation_value_locale_value: translation.locale,
+        translation_value_editor_outlet: '.editor'
+      }
+    %>
+
+    <%= form_with url: locale_lab.translation_path(key), method: :put, data: data do |f| %>
       <%= f.hidden_field :locale, value: translation.locale %>
       <%= f.label        id,      label %>
 

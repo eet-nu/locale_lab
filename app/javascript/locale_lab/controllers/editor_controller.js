@@ -6,14 +6,17 @@ import { EditorView, ViewPlugin, Decoration, MatchDecorator, keymap } from '@cod
 import { indentWithTab } from "@codemirror/commands"
 import { html } from '@codemirror/lang-html';
 import { yaml } from '@codemirror/lang-yaml';
+import * as jsyaml from "js-yaml";
 
 export default class extends Controller {
 
-  static targets = ['editor', 'wrapper']
+  static targets = ['editor', 'wrapper', 'errors', 'form', 'textarea', 'locale']
 
   static values = {
     minimumLines: { type: Number, default: 10 }
   }
+
+  static classes = ['hidden']
 
   connect() {
     this.loadEditor()
@@ -46,8 +49,20 @@ export default class extends Controller {
         insert: content
       }
     })
+  }
 
-    this.updateToMinNumberOfLines()
+  set action(action) {
+    this.formTarget.action = action
+  }
+
+  set locale(locale) {
+    this.localeTarget.value = locale
+  }
+
+  set type(contentType) {
+    this.editor.dispatch({
+      effects: StateEffect.reconfigure.of([...this.editorExtensions, contentType])
+    });
   }
 
   get editorView() {
@@ -68,71 +83,65 @@ export default class extends Controller {
     return this.editorView
   }
 
-  updateToMinNumberOfLines() {
-    const currentNumOfLines = this.editor.state.doc.lines;
-    const currentStr = this.editor.state.doc.toString();
-
-    if (currentNumOfLines >= this.minimumLinesValue) {
-      return;
-    }
-
-    const lines = this.minimumLinesValue - currentNumOfLines;
-    const appendLines = "\n".repeat(lines);
-
-    this.editor.dispatch({
-      changes: {from: currentStr.length, insert: appendLines},
-      selection: {anchor: 0, head: 0}
-    })
-  }
-
-  close() {
-    this.element.close()
-    this.content = ''
-  }
-
   get editorExtensions() {
     return [basicSetup, keymap.of([indentWithTab]), this.interpolationTemplate]
   }
 
   get yaml() {
+    this.contentType = 'yaml'
     return yaml()
   }
 
   get html() {
+    this.contentType = 'html'
     return html()
   }
 
-  show(content, contentType) {
-    if (this.currentEventListener) {
-      this.element.removeEventListener('saving', this.currentEventListener);
-    }
-
-    this.editor.dispatch({
-      effects: StateEffect.reconfigure.of([...this.editorExtensions, contentType])
-    });
-
-    this.content = content
+  show() {
     this.element.showModal()
     this.editor.focus()
   }
 
-  onSave(callback) {
-    const eventListener = (event) => {
-      callback(this.value);
-    };
-
-    this.currentEventListener = eventListener;
-    this.element.addEventListener('saving', eventListener);
-  }
-
-  save() {
-    this.element.dispatchEvent(new Event('saving'));
-    this.close();
+  close() {
+    this.errorsTarget.classList.add(this.hiddenClass);
+    this.element.close()
   }
 
   loadEditor() {
     if (this.hasWrapperTarget) {
       this.wrapperTarget.prepend(this.editor);
+    }
+  }
+
+  get error() {
+    if (this.contentType === 'yaml') {
+      try {
+        jsyaml.load(this.value)
+      } catch (error) {
+        return error.message
+      }
+    }
+  }
+
+  input_is_valid() {
+    const error = this.error;
+
+    if (error) {
+      this.errorsTarget.innerText = error;
+      this.errorsTarget.classList.remove(this.hiddenClass);
+
+      return false
+    }
+
+    return true
+  }
+
+  submit(event) {
+    if (!this.input_is_valid()) {
+      event.preventDefault();
+    } else {
+      this.textareaTarget.value = this.value
+      this.close()
     }
   }
 }
