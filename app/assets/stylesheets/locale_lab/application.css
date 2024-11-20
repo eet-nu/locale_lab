@@ -17,11 +17,8 @@
 ** Components
 */
 @import "components/card.css";
-
 @import "components/current-application.css";
-@import "components/translations-explorer.css";
-
+@import "components/folder-navigation.css";
 @import "components/keys-overview.css";
 @import "components/key.css";
-
 @import "components/editor.css";

@@ -1,0 +1,74 @@
+.folder-navigation {
+
+  .folder-actions {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background: var(--folderActions-bgColor);
+    padding: var(--base-size-8);
+    margin-bottom: var(--base-size-12);
+    border: 1px solid var(--folderActions-borderColor);
+    border-radius: var(--folderActions-borderRadius);
+
+    .folder-up {
+      margin-right: var(--base-size-8);
+    }
+
+    .folder-move {
+      margin-left: auto;
+    }
+
+    .folder-duplicate,
+    .folder-remove {
+      margin-left: var(--base-size-8);
+    }
+  }
+
+  .folder-items {
+    font-size: var(--base-text-size-small);
+    font-weight: var(--base-text-weight-semibold);
+
+    .folder,
+    .key {
+      display: flex;
+      align-items: center;
+      height: var(--base-size-32);
+      margin-bottom: var(--base-size-4);
+
+      a {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        height: var(--base-size-32);
+      }
+
+      &:hover {
+        background: var(--base-color-neutral-400);
+        border-radius: var(--base-size-8);
+
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+
+    .folder {
+
+      a {
+        padding-left: var(--base-size-16);
+
+        .folder-icon {
+          fill: var(--fgColor-default);
+          margin-right: var(--base-size-12);
+        }
+      }
+    }
+
+    .key {
+
+      a {
+        padding-left: var(--base-size-40);
+      }
+    }
+  }
+}

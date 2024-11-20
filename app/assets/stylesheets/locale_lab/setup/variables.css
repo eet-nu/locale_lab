@@ -77,7 +77,7 @@
   /* Sizes */
   --base-size-0:  0px;
   --base-size-2:  2px;
-  --base-size-4:  8px;
+  --base-size-4:  4px;
   --base-size-6:  6px;
   --base-size-8:  8px;
   --base-size-12: 12px;
@@ -156,6 +156,11 @@
   --card-bgColor:      var(--base-color-neutral-100);
   --card-borderColor:  var(--borderColor-default);
   --card-borderRadius: var(--base-size-12);
+
+  /* Folder actions */
+  --folderActions-bgColor:      var(--base-color-neutral-100);
+  --folderActions-borderColor:  var(--borderColor-default);
+  --folderActions-borderRadius: var(--base-size-12);
 }
 
 /*
