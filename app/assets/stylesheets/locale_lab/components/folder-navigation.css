@@ -55,11 +55,15 @@
     .folder {
 
       a {
-        padding-left: var(--base-size-16);
+        padding: 0 var(--base-size-16);
 
         .folder-icon {
           fill: var(--fgColor-default);
           margin-right: var(--base-size-12);
+        }
+
+        .arrow-icon {
+          margin-left: auto;
         }
       }
     }
