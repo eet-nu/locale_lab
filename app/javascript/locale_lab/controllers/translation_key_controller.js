@@ -22,7 +22,6 @@ export default class extends Controller {
   }
 
   showMoveForm() {
-    this.hideDuplicateForm()
     this.moveFormTarget.showModal()
   }
 
@@ -31,7 +30,6 @@ export default class extends Controller {
   }
 
   showDuplicateForm() {
-    this.hideMoveForm()
     this.duplicateFormTarget.showModal()
   }
 
