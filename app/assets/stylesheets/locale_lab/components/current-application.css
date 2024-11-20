@@ -1,4 +1,5 @@
 .current-application {
+  height: var(--base-size-40);
   padding-left: var(--base-size-24);
   margin-bottom: var(--base-size-16);
 

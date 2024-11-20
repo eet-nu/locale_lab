@@ -1,4 +1,5 @@
 .folder-navigation {
+  height: calc(100vh - var(--base-size-40) * 2);
 
   .folder-actions {
     display: flex;
@@ -6,7 +7,6 @@
     align-items: center;
     background: var(--folderActions-bgColor);
     padding: var(--base-size-8);
-    margin-bottom: var(--base-size-12);
     border: 1px solid var(--folderActions-borderColor);
     border-radius: var(--folderActions-borderRadius);
 
@@ -27,6 +27,9 @@
   .folder-items {
     font-size: var(--base-text-size-small);
     font-weight: var(--base-text-weight-semibold);
+    height: calc(100% - var(--base-size-32) + var(--base-size-16) + 2px);
+    overflow: scroll;
+    padding: var(--base-size-12) 0 50px;
 
     .folder,
     .key {
