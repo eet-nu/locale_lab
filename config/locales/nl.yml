@@ -15,6 +15,7 @@ nl:
         create: Aanmaken
       show:
         new: Nieuw
+        save: Opslaan
       translations_with_key:
         destroy: Verwijder
         confirm_destroy: Weet je het zeker?
