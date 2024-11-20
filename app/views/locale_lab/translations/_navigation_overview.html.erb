@@ -13,7 +13,7 @@
           <ul>
             <!--- TODO: This should become a dropdown -->
             <% @yamls.each do |yaml| %>
-              <li><%= rand %>>
+              <li>
                 <%=
                   button_tag yaml[:locale].upcase, type: 'button', class: 'button secondary-button', data: {
                     controller:         'yaml',
