@@ -53,19 +53,55 @@ input[type="submit"] {
   /* Icon buttons */
   &.icon-button {
     display: flex;
+    justify-content: center;
     align-items: center;
+    color: var(--fgColor-muted);
+    font-size: 0;
+    width: var(--iconButton-size);
+    height: var(--iconButton-size);
+    padding: 0;
+    border: none;
 
     svg {
-      width: 18px;
-      height: 18px;
-      fill: #FF0000;
+      fill: var(--fgColor-muted);
+    }
+
+    &:hover {
+      background-color: var(--iconButton-bgColor-hover);
+
+      svg {
+        fill: var(--fgColor-muted);
+      }
+    }
+  }
+
+  &.icon-button-stroke {
+
+    svg {
+      fill: none;
+      stroke: var(--fgColor-muted);
     }
 
     &:hover {
 
       svg {
-        fill: #000;
+        fill: none;
+        stroke: var(--fgColor-muted);
       }
+    }
+  }
+
+  &.icon-button-primary {
+    background-color: var(--primaryButton-bgColor-rest);
+    border: 1px solid var(--primaryButton-borderColor-rest);
+
+    svg {
+      fill: var(--fgColor-default);
+    }
+
+    &:hover {
+      background-color: var(--primaryButton-bgColor-hover);
+      border: 1px solid var(--primaryButton-borderColor-hover);
     }
   }
 }

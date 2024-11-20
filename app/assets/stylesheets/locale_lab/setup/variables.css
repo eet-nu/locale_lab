@@ -151,6 +151,7 @@
 
   /* Icon button */
   --iconButton-bgColor-hover: var(--base-color-neutral-400);
+  --iconButton-size:          var(--base-size-32);
 
   /* Cards */
   --card-bgColor:      var(--base-color-neutral-100);

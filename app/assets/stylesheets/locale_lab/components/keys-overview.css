@@ -5,6 +5,15 @@
   align-items: center;
   margin-bottom: var(--base-size-24);
 
+  h2 {
+    color: var(--fgColor-muted);
+    font-weight: var(--base-text-weight-bold);
+  }
+
+  .actions {
+    margin-left: auto;
+  }
+
   .actions, .actions ul {
     display: flex;
   }
