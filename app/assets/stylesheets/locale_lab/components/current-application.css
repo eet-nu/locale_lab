@@ -1,5 +1,5 @@
 .current-application {
-  margin-bottom: var(--base-size-24);
+  margin-bottom: var(--base-size-16);
 
   .application,
   .branch {
@@ -12,7 +12,14 @@
   }
 
   .branch {
+    display: flex;
+    align-items: center;
     color: var(--fgColor-brand);
     font-weight: var(--text-body-weight-medium);
+
+    .branch-icon {
+      fill: var(--fgColor-brand);
+      margin-right: var(--base-size-6);
+    }
   }
 }
