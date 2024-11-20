@@ -8,12 +8,12 @@
     border-bottom: 1px solid var(--card-borderColor);
   }
 
-  .key-header-label { 
+  .key-label { 
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 
-    a {
+    a:not(.button) {
       color: var(--fgColor-muted);
       font-weight: var(--base-text-weight-bold);
     }
@@ -23,7 +23,7 @@
     }
   }
 
-  .key-header-actions {
+  .key-actions {
     margin-left: auto;
 
     ul {

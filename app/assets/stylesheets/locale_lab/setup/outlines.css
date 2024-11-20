@@ -5,6 +5,14 @@ body {
   font-family: var(--text-body-fontFamily);
 }
 
+a:not(.button) {
+  color: var(--fgColor-default);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 input, textarea, button {
   font-size: var(--text-body-fontSize-normal);
   line-height: var(--text-body-lineHeight-normal);

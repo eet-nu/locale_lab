@@ -6,7 +6,7 @@ current = parts.pop
 
 <li class="card key" data-controller="translation-key" data-translation-key-hidden-class="display-none">
   <ul class="key-header">
-    <li class="key-header-label">
+    <li class="key-label">
       <% parts.each.with_index do |part, index| %>
         <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')), tabindex: '-1' %>
         <span>.</span>
@@ -22,7 +22,7 @@ current = parts.pop
       %>
     </li>
 
-    <li class="key-header-actions">
+    <li class="key-actions">
       <ul>
         <li>
           <%=
