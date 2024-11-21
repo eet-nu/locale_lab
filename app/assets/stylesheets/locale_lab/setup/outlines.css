@@ -5,7 +5,7 @@ body {
   font-family: var(--text-body-fontFamily);
 }
 
-a:not(.button) {
+a:not(.button, .dropdown-button-button) {
   color: var(--fgColor-default);
 
   &:hover {

@@ -6,13 +6,13 @@
   margin-bottom: var(--base-size-24);
 
   h2 {
+    display: none;
     color: var(--fgColor-muted);
     font-weight: var(--base-text-weight-bold);
+    margin-right: auto;
   }
 
-  .actions {
-    margin-left: auto;
-  }
+  .actions { }
 
   .actions, .actions ul {
     display: flex;

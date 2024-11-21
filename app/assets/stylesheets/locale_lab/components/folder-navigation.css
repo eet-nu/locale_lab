@@ -2,6 +2,7 @@
   height: calc(100vh - var(--base-size-40) * 2);
 
   .folder-actions {
+    position: relative;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -26,9 +27,54 @@
 
   .folder-dropdown {
 
-    ul ul {
-      margin-left: var(--base-size-24);
+    .dropdown-button-button {
+      padding-left: 0;
+      border: none;
     }
+
+    .dropdown-button-dropdown {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      left: -1px;
+      background: var(--folderActions-bgColor);
+      padding: var(--base-size-8);
+      border: 1px solid var(--folderActions-borderColor);
+      border-radius: var(--folderActions-borderRadius);
+    }
+
+    .current-folder {
+
+      a {
+        display: flex;
+        align-items: center;
+        font-weight: var(--base-text-weight-bold);
+        height: var(--base-size-32);
+        background: var(--base-color-neutral-400);
+        padding: 0 var(--base-size-16);
+        border-radius: var(--base-size-8);
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      svg {
+        fill: var(--fgColor-default);
+        margin-left: auto;
+      }
+    }
+
+    .folder {
+      padding-left: var(--base-size-16);
+
+      a {
+        display: flex;
+        align-items: center;
+        height: var(--base-size-32);
+        margin-top: var(--base-size-8);
+      }
+    }  
   }
 
   .folder-items {
@@ -36,7 +82,7 @@
     font-weight: var(--base-text-weight-semibold);
     height: calc(100% - var(--base-size-32) + var(--base-size-16) + 2px);
     overflow: scroll;
-    padding: var(--base-size-12) 0 calc(var(--base-size-32) + var(--base-size-16) + 2px);
+    padding: 0 0 calc(var(--base-size-32) + var(--base-size-16) + 2px);
 
     .folder,
     .key {
@@ -84,5 +130,16 @@
         padding-left: var(--base-size-40);
       }
     }
+  }
+
+  .folder-actions + .folder-items {
+    padding: var(--base-size-12) 0 calc(var(--base-size-32) + var(--base-size-16) + 2px);
+  }
+}
+
+.folder-navigation:has(.dropdown-button-dropdown:not(.display-none)) {
+
+  .folder-items {
+    display: none;
   }
 }
