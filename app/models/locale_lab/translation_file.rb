@@ -44,10 +44,15 @@ module LocaleLab
       @data ||= YAML.load_file(path)
     end
 
+    # This method places a hash into the current file, at the location specified by the dotted key.
     def merge!(location, hash)
+      # Reset the translations memoization
       @translations = nil
+
+      # Split the key into an array, prepend the locale code
       location = [locale] + location.split('.')
 
+      # Traverse the hash to the location and set the new hash
       location[0..-2].reduce(@data) { |acc, key| acc[key] }[location.last] = hash
 
       save
