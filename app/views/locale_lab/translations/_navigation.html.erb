@@ -17,7 +17,26 @@
     <% end %>
 
     <li class="folder-dropdown">
-      <a href="#" class="button">navDropdown</a>
+      <a href="#" class="button dropdown-button"><%= navigation.path.split('.').last %></a>
+      <ul>
+        <!-- Clean up code -->
+        <% path_parts = navigation.path.split('.') %>
+        <% full_path = '' %>
+
+        <% path_parts.each_with_index do |part, index| %>
+          <% full_path = path_parts[0..index].join('.') %>
+          
+          <li>
+            <a href="<%= locale_lab.translation_path(full_path) %>"><%= part.capitalize %></a>
+            
+            <% if index < path_parts.size - 1 %>
+              <ul>
+            <% else %>
+              <% (path_parts.size - 1).times { %></ul><% } %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     </li>
 
     <% if navigation.path %>

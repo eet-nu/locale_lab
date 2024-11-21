@@ -24,6 +24,13 @@
     }
   }
 
+  .folder-dropdown {
+
+    ul ul {
+      margin-left: var(--base-size-24);
+    }
+  }
+
   .folder-items {
     font-size: var(--base-text-size-small);
     font-weight: var(--base-text-weight-semibold);
