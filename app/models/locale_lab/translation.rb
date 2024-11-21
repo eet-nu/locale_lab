@@ -26,38 +26,9 @@ module LocaleLab
       end
     end
 
-    def self.copy(from_path, to_path, is_folder: false)
-      return false if from_path.empty?
-      return false if to_path.empty?
-
-      old_translations = self.navigate(from_path)
-
-      if is_folder
-        old_translations.translations.each do |old_translation|
-          self.create(old_translation.key.gsub(from_path, to_path))
-        end
-      else
-        self.create(to_path)
-      end
-
-      new_translations = self.navigate(to_path)
-
-      old_translations.translations.each do |old_translation|
-        new_translations.translations.find do |new_translation|
-          if new_translation.locale == old_translation.locale
-            new_translation.value = old_translation.value
-            new_translation.save
-          end
-        end
-      end
-    end
-
-    def self.move(from_path, to_path)
-      return false if from_path.empty?
-      return false if to_path.empty?
-
-      if self.copy(from_path, to_path)
-        self.destroy(from_path)
+    def self.find(key, locale)
+      self.navigate(key).translations.find do |translation|
+        translation.key == key && translation.locale == locale
       end
     end
 
@@ -84,6 +55,25 @@ module LocaleLab
       @locale = locale
       @key    = key
       @value  = value
+    end
+
+    def update(value)
+      self.value = value
+      save
+
+      # TODO: Return an actual bool based on the previous operation
+      true
+    end
+
+    def copy_to(to_path)
+      Translation.create(to_path)
+
+      new_translation = Translation.find(to_path, locale)
+      new_translation.value = value
+      new_translation.save
+
+      # TODO: Return an actual bool based on the previous operation
+      true
     end
 
     def folder

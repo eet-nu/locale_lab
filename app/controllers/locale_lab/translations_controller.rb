@@ -55,14 +55,9 @@ module LocaleLab
     end
 
     def update
-      @translation = @navigation.translations.find do |translation|
-        translation.key == params[:id] && translation.locale == params[:locale]
-      end
+      @translation = Translation.find(params[:id], params[:locale])
 
-      if @translation
-        @translation.value = params[:value]
-        @translation.save
-
+      if @translation.update(params[:value])
         respond_to do |format|
           @yamls = yamls
           format.turbo_stream
@@ -75,7 +70,15 @@ module LocaleLab
     end
 
     def move
-      if LocaleLab::Translation.move(params[:id], params[:new_id])
+      updated = false
+
+      locales.each do |locale|
+        translation = Translation.find(params[:id], locale)
+        updated     = translation.copy_to(params[:new_id])
+      end
+
+      if updated
+        Translation.destroy(params[:id])
         redirect_to action: 'show', id: params[:new_id]
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
@@ -84,7 +87,14 @@ module LocaleLab
     end
 
     def duplicate
-      if LocaleLab::Translation.copy(params[:id], params[:new_id], is_folder: is_folder)
+      updated = false
+
+      locales.each do |locale|
+        translation = Translation.find(params[:id], locale)
+        updated     = translation.copy_to(params[:new_id])
+      end
+
+      if updated
         redirect_to action: 'show', id: params[:new_id]
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
@@ -110,6 +120,10 @@ module LocaleLab
 
     def is_folder
       ActiveModel::Type::Boolean.new.cast(params[:is_folder])
+    end
+
+    def locales
+      LocaleLab::TranslationFile.all.flat_map(&:locales).sort.uniq
     end
 
     def yamls
