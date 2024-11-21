@@ -26,13 +26,20 @@ module LocaleLab
       end
     end
 
-    def self.copy(from_path, to_path)
+    def self.copy(from_path, to_path, is_folder: false)
       return false if from_path.empty?
       return false if to_path.empty?
 
-      self.create(to_path)
-
       old_translations = self.navigate(from_path)
+
+      if is_folder
+        old_translations.translations.each do |old_translation|
+          self.create(old_translation.key.gsub(from_path, to_path))
+        end
+      else
+        self.create(to_path)
+      end
+
       new_translations = self.navigate(to_path)
 
       old_translations.translations.each do |old_translation|

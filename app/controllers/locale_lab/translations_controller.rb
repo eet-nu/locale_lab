@@ -84,7 +84,7 @@ module LocaleLab
     end
 
     def duplicate
-      if LocaleLab::Translation.copy(params[:id], params[:new_id])
+      if LocaleLab::Translation.copy(params[:id], params[:new_id], is_folder: is_folder)
         redirect_to action: 'show', id: params[:new_id]
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
