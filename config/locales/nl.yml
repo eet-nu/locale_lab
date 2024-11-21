@@ -13,6 +13,7 @@ nl:
         title: Nieuwe vertaling
         path: 'Pad:'
         create: Aanmaken
+        confirm_destroy_folder: Weet je zeker dat je de MAP %{folder} wil verwijderen?
       show:
         new: Nieuw
         save: Opslaan

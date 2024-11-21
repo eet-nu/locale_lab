@@ -54,9 +54,14 @@ module LocaleLab
       end
     end
 
-    def self.destroy(path)
+    def self.destroy(path, is_folder: false)
       LocaleLab::TranslationFile.all.each do |file|
-        translations = file.translations.find_all { |t| t.key == path }
+        translations = if is_folder
+          file.translations.find_all { |t| t.key.starts_with?(path) }
+        else
+          file.translations.find_all { |t| t.key == path }
+        end
+
         next unless translations.present?
 
         translations.each do |translation|

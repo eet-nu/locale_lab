@@ -25,7 +25,9 @@ module LocaleLab
     end
 
     def destroy
-      LocaleLab::Translation.destroy(params[:id])
+      LocaleLab::Translation.destroy(
+        params[:id], is_folder: ActiveModel::Type::Boolean.new.cast(params[:is_folder])
+      )
 
       if @navigation.parent_folder
         redirect_to action: 'show', id: @navigation.parent_folder
