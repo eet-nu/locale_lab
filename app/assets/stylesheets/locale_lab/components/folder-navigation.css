@@ -29,7 +29,7 @@
     font-weight: var(--base-text-weight-semibold);
     height: calc(100% - var(--base-size-32) + var(--base-size-16) + 2px);
     overflow: scroll;
-    padding: var(--base-size-12) 0 50px;
+    padding: var(--base-size-12) 0 calc(var(--base-size-32) + var(--base-size-16) + 2px);
 
     .folder,
     .key {
