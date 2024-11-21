@@ -25,9 +25,7 @@ module LocaleLab
     end
 
     def destroy
-      LocaleLab::Translation.destroy(
-        params[:id], is_folder: ActiveModel::Type::Boolean.new.cast(params[:is_folder])
-      )
+      LocaleLab::Translation.destroy(params[:id], is_folder: is_folder)
 
       if @navigation.parent_folder
         redirect_to action: 'show', id: @navigation.parent_folder
@@ -108,6 +106,10 @@ module LocaleLab
 
     def load_navigation
       @navigation = LocaleLab::Translation.navigate(params[:id])
+    end
+
+    def is_folder
+      ActiveModel::Type::Boolean.new.cast(params[:is_folder])
     end
 
     def yamls
