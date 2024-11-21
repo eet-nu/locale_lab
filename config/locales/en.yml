@@ -9,11 +9,11 @@ en:
     translations:
       navigation:
         title: Navigation
+        confirm_destroy_folder: Are you sure you want to delete the FOLDER %{folder}?
       new:
         title: New translation
         path: 'Path:'
         create: Create
-        confirm_destroy_folder: Are you sure you want to delete the FOLDER %{folder}?
       show:
         new: New
         save: Save
