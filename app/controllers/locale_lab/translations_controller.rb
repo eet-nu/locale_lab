@@ -72,13 +72,18 @@ module LocaleLab
     def move
       updated = false
 
-      locales.each do |locale|
-        translation = Translation.find(params[:id], locale)
-        updated     = translation.copy_to(params[:new_id])
+      if is_folder
+        updated = Translation.move_folder(params[:id], params[:new_id])
+      else
+        locales.each do |locale|
+          translation = Translation.find(params[:id], locale)
+          updated     = translation.copy_to(params[:new_id])
+        end
+
+        Translation.destroy(params[:id]) if updated
       end
 
       if updated
-        Translation.destroy(params[:id])
         redirect_to action: 'show', id: params[:new_id]
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
@@ -89,9 +94,13 @@ module LocaleLab
     def duplicate
       updated = false
 
-      locales.each do |locale|
-        translation = Translation.find(params[:id], locale)
-        updated     = translation.copy_to(params[:new_id])
+      if is_folder
+        updated = Translation.copy_folder(params[:id], params[:new_id])
+      else
+        locales.each do |locale|
+          translation = Translation.find(params[:id], locale)
+          updated     = translation.copy_to(params[:new_id])
+        end
       end
 
       if updated

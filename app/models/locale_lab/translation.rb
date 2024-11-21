@@ -26,6 +26,21 @@ module LocaleLab
       end
     end
 
+    def self.copy_folder(from, to)
+      self.navigate("#{from}.").translations.each do |translation|
+        translation.copy_to(translation.key.gsub(from, to))
+      end
+
+      true
+    end
+
+    def self.move_folder(from, to)
+      self.copy_folder(from, to)
+      self.destroy(from, is_folder: true)
+
+      true
+    end
+
     def self.find(key, locale)
       self.navigate(key).translations.find do |translation|
         translation.key == key && translation.locale == locale
@@ -35,7 +50,7 @@ module LocaleLab
     def self.destroy(path, is_folder: false)
       LocaleLab::TranslationFile.all.each do |file|
         translations = if is_folder
-          file.translations.find_all { |t| t.key.starts_with?(path) }
+          file.translations.find_all { |t| t.key.starts_with?("#{path}.") }
         else
           file.translations.find_all { |t| t.key == path }
         end
