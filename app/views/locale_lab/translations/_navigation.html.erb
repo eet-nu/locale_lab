@@ -27,7 +27,7 @@
           <% full_path = path_parts[0..index].join('.') %>
           
           <li>
-            <a href="<%= locale_lab.translation_path(full_path) %>"><%= part.capitalize %></a>
+            <a href="<%= locale_lab.translation_path(full_path) %>"><%= part %></a>
             
             <% if index < path_parts.size - 1 %>
               <ul>
