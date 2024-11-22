@@ -35,5 +35,9 @@ module LocaleLab
         end
       ]
     end
+
+    def current_path
+      "#{params[:id]}."
+    end
   end
 end
