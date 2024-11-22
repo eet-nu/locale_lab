@@ -23,7 +23,7 @@ module LocaleLab
     end
 
     def destroy
-      LocaleLab::Translation.destroy(params[:id], is_folder: is_folder)
+      LocaleLab::Translation.destroy(params[:id], is_folder: is_folder?)
 
       if @navigation.parent_folder
         redirect_to action: 'show', id: @navigation.parent_folder
@@ -35,7 +35,17 @@ module LocaleLab
     def create
       @path = params[:path]
 
-      if LocaleLab::Translation.create(@path)
+      if Translation.exists?(@path)
+        if force_action?
+          Translation.destroy(@path)
+        else
+          flash[:error] = 'Translation already exists'
+          redirect_to action: 'show', id: @path
+          return
+        end
+      end
+
+      if Translation.create(@path)
         redirect_to action: 'show', id: @path
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
@@ -65,7 +75,7 @@ module LocaleLab
     def move
       updated = false
 
-      if is_folder
+      if is_folder?
         updated = Translation.move_folder(params[:id], params[:new_id])
       else
         Translation.locales.each do |locale|
@@ -87,7 +97,7 @@ module LocaleLab
     def duplicate
       updated = false
 
-      if is_folder
+      if is_folder?
         updated = Translation.copy_folder(params[:id], params[:new_id])
       else
         Translation.locales.each do |locale|
@@ -120,8 +130,12 @@ module LocaleLab
       @navigation = LocaleLab::Translation.navigate(params[:id])
     end
 
-    def is_folder
-      ActiveModel::Type::Boolean.new.cast(params[:is_folder])
+    def is_folder?
+      !!ActiveModel::Type::Boolean.new.cast(params[:is_folder])
+    end
+
+    def force_action?
+      !!ActiveModel::Type::Boolean.new.cast(params[:force])
     end
 
     def yamls
