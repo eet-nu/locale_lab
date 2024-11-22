@@ -32,11 +32,6 @@ module LocaleLab
       end
     end
 
-    def new
-      @path = ""
-      @path.prepend("#{params[:scope]}.") if params[:scope].present?
-    end
-
     def create
       @path = params[:path]
 
@@ -44,7 +39,7 @@ module LocaleLab
         redirect_to action: 'show', id: @path
       else
         flash.now[:error] = 'Something went wrong, please check for errors and try again.'
-        render 'new', status: :unprocessable_entity
+        redirect_to action: 'show', status: :unprocessable_entity
       end
     end
 

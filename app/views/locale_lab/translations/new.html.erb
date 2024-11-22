@@ -1,7 +1,0 @@
-<h1><%= t '.title' %></h1>
-<%= form_with url: locale_lab.translations_path, method: :post do |f| %>
-  <%= f.label      :path, t('.path')   %>
-  <%= f.text_field :path, value: @path %>
-
-  <%= f.submit t('.create') %>
-<% end %>
