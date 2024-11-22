@@ -100,7 +100,7 @@
       </li>
     <% end %>
 
-    <% keys.each do |key| %>
+    <% keys(with_current_folder: true).each do |key| %>
       <%
         label = key.split('.').last
         label = content_tag(:strong, label) if key == local_assigns[:path]

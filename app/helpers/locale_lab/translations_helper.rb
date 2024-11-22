@@ -10,7 +10,6 @@ module LocaleLab
       super(**options, &block)
     end
 
-    def keys
     def browser
       if @navigation.key?
         Translation.navigate(@navigation.parent_folder)
@@ -25,7 +24,7 @@ module LocaleLab
       elsif @navigation.key?
         @navigation.keys
       else
-        @navigation.matching_keys
+        @navigation.matching_keys(with_current_folder: with_current_folder)
       end
     end
 
