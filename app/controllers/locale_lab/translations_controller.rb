@@ -73,7 +73,7 @@ module LocaleLab
       if is_folder
         updated = Translation.move_folder(params[:id], params[:new_id])
       else
-        locales.each do |locale|
+        Translation.locales.each do |locale|
           translation = Translation.find(params[:id], locale)
           updated     = translation.copy_to(params[:new_id])
         end
@@ -95,7 +95,7 @@ module LocaleLab
       if is_folder
         updated = Translation.copy_folder(params[:id], params[:new_id])
       else
-        locales.each do |locale|
+        Translation.locales.each do |locale|
           translation = Translation.find(params[:id], locale)
           updated     = translation.copy_to(params[:new_id])
         end
@@ -129,10 +129,6 @@ module LocaleLab
       ActiveModel::Type::Boolean.new.cast(params[:is_folder])
     end
 
-    def locales
-      LocaleLab::TranslationFile.all.flat_map(&:locales).sort.uniq
-    end
-
     def yamls
       if request.method == 'GET'
         keys = params[:id].to_s.split('.')
@@ -143,10 +139,9 @@ module LocaleLab
       return [] if keys.empty?
 
       TranslationFile.all.map do |file|
-        locale = file.locales.first
         {
-          locale: locale,
-          content: file.data[locale].dig(*keys).to_yaml.sub(/^---/, '').strip
+          locale: file.locale,
+          content: file.data[file.locale].dig(*keys).to_yaml.sub(/^---/, '').strip
         }
       end
     end

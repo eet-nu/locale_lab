@@ -1,5 +1,9 @@
 module LocaleLab
   module TranslationsHelper
+    def locales
+      @locales ||= Translation.locales
+    end
+
     def form_with(**options, &block)
       options[:html] ||= {}
       options[:html][:autocomplete] ||= 'off'
