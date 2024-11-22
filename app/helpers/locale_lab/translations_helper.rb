@@ -1,5 +1,11 @@
 module LocaleLab
   module TranslationsHelper
+    def form_with(**options, &block)
+      options[:html] ||= {}
+      options[:html][:autocomplete] ||= 'off'
+      super(**options, &block)
+    end
+
     def keys
       if params[:search].present?
         @navigation.search_keys
