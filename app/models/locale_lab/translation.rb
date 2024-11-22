@@ -5,6 +5,10 @@ module LocaleLab
 
     attr_accessor :value
 
+    def self.locales
+      I18nConfig::AVAILABLE_LOCALES.map(&:to_s)
+    end
+
     def self.all
       TranslationCollection.all
     end
