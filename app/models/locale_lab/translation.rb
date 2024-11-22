@@ -55,6 +55,18 @@ module LocaleLab
       end
     end
 
+    def self.is_folder?(key)
+      navigate(key).translations.size.positive?
+    end
+
+    def self.is_key?(key)
+      locales.any? { |locale| find(key, locale) }
+    end
+
+    def self.exists?(key)
+      is_key?(key) || is_folder?(key)
+    end
+
     def self.destroy(path, is_folder: false)
       LocaleLab::TranslationFile.all.each do |file|
         translations = if is_folder
