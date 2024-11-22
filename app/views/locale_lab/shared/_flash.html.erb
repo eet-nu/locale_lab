@@ -1,0 +1,7 @@
+<%= turbo_frame_tag 'flash' do %>
+  <% if flash[:error].present? %>
+    <div style="color: red; width: 100%; margin-top: 40px;">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+<% end %>
