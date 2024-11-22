@@ -3,7 +3,7 @@
     <h2><%= @navigation.path %></h2>
     <ul class="actions">
       <li>
-        <%= link_to locale_lab.new_translation_path(scope: @navigation.path), class: 'button icon-button icon-button-primary' do %>
+        <%= link_to locale_lab.new_translation_path(scope: @navigation.path), class: 'button icon-button icon-button-primary', data: { turbo_frame: '_top' } do %>
           <svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 5.75H8.25V0h-2.5v5.75H0v2.5h5.75V14h2.5V8.25H14v-2.5Z" /></svg>
           <%= t('.new') %>
         <% end %>

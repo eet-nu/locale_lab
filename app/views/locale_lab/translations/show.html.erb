@@ -6,9 +6,9 @@
   <div class="key-overview">
     <%= render 'navigation_overview' %>
 
-    <% if @translations.present? %>
+    <% if translations.present? %>
       <ul>
-        <% @translations.each do |key, translations| %>
+        <% translations.each do |key, translations| %>
           <%=
             render 'translations_with_key',
               key:          key,

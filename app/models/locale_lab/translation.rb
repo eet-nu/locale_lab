@@ -99,6 +99,10 @@ module LocaleLab
       @folder = key.split('.').tap(&:pop).join('.').presence
     end
 
+    def in_current_folder?(folder)
+      !(key.gsub("#{folder}.", '').include?('.'))
+    end
+
     def incomplete?
       value.blank?
     end

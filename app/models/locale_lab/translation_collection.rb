@@ -97,12 +97,12 @@ module LocaleLab
     end
 
     def search_keys
-      @keys ||= map(&:key).uniq
+      @search_keys ||= map(&:key).uniq
     end
 
     def matching_keys
       @matching_keys ||= translations.find_all do |translation|
-        translation.folder == path || translation.folder.starts_with?("#{path}.")
+        translation.in_current_folder?(path) && (translation.folder == path || translation.folder.starts_with?("#{path}."))
       end.map(&:key).uniq
     end
   end

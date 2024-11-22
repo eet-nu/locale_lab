@@ -11,15 +11,7 @@ module LocaleLab
         return redirect_to action: 'show', id: params[:id]
       end
 
-      @navigation = LocaleLab::Translation.search(params[:search])
-      @browser    = @navigation
-      @keys       = @navigation.search_keys
-
-      @translations = Hash[
-        @keys.map do |key|
-          [key, @navigation.with_key(key)]
-        end
-      ]
+      @browser = @navigation = LocaleLab::Translation.search(params[:search])
 
       @yamls = []
 
@@ -28,18 +20,10 @@ module LocaleLab
 
     def show
       if @navigation.key?
-        @keys    = @navigation.keys
         @browser = LocaleLab::Translation.navigate(@navigation.parent_folder)
       else
-        @keys    = @navigation.matching_keys
         @browser = @navigation
       end
-
-      @translations = Hash[
-        @keys.map do |key|
-          [key, @navigation.with_key(key)]
-        end
-      ]
 
       @yamls = yamls
     end
