@@ -11,7 +11,7 @@ module LocaleLab
         return redirect_to action: 'show', id: params[:id]
       end
 
-      @browser = @navigation = LocaleLab::Translation.search(params[:search])
+      @navigation = LocaleLab::Translation.search(params[:search])
 
       @yamls = []
 
@@ -19,12 +19,6 @@ module LocaleLab
     end
 
     def show
-      if @navigation.key?
-        @browser = LocaleLab::Translation.navigate(@navigation.parent_folder)
-      else
-        @browser = @navigation
-      end
-
       @yamls = yamls
     end
 

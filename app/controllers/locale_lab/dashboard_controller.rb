@@ -3,7 +3,6 @@ module LocaleLab
     def show
       @navigation = LocaleLab::Translation.all
 
-      @browser = @navigation
       @files   = LocaleLab::TranslationFile.all
       @locales = @files.flat_map(&:locales).sort.uniq
 

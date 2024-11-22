@@ -7,6 +7,15 @@ module LocaleLab
     end
 
     def keys
+    def browser
+      if @navigation.key?
+        Translation.navigate(@navigation.parent_folder)
+      else
+        @navigation
+      end
+    end
+
+    def keys(with_current_folder: false)
       if params[:search].present?
         @navigation.search_keys
       elsif @navigation.key?
