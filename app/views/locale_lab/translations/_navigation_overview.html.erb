@@ -1,13 +1,24 @@
 <%= turbo_frame_tag('navigation_overview') do %>
-  <header class="key-overview-header">
+  <header class="key-overview-header" data-controller="header">
     <h2><%= @navigation.path %></h2>
     <ul class="actions">
       <li>
-        <%= link_to locale_lab.new_translation_path(scope: @navigation.path), class: 'button icon-button icon-button-primary', data: { turbo_frame: '_top' } do %>
+        <%= button_tag type: 'button', class: 'button icon-button icon-button-primary', data: {
+          action: 'click->header#showCreateForm' } do %>
           <svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 5.75H8.25V0h-2.5v5.75H0v2.5h5.75V14h2.5V8.25H14v-2.5Z" /></svg>
           <%= t('.new') %>
         <% end %>
       </li>
+
+      <dialog data-header-target="newTranslationDialog">
+        <%= form_with url: locale_lab.translations_path, method: :post, data: { turbo_frame: '_top' } do |f| %>
+          <%= f.label      :path, t('.path')   %>
+          <%= f.text_field :path, value: @path %>
+
+          <%= f.submit t('.create') %>
+          <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->header#hideCreateForm' } %>
+        <% end %>
+      </dialog>
 
       <li>
         <%= form_with url: locale_lab.search_path, method: :get, data: { turbo_frame: '_top' } do |form| %>

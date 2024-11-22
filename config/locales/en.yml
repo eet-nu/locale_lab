@@ -10,10 +10,6 @@ en:
       navigation:
         title: Navigation
         confirm_destroy_folder: Are you sure you want to delete the FOLDER %{folder}?
-      new:
-        title: New translation
-        path: 'Path:'
-        create: Create
       show:
         new: New
         save: Save
@@ -29,3 +25,5 @@ en:
         edit_in_editor: Editor
       navigation_overview:
         search: Search
+        path: 'Path:'
+        create: Create
