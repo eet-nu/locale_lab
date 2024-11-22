@@ -20,6 +20,14 @@ module LocaleLab
       new(matching, path)
     end
 
+    def self.search(query)
+      matching = all.translations.find_all do |translation|
+        translation.key.include?(query) || translation.value.include?(query)
+      end
+
+      new(matching, query)
+    end
+
     ### INSTANCE METHODS:
 
     def initialize(translations, path = nil)
@@ -86,6 +94,10 @@ module LocaleLab
       @keys ||= translations.find_all do |translation|
         translation.folder == path || translation.key == path
       end.map(&:key).uniq
+    end
+
+    def search_keys
+      @keys ||= map(&:key).uniq
     end
 
     def matching_keys

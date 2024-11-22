@@ -8,6 +8,16 @@
           <%= t('.new') %>
         <% end %>
       </li>
+
+      <li>
+        <%= form_with url: locale_lab.search_path, method: :get, data: { turbo_frame: '_top' } do |form| %>
+          <%= form.label :search, "Search for:" %>
+          <%= form.hidden_field :id, value: params[:id] %>
+          <%= form.search_field :search, value: params[:search] %>
+          <%= form.submit t('.search') %>
+        <% end %>
+      </li>
+
       <% unless @navigation.key? %>
         <li>
           <ul>

@@ -13,6 +13,10 @@ module LocaleLab
       TranslationCollection.navigate(path)
     end
 
+    def self.search(path)
+      TranslationCollection.search(path)
+    end
+
     def self.create(path)
       return false if path.empty?
 

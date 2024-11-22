@@ -27,3 +27,5 @@ en:
         discard: Discard
         save: Save
         edit_in_editor: Editor
+      navigation_overview:
+        search: Search

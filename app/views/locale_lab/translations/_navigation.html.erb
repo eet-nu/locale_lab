@@ -1,5 +1,5 @@
 <nav class="folder-navigation" data-controller="navigation">
-  <% if navigation.path.present? %>
+  <% if navigation.path.present? && !params[:search].present? %>
     <ul class="folder-actions">
       <% if navigation.parent_folder %>
         <li class="folder-up">
@@ -52,7 +52,7 @@
         </span>
       </li>
 
-      <% if navigation.path %>
+      <% if navigation.path.present? %>
         <li class="folder-move">
           <%= button_tag type: 'button', class: 'button icon-button', tabindex: '-1', data: { action: 'click->navigation#showMoveForm' } do %>
             <svg width="16" height="17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.62 2.323 3.55 9.394l3.181 3.182 7.071-7.071-3.182-3.182Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="m1.605 14.52 1.238-4.418 3.18 3.18-4.418 1.238ZM13.424.944a1.008 1.008 0 0 0-1.426 0l-.701.701 3.182 3.182.7-.7A1.008 1.008 0 0 0 15.18 2.7L13.424.944Z"/></svg>
@@ -111,7 +111,7 @@
     <% end %>
   </ul>
 
-<% if navigation.path %>
+<% if navigation.path.present? %>
   <% navigation_path_id = navigation.path.gsub('.', '_') %>
 
   <dialog data-navigation-target="duplicateForm">

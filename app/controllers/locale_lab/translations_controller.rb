@@ -6,6 +6,26 @@ module LocaleLab
       redirect_to locale_lab.dashboard_url
     end
 
+    def search
+      if params[:search].blank?
+        return redirect_to action: 'show', id: params[:id]
+      end
+
+      @navigation = LocaleLab::Translation.search(params[:search])
+      @browser    = @navigation
+      @keys       = @navigation.search_keys
+
+      @translations = Hash[
+        @keys.map do |key|
+          [key, @navigation.with_key(key)]
+        end
+      ]
+
+      @yamls = []
+
+      render 'show'
+    end
+
     def show
       if @navigation.key?
         @keys    = @navigation.keys
@@ -137,10 +157,12 @@ module LocaleLab
 
     def yamls
       if request.method == 'GET'
-        keys = params[:id].split('.')
+        keys = params[:id].to_s.split('.')
       else
         keys = request.referer.split('/').last.split('.')
       end
+
+      return [] if keys.empty?
 
       TranslationFile.all.map do |file|
         locale = file.locales.first

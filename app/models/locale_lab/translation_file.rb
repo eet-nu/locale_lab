@@ -34,6 +34,8 @@ module LocaleLab
 
       @data         = nil
       @translations = nil
+
+      true
     end
 
     def relative_path

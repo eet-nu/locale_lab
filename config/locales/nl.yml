@@ -27,3 +27,5 @@ nl:
         discard: Annuleer
         save: Opslaan
         edit_in_editor: Editor
+      navigation_overview:
+        search: Zoek
