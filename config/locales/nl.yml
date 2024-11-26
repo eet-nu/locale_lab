@@ -10,6 +10,7 @@ nl:
       navigation:
         title: Navigatie
         confirm_destroy_folder: Weet je zeker dat je de MAP %{folder} wil verwijderen?
+        root: root
       show:
         new: Nieuw
         save: Opslaan

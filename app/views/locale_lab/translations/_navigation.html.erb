@@ -35,19 +35,24 @@
               </a>
             </li>
 
-            <% path_parts.each_with_index do |part, index| %>
-              <% full_path = path_parts[0..index].join('.') %>
+            <li class="root folder">
+              <%= link_to t('.root'), locale_lab.root_path %>
+              <ul>
+                <% path_parts.each_with_index do |part, index| %>
+                  <% full_path = path_parts[0..index].join('.') %>
 
-              <li class="folder">
-                <a href="<%= locale_lab.translation_path(full_path) %>"><%= part %></a>
+                  <li class="folder">
+                    <a href="<%= locale_lab.translation_path(full_path) %>"><%= part %></a>
 
-                <% if index < path_parts.size - 1 %>
-                  <ul>
+                    <% if index < path_parts.size - 1 %>
+                      <ul>
+                    <% end %>
+                  </li>
                 <% end %>
-              </li>
-            <% end %>
 
-            <% (path_parts.size - 1).times { %></ul><% } %>
+                <% (path_parts.size - 1).times { %></ul><% } %>
+              </ul>
+            </li>
           </ul>
         </span>
       </li>

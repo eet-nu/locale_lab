@@ -10,6 +10,7 @@ en:
       navigation:
         title: Navigation
         confirm_destroy_folder: Are you sure you want to delete the FOLDER %{folder}?
+        root: root
       show:
         new: New
         save: Save
