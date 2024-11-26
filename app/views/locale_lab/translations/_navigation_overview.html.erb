@@ -11,6 +11,7 @@
       </li>
 
       <dialog data-header-target="newTranslationDialog">
+        <%= render 'locale_lab/shared/flash' %>
         <%= form_with url: locale_lab.translations_path, method: :post, data: { turbo_frame: '_top' } do |f| %>
           <%= f.label      :path, t('.path')   %>
           <%= f.text_field :path, value: current_path, data: { header_target: 'input' } %>

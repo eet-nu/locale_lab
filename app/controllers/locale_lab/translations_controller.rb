@@ -39,9 +39,11 @@ module LocaleLab
         if force_action?
           Translation.destroy(@path)
         else
-          flash[:error] = 'Translation already exists'
-          redirect_to action: 'show', id: @path
-          return
+          flash.now[:error] = "Translation #{@path} already exists"
+          return respond_to do |format|
+            format.turbo_stream { render turbo_stream: turbo_stream.replace(:flash, partial: 'locale_lab/shared/flash') }
+            format.html         { redirect_to action: 'show', id: @path }
+          end
         end
       end
 

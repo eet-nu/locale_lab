@@ -14,7 +14,13 @@ export default class extends Controller {
     );
   }
 
+  hideErrorFlash() {
+    // TODO: Refactor this selector so it uses an outlet/target
+    this.element.querySelector('turbo-frame#flash').innerHTML = '';
+  }
+
   hideCreateForm() {
     this.newTranslationDialogTarget.close()
+    this.hideErrorFlash()
   }
 }
