@@ -14,7 +14,7 @@ module LocaleLab
 
     def self.navigate(path)
       matching = all.translations.find_all do |translation|
-        translation.key.starts_with?(path)
+        path.present? && translation.key.starts_with?(path)
       end
 
       new(matching, path)
