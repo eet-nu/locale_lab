@@ -1,7 +1,24 @@
 <%
   id    = key.gsub('.', '_') + "_#{translation.locale}"
   label = content_tag(:span, translation.locale) + " " + content_tag(:small, "(#{translation.file.relative_path})")
+
+  if translation.is_yaml?
+    content_type      = 'yaml'
+    translation_value = translation.as_yaml
+  else
+    content_type      = 'text'
+    translation_value = translation.value
+  end
 %>
+
+<!-- TODO: Joey Styling -->
+<!-- We cant use "disabled" here, because the field needs to be submitted -->
+<style>
+    textarea[readonly] {
+        background-color: #f5f5f5; /* Light grey background */
+        cursor: not-allowed; /* Pointer feedback */
+    }
+</style>
 
 <li class="key-locale-translation">
   <%= turbo_frame_tag(id) do %>
@@ -9,17 +26,17 @@
     <%
       data = {
         controller: 'translation-value',
-        translation_value_text_area_value: translation.value,
+        translation_value_text_area_value: translation_value,
         translation_value_locale_value: translation.locale,
+        translation_value_content_type_value: content_type,
         translation_value_editor_outlet: '.editor'
       }
     %>
 
-    <%= form_with url: locale_lab.translation_path(key), method: :put, data: data do |f| %>
+    <%= form_with url: locale_lab.translation_path(key, content_type: content_type), method: :put, data: data do |f| %>
       <%= f.hidden_field :locale, value: translation.locale %>
-      <%= f.label        id,      label %>
-
-      <%= f.text_area :value, value: translation.value, id: id, data: {
+      <%= f.label id, label %>
+      <%= f.text_area :value, value: translation_value, id: id, readonly: content_type == 'yaml', data: {
         controller: 'autogrow',
         autogrow_height_value: '36px',
         translation_value_target: 'textArea',
@@ -46,7 +63,9 @@
           <%= f.button t('.discard'), class: 'button secondary-button', disabled: true, tabindex: '-1', type: 'button', data: { action: 'click->translation-value#discard', translation_value_target: 'discardButton' } %>
         </li>
         <li>
-          <%= f.button t('.edit_in_editor'), class: 'button secondary-button', tabindex: '-1', type: 'button', data: { action: 'click->translation-value#editInEditor' } %>
+          <!-- TODO: Joey Styling -->
+          <!-- Make an extra button class to draw the user attention to it, because the user can only edit the value with the editor -->
+          <%= f.button t('.edit_in_editor'), class: "button #{ content_type == 'yaml' ? 'editor-focus' : 'secondary' }-button", tabindex: '-1', type: 'button', data: { action: 'click->translation-value#editInEditor' } %>
         </li>
       </ul>
     <% end %>

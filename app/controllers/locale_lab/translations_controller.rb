@@ -57,7 +57,13 @@ module LocaleLab
     def update
       @translation = Translation.find(params[:id], params[:locale])
 
-      if @translation.update(params[:value])
+      updated = if params[:content_type] == 'yaml'
+        @translation.update_yaml(params[:value])
+      else
+        @translation.update(params[:value])
+      end
+
+      if updated
         respond_to do |format|
           @yamls = yamls
           format.turbo_stream

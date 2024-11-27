@@ -3,9 +3,10 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
 
   static values = {
-    textArea: String,
-    action:   String,
-    locale:   String
+    textArea:    String,
+    action:      String,
+    locale:      String,
+    contentType: String
   }
 
   static targets = ['textArea', 'submitButton', 'discardButton']
@@ -28,7 +29,13 @@ export default class extends Controller {
     this.editorOutlet.action  = this.element.action
     this.editorOutlet.locale  = this.localeValue
     this.editorOutlet.content = this.textAreaTarget.value
-    this.editorOutlet.type    = this.editorOutlet.html
+
+    if (this.contentTypeValue === 'yaml') {
+      this.editorOutlet.type = this.editorOutlet.yaml
+    } else {
+      this.editorOutlet.type = this.editorOutlet.html
+    }
+
     this.editorOutlet.show()
   }
 

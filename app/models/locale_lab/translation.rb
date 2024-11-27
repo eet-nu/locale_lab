@@ -100,6 +100,10 @@ module LocaleLab
       true
     end
 
+    def update_yaml(value)
+      update(YAML.safe_load(value.to_s))
+    end
+
     def copy_to(to_path)
       Translation.create(to_path)
 
@@ -117,6 +121,14 @@ module LocaleLab
 
     def in_current_folder?(folder)
       !(key.gsub("#{folder}.", '').include?('.'))
+    end
+
+    def is_yaml?
+      value.is_a?(Array)
+    end
+
+    def as_yaml
+      value.to_yaml(line_width: 1024 * 1024).sub(/^---/, '').strip
     end
 
     def incomplete?
