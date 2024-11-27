@@ -28,3 +28,4 @@ nl:
         search: Zoek
         path: 'Pad:'
         create: Aanmaken
+      already_exists: De vertaling bestaat reeds. Gebruik <strong>Forceer</strong> om de bestaande vertaling te overschrijven

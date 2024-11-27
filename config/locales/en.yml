@@ -28,3 +28,4 @@ en:
         search: Search
         path: 'Path:'
         create: Create
+      already_exists: The translation already exists. Use <strong>Force</strong> to overwrite the existing translation.
