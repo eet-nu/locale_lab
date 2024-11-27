@@ -11,11 +11,11 @@
       </li>
 
       <dialog data-header-target="newTranslationDialog">
-        <%= render 'locale_lab/shared/flash' %>
+        <%= render 'locale_lab/translations/dialog_flash' %>
         <%= form_with url: locale_lab.translations_path, method: :post, data: { turbo_frame: '_top' } do |f| %>
-          <%= f.label      :path, t('.path')   %>
-          <%= f.text_field :path, value: current_path, data: { header_target: 'input' } %>
-          <%= f.label      :force, t('.force') %>
+          <%= f.label      :new_id, t('.path') %>
+          <%= f.text_field :new_id, value: current_path, data: { header_target: 'input' } %>
+          <%= f.label      :force,  t('.force') %>
           <%= f.check_box  :force %>
           <%= f.submit t('.create') %>
           <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->header#hideCreateForm' } %>

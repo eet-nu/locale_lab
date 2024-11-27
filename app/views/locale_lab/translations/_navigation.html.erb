@@ -120,20 +120,24 @@
   <% navigation_path_id = navigation.path.gsub('.', '_') %>
 
   <dialog data-navigation-target="duplicateForm">
-    <%= form_with url: locale_lab.duplicate_translation_path(navigation.path, is_folder: true), method: :put do |f| %>
+    <%= render 'locale_lab/translations/dialog_flash' %>
+    <%= form_with url: locale_lab.duplicate_translation_path(navigation.path, is_folder: true), method: :put, data: { turbo_frame: '_top' } do |f| %>
       <%= t('.duplicate') %>
       <%=
         f.text_field :new_id, value: "#{navigation.path}_copy",
                      id:    "duplicate_#{navigation_path_id}_input",
                      style: 'width: 500px;'
       %>
+      <%= f.label      :force,  t('.force') %>
+      <%= f.check_box  :force %>
       <%= f.submit %>
       <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideDuplicateForm' } %>
     <% end %>
   </dialog>
 
   <dialog data-navigation-target="moveForm">
-    <%= form_with url: locale_lab.move_translation_path(navigation.path, is_folder: true), method: :put do |f| %>
+    <%= render 'locale_lab/translations/dialog_flash' %>
+    <%= form_with url: locale_lab.move_translation_path(navigation.path, is_folder: true), method: :put, data: { turbo_frame: '_top' } do |f| %>
       <%= t('.move') %>
       <%=
         f.text_field :new_id, value: navigation.path,
@@ -143,6 +147,8 @@
                        translation_key_target: 'input'
                      }
       %>
+      <%= f.label      :force,  t('.force') %>
+      <%= f.check_box  :force %>
       <%= f.submit %>
       <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideMoveForm' } %>
     <% end %>
