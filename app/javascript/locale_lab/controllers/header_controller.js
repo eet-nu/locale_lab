@@ -5,6 +5,7 @@ export default class extends Controller {
   static targets = ['newTranslationDialog', 'input']
 
   showCreateForm() {
+    this.hideErrorFlash()
     this.newTranslationDialogTarget.showModal()
 
     this.inputTarget.focus();
@@ -16,11 +17,12 @@ export default class extends Controller {
 
   hideErrorFlash() {
     // TODO: Refactor this selector so it uses an outlet/target
-    this.element.querySelector('turbo-frame#flash').innerHTML = '';
+    this.element.querySelectorAll('turbo-frame.dialog_flash').forEach(frame => {
+      frame.innerHTML = '';
+    });
   }
 
   hideCreateForm() {
     this.newTranslationDialogTarget.close()
-    this.hideErrorFlash()
   }
 }

@@ -6,6 +6,13 @@ export default class extends Controller {
 
   static classes = ['hidden']
 
+  hideErrorFlash() {
+    // TODO: Refactor this selector so it uses an outlet/target
+    this.element.querySelectorAll('turbo-frame.dialog_flash').forEach(frame => {
+      frame.innerHTML = '';
+    });
+  }
+
   copyKeyToClipboard (event) {
     if (this.hasInputTarget) {
       if (event) {
@@ -22,6 +29,7 @@ export default class extends Controller {
   }
 
   showMoveForm() {
+    this.hideErrorFlash()
     this.moveFormTarget.showModal()
   }
 
@@ -30,6 +38,7 @@ export default class extends Controller {
   }
 
   showDuplicateForm() {
+    this.hideErrorFlash()
     this.duplicateFormTarget.showModal()
   }
 
