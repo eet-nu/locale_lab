@@ -1,6 +1,12 @@
 module LocaleLab
   class TranslationsController < ApplicationController
-    before_action :load_navigation, only: %i[show update destroy yaml]
+
+    before_action :check_existence,
+      unless: :action_is_forced?,
+      only:   %i[create move duplicate]
+
+    before_action :load_navigation,
+      only: %i[show update destroy yaml]
 
     def index
       redirect_to locale_lab.dashboard_url
@@ -33,25 +39,14 @@ module LocaleLab
     end
 
     def create
-      @path = params[:path]
-
-      if Translation.exists?(@path)
-        if force_action?
-          Translation.destroy(@path)
-        else
-          flash.now[:error] = "Translation #{@path} already exists"
-          return respond_to do |format|
-            format.turbo_stream { render turbo_stream: turbo_stream.replace(:flash, partial: 'locale_lab/shared/flash') }
-            format.html         { redirect_to action: 'show', id: @path }
-          end
-        end
-      end
-
-      if Translation.create(@path)
-        redirect_to action: 'show', id: @path
+      if Translation.create(params[:new_id])
+        redirect_to action: 'show', id: params[:new_id]
       else
-        flash.now[:error] = 'Something went wrong, please check for errors and try again.'
-        redirect_to action: 'show', status: :unprocessable_entity
+        flash[:error] = 'Something went wrong, please check for errors and try again.'
+        respond_to do |format|
+          format.turbo_stream { render turbo_stream: turbo_stream.replace(:dialog_flash, partial: 'dialog_flash') }
+          format.html         { redirect_to action: 'show' }
+        end
       end
     end
 
@@ -136,8 +131,26 @@ module LocaleLab
       !!ActiveModel::Type::Boolean.new.cast(params[:is_folder])
     end
 
-    def force_action?
-      !!ActiveModel::Type::Boolean.new.cast(params[:force])
+    def action_is_forced?
+      params[:force] == '1' ? true : false
+    end
+
+    def check_existence
+      return unless Translation.exists?(params[:new_id])
+
+      respond_to do |format|
+        format.turbo_stream do
+          flash.now[:error] = t('.already_exists', path: params[:new_id])
+          render turbo_stream: turbo_stream.replace_all('.dialog_flash', partial: 'dialog_flash')
+        end
+
+        format.html do
+          flash[:error] = t('.already_exists', path: params[:new_id])
+          redirect_back fallback_location: locale_lab.translation_path(params[:id] || params[:new_id])
+        end
+      end
+
+      false
     end
 
     def yamls
