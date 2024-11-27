@@ -1,0 +1,13 @@
+<%= turbo_frame_tag 'dialog_flash', class: 'dialog_flash' do %>
+  <% if flash[:error].present? %>
+    <style>
+      .dialog-error {
+        color: red;
+      }
+    </style>
+
+    <div class="dialog-error">
+      <%= flash[:error].html_safe %>
+    </div>
+  <% end %>
+<% end %>
