@@ -34,4 +34,3 @@ pin "@codemirror/rangeset", to: "@codemirror--rangeset.js" # @0.19.9
 pin "@codemirror/text", to: "@codemirror--text.js" # @0.19.6
 pin "@codemirror/lang-yaml", to: "@codemirror--lang-yaml.js" # @6.1.1
 pin "@lezer/yaml", to: "@lezer--yaml.js" # @1.0.3
-pin "js-yaml" # @4.1.0

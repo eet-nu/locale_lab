@@ -6,7 +6,6 @@ import { EditorView, ViewPlugin, Decoration, MatchDecorator, keymap } from '@cod
 import { indentWithTab } from "@codemirror/commands"
 import { html } from '@codemirror/lang-html';
 import { yaml } from '@codemirror/lang-yaml';
-import * as jsyaml from "js-yaml";
 
 export default class extends Controller {
 
@@ -115,11 +114,11 @@ export default class extends Controller {
 
   get error() {
     if (this.contentType === 'yaml') {
-      try {
-        jsyaml.load(this.value)
-      } catch (error) {
-        return error.message
-      }
+      // try {
+      //   jsyaml.load(this.value)
+      // } catch (error) {
+      //   return error.message
+      // }
     }
   }
 
