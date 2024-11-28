@@ -28,6 +28,15 @@ Or install it yourself as:
 $ gem install locale_lab
 ```
 
+Finally, add the engine to your routes file to make it accessible:
+```ruby
+Rails.application.routes.draw do
+  if Rails.env.development?
+    mount LocaleLab::Engine => '/locale_lab'
+  end
+end
+```
+
 ## Contributing
 Contribution directions go here.
 
