@@ -15,7 +15,7 @@ Visit [https://locale-lab.test](http://locale-lab.test)
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "locale_lab"
+gem 'locale_lab', git: 'https://github.com/eet-nu/locale_lab.git', branch: 'main'
 ```
 
 And then execute:
