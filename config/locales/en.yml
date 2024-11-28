@@ -11,15 +11,24 @@ en:
         title: Navigation
         confirm_destroy_folder: Are you sure you want to delete the FOLDER %{folder}?
         root: root
+        back: Back
+        destroy_folder: Delete
+        duplicate: Duplicate
+        force: Force
+        discard: Discard
+        move: Move
       show:
         new: New
         save: Save
+        discard: Discard
       translations_with_key:
         destroy: Destroy
         confirm_destroy: Are you sure?
         copy_to_clipboard: Copy
         move: Move
         duplicate: Duplicate
+        force: Force
+        discard: Discard
       translation_with_key:
         discard: Discard
         save: Save
@@ -28,6 +37,9 @@ en:
         search: Search
         path: 'Path:'
         create: Create
+        new: New
+        force: Force
+        discard: Discard
       already_exists: The translation already exists. Use <strong>Force</strong> to overwrite the existing translation.
   humanizer:
     validation:

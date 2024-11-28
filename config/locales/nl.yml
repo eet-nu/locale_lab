@@ -11,15 +11,24 @@ nl:
         title: Navigatie
         confirm_destroy_folder: Weet je zeker dat je de MAP %{folder} wil verwijderen?
         root: root
+        back: Terug
+        destroy_folder: Verwijder
+        duplicate: Dupliceer
+        force: Forceer
+        discard: Annuleer
+        move: Verplaats
       show:
         new: Nieuw
         save: Opslaan
+        discard: Annuleer
       translations_with_key:
         destroy: Verwijder
         confirm_destroy: Weet je het zeker?
         copy_to_clipboard: Kopieer
         move: Verplaats
         duplicate: Dupliceer
+        force: Forceer
+        discard: Annuleer
       translation_with_key:
         discard: Annuleer
         save: Opslaan
@@ -28,6 +37,9 @@ nl:
         search: Zoek
         path: 'Pad:'
         create: Aanmaken
+        new: Nieuw
+        force: Forceer
+        discard: Annuleer
       already_exists: De vertaling bestaat reeds. Gebruik <strong>Forceer</strong> om de bestaande vertaling te overschrijven
   humanizer:
     validation:
