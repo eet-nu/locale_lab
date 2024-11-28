@@ -100,10 +100,6 @@ module LocaleLab
       true
     end
 
-    def update_yaml(value)
-      update(YAML.safe_load(value.to_s))
-    end
-
     def copy_to(to_path)
       Translation.create(to_path)
 

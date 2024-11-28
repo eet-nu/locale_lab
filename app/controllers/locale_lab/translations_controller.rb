@@ -57,13 +57,7 @@ module LocaleLab
     def update
       @translation = Translation.find(params[:id], params[:locale])
 
-      updated = if params[:content_type] == 'yaml'
-        @translation.update_yaml(params[:value])
-      else
-        @translation.update(params[:value])
-      end
-
-      if updated
+      if @translation.update(value_param)
         respond_to do |format|
           @yamls = yamls
           format.turbo_stream
@@ -118,10 +112,8 @@ module LocaleLab
     end
 
     def yaml
-      new_hash = YAML.safe_load(params[:value].to_s)
-
       LocaleLab::TranslationFile.all.each do |file|
-        file.merge!(params[:id], new_hash) if file.locale == params[:locale]
+        file.merge!(params[:id], value_param) if file.locale == params[:locale]
       end
 
       redirect_to action: 'show', id: params[:id]
@@ -135,6 +127,14 @@ module LocaleLab
 
     def is_folder?
       !!ActiveModel::Type::Boolean.new.cast(params[:is_folder])
+    end
+
+    def value_is_yaml?
+      params[:content_type] == 'yaml'
+    end
+
+    def value_param
+      @value_param ||= value_is_yaml? ? YAML.safe_load(params[:value].to_s) : params[:value]
     end
 
     def action_is_forced?
