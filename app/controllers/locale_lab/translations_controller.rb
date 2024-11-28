@@ -19,13 +19,10 @@ module LocaleLab
 
       @navigation = LocaleLab::Translation.search(params[:search])
 
-      @yamls = []
-
       render 'show'
     end
 
     def show
-      @yamls = yamls
     end
 
     def destroy
@@ -59,7 +56,6 @@ module LocaleLab
 
       if @translation.update(value_param)
         respond_to do |format|
-          @yamls = yamls
           format.turbo_stream
           return
         end
@@ -157,23 +153,6 @@ module LocaleLab
       end
 
       false
-    end
-
-    def yamls
-      if request.method == 'GET'
-        keys = params[:id].to_s.split('.')
-      else
-        keys = request.referer.split('/').last.split('.')
-      end
-
-      return [] if keys.empty?
-
-      TranslationFile.all.map do |file|
-        {
-          locale: file.locale,
-          content: file.data[file.locale].dig(*keys).to_yaml.sub(/^---/, '').strip
-        }
-      end
     end
   end
 end

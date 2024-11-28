@@ -23,6 +23,15 @@ module LocaleLab
       end
     end
 
+    def self.at(keys)
+      all.map do |file|
+        {
+          locale: file.locale,
+          content: file.data[file.locale].dig(*keys).to_yaml.sub(/^---/, '').strip
+        }
+      end
+    end
+
     ### INSTANCE METHODS:
 
     def initialize(path)

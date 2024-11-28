@@ -39,5 +39,15 @@ module LocaleLab
     def current_path
       "#{params[:id]}."
     end
+
+    def yamls
+      keys = if params[:id].present?
+        params[:id].to_s.split('.')
+      else
+        request.referer.split('/').last.split('.')
+      end
+
+      keys.empty? ? [] : TranslationFile.at(keys)
+    end
   end
 end
