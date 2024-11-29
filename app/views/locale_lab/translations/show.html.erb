@@ -30,8 +30,8 @@
     <div data-editor-target="wrapper">
       <%= f.hidden_field :locale, data: { editor_target: 'locale' } %>
       <%= f.text_area    :value,  data: { editor_target: 'textarea' }, class: 'display-none' %>
-      <%= f.submit       t('.save') %>
-      <%= f.button       t('.discard'), type: 'button', data: { action: 'click->editor#close' } %>
+      <%= f.submit(class: 'button primary-button') %>
+      <%= f.button       t('.discard'), type: 'button', class: 'button secondary-button', data: { action: 'click->editor#close' } %>
     </div>
   <% end %>
 </dialog>

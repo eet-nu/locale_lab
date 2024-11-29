@@ -17,7 +17,7 @@
           <%= f.text_field :new_id, value: current_path, data: { header_target: 'input' } %>
           <%= f.label      :force,  t('.force') %>
           <%= f.check_box  :force %>
-          <%= f.submit t('.create') %>
+          <%= f.submit t('.create'), class: 'button primary-button' %>
           <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->header#hideCreateForm' } %>
         <% end %>
       </dialog>

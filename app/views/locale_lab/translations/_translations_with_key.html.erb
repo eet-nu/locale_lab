@@ -73,7 +73,7 @@ current = parts.pop
       %>
       <%= f.label      :force,  t('.force') %>
       <%= f.check_box  :force %>
-      <%= f.submit %>
+      <%= f.submit(class: 'button primary-button') %>
       <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideMoveForm' } %>
     <% end %>
   </dialog>
@@ -89,7 +89,7 @@ current = parts.pop
       %>
       <%= f.label      :force,  t('.force') %>
       <%= f.check_box  :force %>
-      <%= f.submit %>
+      <%= f.submit(class: 'button primary-button') %>
       <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideDuplicateForm' } %>
     <% end %>
   </dialog>

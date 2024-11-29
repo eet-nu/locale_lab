@@ -130,7 +130,7 @@
       %>
       <%= f.label      :force,  t('.force') %>
       <%= f.check_box  :force %>
-      <%= f.submit %>
+      <%= f.submit(class: 'button primary-button') %>
       <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideDuplicateForm' } %>
     <% end %>
   </dialog>
@@ -149,7 +149,7 @@
       %>
       <%= f.label      :force,  t('.force') %>
       <%= f.check_box  :force %>
-      <%= f.submit %>
+      <%= f.submit(class: 'button primary-button') %>
       <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideMoveForm' } %>
     <% end %>
   </dialog>
