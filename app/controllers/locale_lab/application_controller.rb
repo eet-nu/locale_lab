@@ -65,5 +65,11 @@ module LocaleLab
       end
     end
 
+    def yaml_is_valid?(possible_yaml_string)
+      YAML.safe_load(possible_yaml_string)
+      true
+    rescue Psych::SyntaxError
+      false
+    end
   end
 end

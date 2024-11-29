@@ -123,6 +123,17 @@ module LocaleLab
     end
 
     def yaml
+      unless yaml_is_valid?(params[:value].to_s)
+        respond_to do |format|
+          format.turbo_stream do
+            flash.now[:error] = t('.invalid_yaml')
+            render turbo_stream: turbo_stream.replace_all('.dialog_flash', partial: 'dialog_flash')
+          end
+        end
+
+        return
+      end
+
       LocaleLab::TranslationFile.all.each do |file|
         file.merge!(params[:id], value_param) if file.locale == params[:locale]
       end
