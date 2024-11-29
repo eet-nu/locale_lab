@@ -9,10 +9,11 @@ import { yaml } from '@codemirror/lang-yaml';
 
 export default class extends Controller {
 
-  static targets = ['editor', 'wrapper', 'errors', 'form', 'textarea', 'locale']
+  static targets = ['editor', 'wrapper', 'form', 'textarea', 'locale']
 
   static values = {
-    minimumLines: { type: Number, default: 10 }
+    minimumLines: { type: Number, default: 10 },
+    closeAfterSubmit: { type: Boolean, default: true }
   }
 
   static classes = ['hidden']
@@ -96,13 +97,20 @@ export default class extends Controller {
     return html()
   }
 
+  hideErrorFlash() {
+    // TODO: Refactor this selector so it uses an outlet/target
+    this.element.querySelectorAll('turbo-frame.dialog_flash').forEach(frame => {
+      frame.innerHTML = '';
+    });
+  }
+
   show() {
+    this.hideErrorFlash()
     this.element.showModal()
     this.editor.focus()
   }
 
   close() {
-    this.errorsTarget.classList.add(this.hiddenClass);
     this.element.close()
   }
 
@@ -112,34 +120,10 @@ export default class extends Controller {
     }
   }
 
-  get error() {
-    if (this.contentType === 'yaml') {
-      // try {
-      //   jsyaml.load(this.value)
-      // } catch (error) {
-      //   return error.message
-      // }
-    }
-  }
-
-  input_is_valid() {
-    const error = this.error;
-
-    if (error) {
-      this.errorsTarget.innerText = error;
-      this.errorsTarget.classList.remove(this.hiddenClass);
-
-      return false
-    }
-
-    return true
-  }
-
   submit(event) {
-    if (!this.input_is_valid()) {
-      event.preventDefault();
-    } else {
-      this.textareaTarget.value = this.value
+    this.textareaTarget.value = this.value
+
+    if (this.closeAfterSubmitValue) {
       this.close()
     }
   }
