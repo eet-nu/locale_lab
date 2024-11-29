@@ -23,14 +23,14 @@
       </dialog>
 
       <li>
-        <%= form_with url: locale_lab.translation_path, method: :get, data: { turbo_frame: '_top' } do |form| %>
+        <%= form_with url: locale_lab.search_path, method: :get, data: { turbo_frame: '_top' } do |form| %>
           <%= form.hidden_field :id, value: params[:id] %>
           <%= form.search_field :search, value: params[:search] %>
-          <%= form.submit t('.search') %>
+          <%= form.submit t('.search'), class: 'button primary-button' %>
         <% end %>
       </li>
 
-      <% unless @navigation.key? %>
+      <% if @navigation.path.present? %>
         <li>
           <ul>
             <!--- TODO: This should become a dropdown -->

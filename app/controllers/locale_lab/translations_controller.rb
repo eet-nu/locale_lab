@@ -8,20 +8,31 @@ module LocaleLab
       only:   %i[create move duplicate]
 
     before_action :load_navigation,
-      only: %i[show update destroy yaml]
+      only: %i[show update destroy yaml search]
 
     def index
-      redirect_to locale_lab.dashboard_url
+      redirect_to locale_lab.root_url
+    end
+
+    def search
+      unless params[:search].present?
+        if params[:id].present?
+          return redirect_to action: 'show', id: params[:id]
+        end
+
+        return redirect_to locale_lab.root_url
+      end
+
+      @translations = all_translations.drop((current_page - 1) * PER_PAGE).take(PER_PAGE)
+
+      respond_to do |format|
+        format.html { render 'show' }
+        format.turbo_stream { render 'show' }
+      end
     end
 
     def show
-      @all_translations ||= Hash[
-        keys.map do |key|
-          [key, @navigation.with_key(key)]
-        end
-      ]
-
-      @translations = @all_translations.drop((current_page - 1) * PER_PAGE).take(PER_PAGE)
+      @translations = all_translations.drop((current_page - 1) * PER_PAGE).take(PER_PAGE)
 
       respond_to do |format|
         format.html
@@ -148,6 +159,14 @@ module LocaleLab
 
     def action_is_forced?
       params[:force] == '1' ? true : false
+    end
+
+    def all_translations
+      @all_translations ||= Hash[
+        keys.map do |key|
+          [key, @navigation.with_key(key)]
+        end
+      ]
     end
 
     def check_existence
