@@ -10,10 +10,11 @@ export default class extends Controller {
   }
 
   editInEditor() {
-    this.editorOutlet.action  = this.actionValue
-    this.editorOutlet.locale  = this.localeValue
-    this.editorOutlet.content = this.yamlValue
-    this.editorOutlet.type    = this.editorOutlet.yaml
+    this.editorOutlet.action                = this.actionValue
+    this.editorOutlet.locale                = this.localeValue
+    this.editorOutlet.content               = this.yamlValue
+    this.editorOutlet.type                  = this.editorOutlet.yaml
+    this.editorOutlet.closeAfterSubmitValue = false
     this.editorOutlet.show()
   }
 }
