@@ -30,7 +30,7 @@
 </div>
 
 <dialog data-controller="editor" class="editor" data-editor-hidden-class="display-none">
-  <div data-editor-target="errors" class="display-none"></div>
+  <%= render 'locale_lab/translations/dialog_flash' %>
   <%= form_with method: :put, data: { editor_target: 'form', action: 'submit->editor#submit' } do |f| %>
     <div data-editor-target="wrapper">
       <%= f.hidden_field :locale, data: { editor_target: 'locale' } %>
