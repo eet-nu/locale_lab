@@ -5,10 +5,21 @@
 <div class="content">
   <div class="key-overview">
     <%= render 'navigation_overview' %>
-    <% if translations.present? %>
-      <ul id="translations-list">
-        <%= render 'translations' %>
+    <% if @translations.present? %>
+      <ul id="translations_list">
+        <%= turbo_frame_tag "translations_page_#{current_page}" do %>
+          <%= render 'translations', translations: @translations %>
+          <%
+            next_page_url = locale_lab.translation_path(@navigation.path, page: current_page + 1)
+          %>
+          <%= turbo_frame_tag("translations_page_#{current_page + 1}", loading: :lazy, src: next_page_url) do %>
+            <%= link_to t('.next_page'), next_page_url %>
+          <% end %>
+        <% end %>
       </ul>
+    <% else %>
+      <%= turbo_frame_tag "translations_page_#{current_page}" do %>
+      <% end %>
    <% end %>
   </div>
 </div>

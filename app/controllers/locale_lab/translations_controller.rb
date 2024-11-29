@@ -1,6 +1,8 @@
 module LocaleLab
   class TranslationsController < ApplicationController
 
+    PER_PAGE = 25
+
     before_action :check_existence,
       unless: :action_is_forced?,
       only:   %i[create move duplicate]
@@ -23,8 +25,17 @@ module LocaleLab
     end
 
     def show
-      if (params[:offset].to_i > 0)
-        return render turbo_stream: turbo_stream.append('translations-list', partial: "translations")
+      @all_translations ||= Hash[
+        keys.map do |key|
+          [key, @navigation.with_key(key)]
+        end
+      ]
+
+      @translations = @all_translations.drop((current_page - 1) * PER_PAGE).take(PER_PAGE)
+
+      respond_to do |format|
+        format.html
+        format.turbo_stream
       end
     end
 
@@ -119,6 +130,11 @@ module LocaleLab
     end
 
     private
+
+    def current_page
+      @current_page ||= [1, params[:page].presence].compact.map(&:to_i).max
+    end
+    helper_method :current_page
 
     def load_navigation
       @navigation = LocaleLab::Translation.navigate(params[:id])
