@@ -23,6 +23,9 @@ module LocaleLab
     end
 
     def show
+      if (params[:offset].to_i > 0)
+        return render turbo_stream: turbo_stream.append('translations-list', partial: "translations")
+      end
     end
 
     def destroy

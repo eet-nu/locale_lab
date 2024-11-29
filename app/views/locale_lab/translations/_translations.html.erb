@@ -1,0 +1,11 @@
+<%
+  offset = params[:offset].to_i
+  limit  = 25
+  url    = locale_lab.translation_path(@navigation.path, offset: offset + limit)
+%>
+
+<% translations.drop(offset).take(limit).each do |key, translations| %>
+  <%= render 'translations_with_key', key: key, translations: translations %>
+<% end %>
+
+<%= turbo_frame_tag('next', loading: :lazy, src: url) %>
