@@ -22,7 +22,7 @@ module LocaleLab
 
     def self.search(query)
       matching = all.translations.find_all do |translation|
-        translation.key.include?(query) || translation.value.include?(query)
+        translation.key.include?(query) || translation.value.to_s.include?(query)
       end
 
       new(matching, query)
