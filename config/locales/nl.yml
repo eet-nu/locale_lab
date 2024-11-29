@@ -40,6 +40,7 @@ nl:
         new: Nieuw
         force: Forceer
         discard: Annuleer
+      invalid_yaml: De opgegeven YAML is ongeldig
       already_exists: De vertaling bestaat reeds. Gebruik <strong>Forceer</strong> om de bestaande vertaling te overschrijven
   humanizer:
     validation:

@@ -40,6 +40,7 @@ en:
         new: New
         force: Force
         discard: Discard
+      invalid_yaml: Invalid YAML
       already_exists: The translation already exists. Use <strong>Force</strong> to overwrite the existing translation.
   humanizer:
     validation:
