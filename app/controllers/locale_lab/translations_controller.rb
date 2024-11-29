@@ -14,16 +14,6 @@ module LocaleLab
       redirect_to locale_lab.dashboard_url
     end
 
-    def search
-      if params[:search].blank?
-        return redirect_to action: 'show', id: params[:id]
-      end
-
-      @navigation = LocaleLab::Translation.search(params[:search])
-
-      render 'show'
-    end
-
     def show
       @all_translations ||= Hash[
         keys.map do |key|
@@ -137,7 +127,11 @@ module LocaleLab
     helper_method :current_page
 
     def load_navigation
-      @navigation = LocaleLab::Translation.navigate(params[:id])
+      if params[:search].present?
+        @navigation = LocaleLab::Translation.search(params[:search])
+      else
+        @navigation = LocaleLab::Translation.navigate(params[:id])
+      end
     end
 
     def is_folder?

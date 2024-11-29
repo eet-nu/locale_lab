@@ -9,9 +9,14 @@
       <ul id="translations_list">
         <%= turbo_frame_tag "translations_page_#{current_page}" do %>
           <%= render 'translations', translations: @translations %>
+
           <%
-            next_page_url = locale_lab.translation_path(@navigation.path, page: current_page + 1)
+            next_page_url = locale_lab.translation_path(@navigation.path,
+              page:   current_page + 1,
+              search: params[:search].presence
+            )
           %>
+
           <%= turbo_frame_tag("translations_page_#{current_page + 1}", loading: :lazy, src: next_page_url) do %>
             <%= link_to t('.next_page'), next_page_url %>
           <% end %>
