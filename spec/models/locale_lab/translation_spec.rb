@@ -50,6 +50,24 @@ RSpec.describe LocaleLab::Translation do
         expect(LocaleLab::Translation.is_folder?(from_folder)).to be(false)
       end
     end
+
+    describe '.destroy' do
+      context 'when the key is a folder' do
+        it 'destroys the given folder' do
+          expect(LocaleLab::Translation.is_folder?('greetings')).to be(true)
+          LocaleLab::Translation.destroy('greetings', is_folder: true)
+          expect(LocaleLab::Translation.exists?('greetings')).to be(false)
+        end
+      end
+
+      context 'when the key is a key (not a folder)' do
+        it 'destroys the given folder' do
+          expect(LocaleLab::Translation.is_key?('greetings.evening')).to be(true)
+          LocaleLab::Translation.destroy('greetings.evening', is_folder: false)
+          expect(LocaleLab::Translation.exists?('greetings.evening')).to be(false)
+        end
+      end
+    end
   end
 
   context 'instance methods' do
@@ -65,13 +83,27 @@ RSpec.describe LocaleLab::Translation do
       end
     end
 
-    describe '#move' do
-      it 'copies the translation to the given key' do
-        expect{
-          translation.copy_to('greetings.informal.salutation')
-        }.to change {
-          LocaleLab::Translation.find('greetings.informal.salutation', 'en')&.value
-        }.from(nil).to(translation.value)
+    describe '#update' do
+      it 'updates the value field' do
+        expect(translation.value).to eq('We hope this message finds you well')
+        translation.update('Howdy do?')
+        expect(translation.value).to eq('Howdy do?')
+      end
+    end
+
+    describe '#incomplete?' do
+      let(:translation) {
+        LocaleLab::Translation.create('new')
+        LocaleLab::Translation.find('new', 'en')
+      }
+
+      it 'returns true if it does not have a value' do
+        expect(translation.incomplete?).to be(true)
+      end
+
+      it 'returns false if it does have a value' do
+        translation.update('Now it is complete')
+        expect(translation.incomplete?).to be(false)
       end
     end
   end
