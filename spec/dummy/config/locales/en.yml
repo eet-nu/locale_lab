@@ -1,18 +1,19 @@
+---
 en:
   greetings:
-    morning: 'Good morning'
-    evening: 'Good evening'
+    morning: Good morning
+    evening: Good evening
     formal:
-      title: 'Dear Sir or Madam'
-      salutation: 'We hope this message finds you well'
+      title: Dear Sir or Madam
+      salutation: We hope this message finds you well
   actions:
-    save: 'Save'
-    delete: 'Delete'
+    save: Save
+    delete: Delete
     confirm:
-      yes: 'Yes, proceed'
-      no: 'No, cancel'
+      'true': Yes, proceed
+      'false': No, cancel
   errors:
-    not_found: 'Page not found'
+    not_found: Page not found
     server_error:
-      message: 'Something went wrong'
-      advice: 'Please try again later'
+      message: Something went wrong
+      advice: Please try again later

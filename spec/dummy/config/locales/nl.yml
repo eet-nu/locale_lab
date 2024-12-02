@@ -1,18 +1,19 @@
+---
 nl:
   greetings:
-    morning: 'Goedemorgen'
-    evening: 'Goedenavond'
+    morning: Goedemorgen
+    evening: Goedenavond
     formal:
-      title: 'Geachte heer of mevrouw'
-      salutation: 'Wij hopen dat deze boodschap u in goede gezondheid bereikt'
+      title: Geachte heer of mevrouw
+      salutation: Wij hopen dat deze boodschap u in goede gezondheid bereikt
   actions:
-    save: 'Opslaan'
-    delete: 'Verwijderen'
+    save: Opslaan
+    delete: Verwijderen
     confirm:
-      yes: 'Ja, doorgaan'
-      no: 'Nee, annuleren'
+      'true': Ja, doorgaan
+      'false': Nee, annuleren
   errors:
-    not_found: 'Pagina niet gevonden'
+    not_found: Pagina niet gevonden
     server_error:
-      message: 'Er ging iets mis'
-      advice: 'Probeer het later opnieuw'
+      message: Er ging iets mis
+      advice: Probeer het later opnieuw
