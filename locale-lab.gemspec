@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_development_dependency "rspec-rails"
+  spec.add_development_dependency "rails-controller-testing"
   spec.add_dependency 'rails', '>= 7.0'
   spec.add_dependency 'importmap-rails'
   spec.add_dependency 'turbo-rails'
