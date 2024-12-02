@@ -2,6 +2,7 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
+/coverage
 /log/*.log
 /log/*.yml
 /log/*.pid
