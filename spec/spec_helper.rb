@@ -92,3 +92,5 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| load f}

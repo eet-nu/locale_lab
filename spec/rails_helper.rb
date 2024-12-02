@@ -65,8 +65,3 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-RSpec.configure do |config|
-  config.before(:each) do
-    Thread.current[:locale_lab] = nil if Thread.current[:locale_lab].present?
-  end
-end
