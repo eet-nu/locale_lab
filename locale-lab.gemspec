@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
     Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
+  spec.add_development_dependency "rspec-rails"
   spec.add_dependency 'rails', '>= 7.0'
   spec.add_dependency 'importmap-rails'
   spec.add_dependency 'turbo-rails'
