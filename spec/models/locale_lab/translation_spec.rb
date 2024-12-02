@@ -8,6 +8,48 @@ RSpec.describe LocaleLab::Translation do
         expect(translation.value).to eq('Good morning')
       end
     end
+
+    describe '.create' do
+      it 'creates a translation key' do
+        expect{
+          LocaleLab::Translation.create('some.random.key')
+        }.to change {
+          LocaleLab::Translation.exists?('some.random.key')
+        }.from(false).to(true)
+      end
+    end
+
+    describe '.copy_folder' do
+      let(:from_folder) { 'actions' }
+      let(:to_folder)   { 'copied_actions' }
+
+      it 'creates a new translation folder' do
+        expect(LocaleLab::Translation.is_folder?(to_folder)).to be(false)
+        LocaleLab::Translation.copy_folder(from_folder, to_folder)
+        expect(LocaleLab::Translation.is_folder?(to_folder)).to be(true)
+      end
+
+      it 'does not delete the old folder' do
+        LocaleLab::Translation.copy_folder(from_folder, to_folder)
+        expect(LocaleLab::Translation.is_folder?(from_folder)).to be(true)
+      end
+    end
+
+    describe '.move_folder' do
+      let(:from_folder) { 'actions' }
+      let(:to_folder)   { 'copied_actions' }
+
+      it 'creates a new translation folder' do
+        expect(LocaleLab::Translation.is_folder?(to_folder)).to be(false)
+        LocaleLab::Translation.move_folder(from_folder, to_folder)
+        expect(LocaleLab::Translation.is_folder?(to_folder)).to be(true)
+      end
+
+      it 'does delete the old folder' do
+        LocaleLab::Translation.move_folder(from_folder, to_folder)
+        expect(LocaleLab::Translation.is_folder?(from_folder)).to be(false)
+      end
+    end
   end
 
   context 'instance methods' do
