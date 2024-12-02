@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe LocaleLab::TranslationFile, type: :model do
+RSpec.describe LocaleLab::TranslationFile do
   let(:file1) { 'en.yml' }
   let(:file2) { 'nl.yml' }
 
