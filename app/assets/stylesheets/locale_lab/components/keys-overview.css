@@ -12,17 +12,38 @@
     margin-right: auto;
   }
 
-  .actions { }
+  .actions { 
+    width: 100%;
+  }
 
   .actions, .actions ul {
     display: flex;
   }
 
   .actions li {
-    margin-right: var(--base-size-8);
+    margin-right: var(--base-size-16);
 
     &:last-child {
       margin-right: 0;
+    }
+  }
+
+  .search {
+    margin-left: auto;
+
+    form {
+      display: flex;
+    }
+
+    input[type="search"] {
+      margin-right: var(--base-size-8);
+    }
+  }
+
+  .yaml-locales {
+
+    li {
+      margin-right: var(--base-size-8);
     }
   }
 }

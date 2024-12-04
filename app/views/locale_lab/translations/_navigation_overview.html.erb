@@ -22,7 +22,7 @@
         <% end %>
       </dialog>
 
-      <li>
+      <li class="search">
         <%= form_with url: locale_lab.search_path, method: :get, data: { turbo_frame: '_top' } do |form| %>
           <%= form.hidden_field :id, value: params[:id] %>
           <%= form.search_field :search, value: params[:search] %>
@@ -31,7 +31,7 @@
       </li>
 
       <% if @navigation.path.present? %>
-        <li>
+        <li class="yaml-locales">
           <ul>
             <!--- TODO: This should become a dropdown -->
             <% yamls.each do |yaml| %>
