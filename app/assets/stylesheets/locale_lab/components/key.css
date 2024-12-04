@@ -51,10 +51,11 @@
     form {
       display: flex;
       flex-flow: row wrap;
-      align-items: center;
+      align-items: flex-start;
 
       label {
         text-transform: uppercase;
+        padding-top: var(--base-size-8);
         margin-right: var(--base-size-16);
 
         small {
@@ -64,6 +65,7 @@
 
       textarea {
         flex: 1;
+        overflow: hidden;
       }
     }
 
