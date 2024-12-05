@@ -3,7 +3,7 @@
 %>
 
 <div class="content">
-  <div class="key-overview">
+  <div class="key-overview" data-controller="key-overview" data-key-overview-hidden-class="display-none" data-key-overview-visible-flex-class="display-flex">
     <%= render 'navigation_overview' %>
     <% if @translations.present? %>
       <ul id="translations_list">

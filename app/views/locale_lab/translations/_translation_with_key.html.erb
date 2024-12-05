@@ -20,7 +20,7 @@
     }
 </style>
 
-<li class="key-locale-translation">
+<li class="key-locale-translation" data-action="click->key-overview#toggleLocaleActions">
   <%= turbo_frame_tag(id) do %>
 
     <%
@@ -55,7 +55,7 @@
         </ul>
       -->
 
-      <ul class="key-locale-translation-actions">
+      <ul class="key-locale-translation-actions display-none" data-key-overview-target="localeActions">
         <li>
           <%= f.submit t('.save'), class: 'button primary-button', tabindex: '-1', data: { translation_value_target: 'submitButton' } %>
         </li>
