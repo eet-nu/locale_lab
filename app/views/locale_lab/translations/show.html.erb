@@ -18,7 +18,7 @@
           %>
 
           <%= turbo_frame_tag("translations_page_#{current_page + 1}", loading: :lazy, src: next_page_url) do %>
-            <%= link_to t('.next_page'), next_page_url %>
+            <%= link_to t('.next_page'), next_page_url, class: 'display-none' %>
           <% end %>
         <% end %>
       </ul>
