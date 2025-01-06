@@ -7,7 +7,16 @@ export default class extends Controller {
   static classes = ['hidden', 'visibleFlex']
 
   toggleLocaleActions(event) {
-    const activeKeyLocale = event.currentTarget
+    let activeKeyLocale
+
+    if (event.type === 'focus') {
+      // The event got fired from focusing on the textarea
+      activeKeyLocale = event.currentTarget.closest('li')
+    } else {
+      // The event got fired from clicking in the list item
+      activeKeyLocale = event.currentTarget
+    }
+
     const keyLocaleActions = this.localeActionsTargets.find((target) =>
       activeKeyLocale.contains(target)
     )
