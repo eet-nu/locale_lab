@@ -1,18 +1,6 @@
 module LocaleLab
   class ApplicationController < ActionController::Base
-
-    around_action :use_locale_lab_locale
-
     private
-
-    def use_locale_lab_locale(&action)
-      @original_i18n_config = I18n.config
-      I18n.config = ::LocaleLab::I18nConfig.new
-      I18n.with_locale(current_locale, &action)
-    ensure
-      I18n.config = @original_i18n_config
-      @original_i18n_config = nil
-    end
 
     def locales
       @locales ||= Translation.locales
@@ -54,16 +42,6 @@ module LocaleLab
       keys.empty? ? [] : TranslationFile.at(keys)
     end
     helper_method :yamls
-
-    def current_locale
-      if request.GET['locale']
-        request.GET['locale']
-      elsif params[:locale]
-        params[:locale]
-      else
-        I18n.default_locale
-      end
-    end
 
     def yaml_is_valid?(possible_yaml_string)
       YAML.safe_load(possible_yaml_string)
