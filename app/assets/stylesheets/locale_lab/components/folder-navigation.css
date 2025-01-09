@@ -111,8 +111,10 @@
 
       a {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         flex: 1;
+        max-width: 100%;
         height: var(--base-size-32);
       }
 
@@ -136,6 +138,14 @@
           margin-right: var(--base-size-12);
         }
 
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          flex: 1;
+          max-width: calc(100% - var(--base-size-40));
+        }
+
         .arrow-icon {
           margin-left: auto;
         }
@@ -145,7 +155,14 @@
     .key {
 
       a {
+        max-width: calc(100% - var(--base-size-40));
         padding-left: var(--base-size-40);
+        
+        span {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
     }
   }
