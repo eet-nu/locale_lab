@@ -1,5 +1,5 @@
 .current-application {
-  height: var(--base-size-40);
+  min-height: var(--base-size-40);
   padding-left: var(--base-size-24);
   margin-bottom: var(--base-size-16);
 
@@ -15,6 +15,7 @@
 
   .branch {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     color: var(--fgColor-brand);
     font-weight: var(--text-body-weight-medium);
@@ -22,6 +23,10 @@
     .branch-icon {
       fill: var(--fgColor-brand);
       margin-right: var(--base-size-6);
+    }
+
+    span {
+      flex: 1;
     }
   }
 }
