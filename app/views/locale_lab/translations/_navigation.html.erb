@@ -20,7 +20,7 @@
       <li class="folder-dropdown">
         <span class="dropdown-button" data-controller="dropdown-button" data-dropdown-button-hidden-class="display-none">
           <a href="#" class="dropdown-button-button" data-action="click->dropdown-button#toggleDropdown">
-            <%= navigation.path.split('.').last %>
+            <span><%= navigation.path.split('.').last %></span>
             <svg width="10" height="5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.597 4.457.09.465l9-.017-4.493 4.009Z"/></svg>
           </a>
 
@@ -30,7 +30,7 @@
 
             <li class="current-folder">
               <a href="#" data-action="click->dropdown-button#toggleDropdown">
-                <%= navigation.path.split('.').last %>
+                <span><%= navigation.path.split('.').last %></span>
                 <svg width="10" height="5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m5.337.02 4.508 3.992-9 .017L5.337.021Z"/></svg>
               </a>
             </li>

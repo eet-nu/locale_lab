@@ -26,8 +26,18 @@
   }
 
   .folder-dropdown {
+    overflow: hidden;
+    max-width: calc(100% - var(--base-size-8) * 19); 
+
+    .dropdown-button {
+      display: block;
+      overflow: hidden;
+      max-width: 100%;
+    }
 
     .dropdown-button-button {
+      overflow: hidden;
+      max-width: 100%;
       padding-left: 0;
       border: none;
     }
@@ -63,6 +73,14 @@
         fill: var(--fgColor-default);
         margin-left: auto;
       }
+    }
+
+    .dropdown-button-button span,
+    .current-folder span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: calc(100% - (10px + var(--base-size-8))); /* 10px is icon size */
     }
 
     .folder {
