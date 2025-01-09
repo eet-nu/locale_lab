@@ -16,12 +16,13 @@
   .branch {
     display: flex;
     flex-wrap: nowrap;
-    align-items: center;
+    align-items: flex-start;
     color: var(--fgColor-brand);
     font-weight: var(--text-body-weight-medium);
 
     .branch-icon {
       fill: var(--fgColor-brand);
+      margin-top: calc(var(--base-size-6) / 2);
       margin-right: var(--base-size-6);
     }
 
