@@ -21,6 +21,7 @@
     font-weight: var(--text-body-weight-medium);
 
     .branch-icon {
+      flex-shrink: 0;
       fill: var(--fgColor-brand);
       margin-top: calc(var(--base-size-6) / 2);
       margin-right: var(--base-size-6);
