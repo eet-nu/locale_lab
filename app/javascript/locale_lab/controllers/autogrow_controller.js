@@ -4,10 +4,14 @@ export default class extends Controller {
   
   static values = { height: String }
 
+  static classes = [ 'overflow' ]
+
   connect () {
     if (!this.element.value == '') {
       this.grow()
     }
+
+    this.element.classList.add(this.overflowClass)
   }
 
   grow () {

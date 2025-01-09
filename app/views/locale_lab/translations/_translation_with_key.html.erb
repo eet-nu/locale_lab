@@ -38,6 +38,7 @@
       <%= f.label id, label %>
       <%= f.text_area :value, value: translation_value, id: id, readonly: content_type == 'yaml', data: {
         controller: 'autogrow',
+        autogrow_overflow_class: 'overflow-hidden',
         autogrow_height_value: '36px',
         translation_value_target: 'textArea',
         action: %w[

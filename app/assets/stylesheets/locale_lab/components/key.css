@@ -65,6 +65,9 @@
 
       textarea {
         flex: 1;
+      }
+
+      textarea.overflow-hidden {
         overflow: hidden;
       }
     }
