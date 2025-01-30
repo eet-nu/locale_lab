@@ -22,7 +22,7 @@ module LocaleLab
     end
 
     def self.create(path)
-      return false if path.empty?
+      return false if path.empty? || path.starts_with?('.')
 
       created_locales = []
 
