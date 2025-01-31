@@ -1,0 +1,11 @@
+<%=
+  turbo_stream.remove("translations_with_key:#{params[:id]}")
+%>
+
+<%=
+  turbo_stream.remove("sidebar_item:#{params[:id]}")
+%>
+
+<%=
+  turbo_stream.replace('navigation_overview', partial: 'navigation_overview')
+%>

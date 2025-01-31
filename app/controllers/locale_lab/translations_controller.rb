@@ -43,10 +43,16 @@ module LocaleLab
     def destroy
       LocaleLab::Translation.destroy(params[:id], is_folder: is_folder?)
 
-      if @navigation.parent_folder
-        redirect_to action: 'show', id: @navigation.parent_folder
-      else
-        redirect_to action: 'new'
+      respond_to do |format|
+        format.html do
+          if @navigation.parent_folder
+            redirect_to action: 'show', id: @navigation.parent_folder
+          else
+            redirect_to action: 'new'
+          end
+        end
+
+        format.turbo_stream
       end
     end
 

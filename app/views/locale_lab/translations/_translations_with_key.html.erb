@@ -1,106 +1,108 @@
 <%
-key_id  = key.underscore.gsub('.', '_')
-parts   = key.split('.')
-current = parts.pop
+  key_id  = key.underscore.gsub('.', '_')
+  parts   = key.split('.')
+  current = parts.pop
 %>
-
-<li class="card key" data-controller="translation-key" data-translation-key-hidden-class="display-none">
-  <ul class="key-header">
-    <li class="key-label">
-      <% parts.each.with_index do |part, index| %>
-        <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')), tabindex: '-1', data: { turbo: false } %>
-        <span>.</span>
-      <% end %>
-      <strong><%= current %></strong>
-      <%= link_to "#rename_#{key_id}_input",
-                  class: 'button icon-button',
-                  tabindex: '-1',
-                  data: { action: 'translation-key#copyKeyToClipboard' } do %>
-        <svg width="18" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 .233H8c-2.2 0-4 1.8-4 4-2.2 0-4 1.8-4 4v6c0 2.2 1.8 4 4 4h6c2.2 0 4-1.8 4-4 2.2 0 4-1.8 4-4v-6c0-2.2-1.8-4-4-4Zm-2 14c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2v-6c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Zm4-4c0 1.1-.9 2-2 2v-4c0-2.2-1.8-4-4-4H6c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Z"/>
-        </svg>
-        <%= t('.copy_to_clipboard') %>
-      <% end %>
-    </li>
-
-    <li class="key-actions">
-      <ul>
-        <li>
-          <%= button_tag type: 'button', class: 'button icon-button', tabindex: '-1', data: { action: 'click->translation-key#showMoveForm' } do %>
-            <svg width="16" height="17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.62 2.323 3.55 9.394l3.181 3.182 7.071-7.071-3.182-3.182Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="m1.605 14.52 1.238-4.418 3.18 3.18-4.418 1.238ZM13.424.944a1.008 1.008 0 0 0-1.426 0l-.701.701 3.182 3.182.7-.7A1.008 1.008 0 0 0 15.18 2.7L13.424.944Z"/></svg>
-            <%= t('.move') %>
-          <% end %>
-        </li>
-
-        <li>
-          <%= button_tag type: 'button', class: 'button icon-button', tabindex: '-1', data: { action: 'click->translation-key#showDuplicateForm' } do %>
-            <svg width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.015.231h-6c-2.2 0-4 1.8-4 4-2.2 0-4 1.8-4 4v6c0 2.2 1.8 4 4 4h6c2.2 0 4-1.8 4-4 2.2 0 4-1.8 4-4v-6c0-2.2-1.8-4-4-4Zm-2 14c0 1.1-.9 2-2 2h-6c-1.1 0-2-.9-2-2v-6c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Zm4-4c0 1.1-.9 2-2 2v-4c0-2.2-1.8-4-4-4h-4c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Z" /><path d="M4.015 10.231h6v2h-6z"/><path d="M8.015 8.231v6h-2v-6z"/></svg>
-            <%= t('.duplicate') %>
-          <% end %>
-        </li>
-
-        <li>
-          <%= button_to locale_lab.translation_path(key),
-                        method: :delete,
-                        class: 'button icon-button',
-                        tabindex: '-1',
-                        form: {
-                          data: {
-                            turbo_method: :delete,
-                            turbo_confirm: t('.confirm_destroy')
-                          }
-                        } do %>
-            <svg width="17" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.268 3.2h-3.1L11.89 1.094c-.358-.535-.911-.863-1.543-.863H6.538c-.632 0-1.218.328-1.542.863L3.716 3.2h-3.1a.596.596 0 0 0-.601.594v.593c0 .33.268.594.602.594h.602v11.875c0 1.312 1.078 2.375 2.408 2.375h9.63c1.33 0 2.409-1.063 2.409-2.375V4.981h.602a.595.595 0 0 0 .602-.594v-.593a.596.596 0 0 0-.602-.594ZM6.482 2.12a.224.224 0 0 1 .192-.108h3.536c.08 0 .156.042.193.107l.658 1.08-5.237.001.658-1.08Zm6.776 15.33H3.627a.598.598 0 0 1-.602-.594V4.981H13.86v11.875a.6.6 0 0 1-.602.594Zm-4.816-1.781a.598.598 0 0 0 .602-.594V7.356a.598.598 0 0 0-.602-.594.599.599 0 0 0-.602.594v7.719a.6.6 0 0 0 .602.594Zm-3.01 0a.6.6 0 0 0 .602-.594V7.356a.598.598 0 0 0-.602-.594.599.599 0 0 0-.602.594v7.719a.6.6 0 0 0 .602.594Zm6.02 0a.598.598 0 0 0 .602-.594V7.356a.598.598 0 0 0-.602-.594.599.599 0 0 0-.602.594v7.719a.6.6 0 0 0 .602.594Z"/></svg>
-            <%= t('.destroy') %>
-          <% end %>
-        </li>
-      </ul>
-    </li>
-  </ul>
-
-
-  <dialog data-translation-key-target="moveForm">
-    <%= render 'locale_lab/translations/dialog_flash' %>
-    <%= form_with url: locale_lab.move_translation_path(key), method: :put, data: { turbo_frame: '_top' } do |f| %>
-      <%= t('.move') %>
-      <%=
-        f.text_field :new_id, value: key,
-                     id:    "rename_#{key_id}_input",
-                     style: 'width: 500px;',
-                     data: {
-                       translation_key_target: 'input'
-                     }
-      %>
-      <%= f.label      :force,  t('.force') %>
-      <%= f.check_box  :force %>
-      <%= f.submit(class: 'button primary-button') %>
-      <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideMoveForm' } %>
-    <% end %>
-  </dialog>
-
-  <dialog data-translation-key-target="duplicateForm">
-    <%= render 'locale_lab/translations/dialog_flash' %>
-    <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put, data: { turbo_frame: '_top' } do |f| %>
-      <%= t('.duplicate') %>
-      <%=
-        f.text_field :new_id, value: "#{key}_copy",
-                     id:    "duplicate_#{key_id}_input",
-                     style: 'width: 500px;'
-      %>
-      <%= f.label      :force,  t('.force') %>
-      <%= f.check_box  :force %>
-      <%= f.submit(class: 'button primary-button') %>
-      <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideDuplicateForm' } %>
-    <% end %>
-  </dialog>
-
-  <ul class="key-body">
-    <li>
-      <ul class="key-locales">
-        <% translations.each do |translation| %>
-          <%= render 'translation_with_key', key: key, translation: translation %>
+<%= turbo_frame_tag "translations_with_key:#{key}" do %>
+  <li class="card key" data-controller="translation-key" data-translation-key-hidden-class="display-none">
+    <ul class="key-header">
+      <li class="key-label">
+        <% parts.each.with_index do |part, index| %>
+          <%= link_to part, locale_lab.translation_path(parts[0..index].join('.')), tabindex: '-1', data: { turbo: false } %>
+          <span>.</span>
         <% end %>
-      </ul>
-    </li>
-  </ul>
-</li>
+        <strong><%= current %></strong>
+        <%= link_to "#rename_#{key_id}_input",
+                    class: 'button icon-button',
+                    tabindex: '-1',
+                    data: { action: 'translation-key#copyKeyToClipboard' } do %>
+          <svg width="18" height="19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 .233H8c-2.2 0-4 1.8-4 4-2.2 0-4 1.8-4 4v6c0 2.2 1.8 4 4 4h6c2.2 0 4-1.8 4-4 2.2 0 4-1.8 4-4v-6c0-2.2-1.8-4-4-4Zm-2 14c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2v-6c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Zm4-4c0 1.1-.9 2-2 2v-4c0-2.2-1.8-4-4-4H6c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Z"/>
+          </svg>
+          <%= t('.copy_to_clipboard') %>
+        <% end %>
+      </li>
+
+      <li class="key-actions">
+        <ul>
+          <li>
+            <%= button_tag type: 'button', class: 'button icon-button', tabindex: '-1', data: { action: 'click->translation-key#showMoveForm' } do %>
+              <svg width="16" height="17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.62 2.323 3.55 9.394l3.181 3.182 7.071-7.071-3.182-3.182Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="m1.605 14.52 1.238-4.418 3.18 3.18-4.418 1.238ZM13.424.944a1.008 1.008 0 0 0-1.426 0l-.701.701 3.182 3.182.7-.7A1.008 1.008 0 0 0 15.18 2.7L13.424.944Z"/></svg>
+              <%= t('.move') %>
+            <% end %>
+          </li>
+
+          <li>
+            <%= button_tag type: 'button', class: 'button icon-button', tabindex: '-1', data: { action: 'click->translation-key#showDuplicateForm' } do %>
+              <svg width="19" height="19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.015.231h-6c-2.2 0-4 1.8-4 4-2.2 0-4 1.8-4 4v6c0 2.2 1.8 4 4 4h6c2.2 0 4-1.8 4-4 2.2 0 4-1.8 4-4v-6c0-2.2-1.8-4-4-4Zm-2 14c0 1.1-.9 2-2 2h-6c-1.1 0-2-.9-2-2v-6c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Zm4-4c0 1.1-.9 2-2 2v-4c0-2.2-1.8-4-4-4h-4c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v6Z" /><path d="M4.015 10.231h6v2h-6z"/><path d="M8.015 8.231v6h-2v-6z"/></svg>
+              <%= t('.duplicate') %>
+            <% end %>
+          </li>
+
+          <li>
+            <%=
+              button_to locale_lab.translation_path(key),
+                method: :delete,
+                class: 'button icon-button',
+                tabindex: '-1',
+                form: {
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: t('.confirm_destroy')
+                  }
+                } do
+            %>
+              <svg width="17" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.268 3.2h-3.1L11.89 1.094c-.358-.535-.911-.863-1.543-.863H6.538c-.632 0-1.218.328-1.542.863L3.716 3.2h-3.1a.596.596 0 0 0-.601.594v.593c0 .33.268.594.602.594h.602v11.875c0 1.312 1.078 2.375 2.408 2.375h9.63c1.33 0 2.409-1.063 2.409-2.375V4.981h.602a.595.595 0 0 0 .602-.594v-.593a.596.596 0 0 0-.602-.594ZM6.482 2.12a.224.224 0 0 1 .192-.108h3.536c.08 0 .156.042.193.107l.658 1.08-5.237.001.658-1.08Zm6.776 15.33H3.627a.598.598 0 0 1-.602-.594V4.981H13.86v11.875a.6.6 0 0 1-.602.594Zm-4.816-1.781a.598.598 0 0 0 .602-.594V7.356a.598.598 0 0 0-.602-.594.599.599 0 0 0-.602.594v7.719a.6.6 0 0 0 .602.594Zm-3.01 0a.6.6 0 0 0 .602-.594V7.356a.598.598 0 0 0-.602-.594.599.599 0 0 0-.602.594v7.719a.6.6 0 0 0 .602.594Zm6.02 0a.598.598 0 0 0 .602-.594V7.356a.598.598 0 0 0-.602-.594.599.599 0 0 0-.602.594v7.719a.6.6 0 0 0 .602.594Z"/></svg>
+              <%= t('.destroy') %>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <dialog data-translation-key-target="moveForm">
+      <%= render 'locale_lab/translations/dialog_flash' %>
+      <%= form_with url: locale_lab.move_translation_path(key), method: :put, data: { turbo_frame: '_top' } do |f| %>
+        <%= t('.move') %>
+        <%=
+          f.text_field :new_id, value: key,
+                      id:    "rename_#{key_id}_input",
+                      style: 'width: 500px;',
+                      data: {
+                        translation_key_target: 'input'
+                      }
+        %>
+        <%= f.label      :force,  t('.force') %>
+        <%= f.check_box  :force %>
+        <%= f.submit(class: 'button primary-button') %>
+        <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideMoveForm' } %>
+      <% end %>
+    </dialog>
+
+    <dialog data-translation-key-target="duplicateForm">
+      <%= render 'locale_lab/translations/dialog_flash' %>
+      <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put, data: { turbo_frame: '_top' } do |f| %>
+        <%= t('.duplicate') %>
+        <%=
+          f.text_field :new_id, value: "#{key}_copy",
+                      id:    "duplicate_#{key_id}_input",
+                      style: 'width: 500px;'
+        %>
+        <%= f.label      :force,  t('.force') %>
+        <%= f.check_box  :force %>
+        <%= f.submit(class: 'button primary-button') %>
+        <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideDuplicateForm' } %>
+      <% end %>
+    </dialog>
+
+    <ul class="key-body">
+      <li>
+        <ul class="key-locales">
+          <% translations.each do |translation| %>
+            <%= render 'translation_with_key', key: key, translation: translation %>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </li>
+<% end %>
