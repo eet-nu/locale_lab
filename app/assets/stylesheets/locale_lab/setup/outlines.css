@@ -26,3 +26,19 @@ input, textarea {
   border: 1px solid var(--borderColor-default);
   border-radius: var(--base-size-6);
 }
+
+input[type="checkbox"] {
+  appearance: none;
+  display: block;
+  min-width: var(--base-size-24);
+  max-width: var(--base-size-24);
+  min-height: var(--base-size-24);
+  max-height: var(--base-size-24);
+  padding: 0;
+  border: 1px solid var(--borderColor-default);
+
+  &:checked {
+    background: var(--primaryButton-bgColor-rest);
+    border: 1px solid var(--primaryButton-borderColor-rest);
+  }
+}

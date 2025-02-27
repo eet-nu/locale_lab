@@ -1,0 +1,50 @@
+.dialog {
+  width: 100%;
+  max-width: 700px;
+
+  form {
+
+    ul.inputs {
+      margin-bottom: var(--base-size-16);
+
+      li {
+        margin-bottom: var(--base-size-16);
+
+        label {
+          display: block;
+          font-weight: 600;
+          margin-bottom: var(--base-size-4);
+        }
+
+        input {
+          width: 100%;
+        }
+      }
+
+      li:last-child {
+        margin-bottom: 0;
+      }
+
+      li.choice {
+        display: flex;
+        align-items: center;
+
+        label {
+          margin: 0;
+        }
+
+        input[type="checkbox"] {
+          width: var(--base-size-24);
+          margin-right: var(--base-size-8);
+        }
+      }
+    }
+
+    ul.actions {
+
+      li {
+        margin-right: var(--base-size-8);
+      }
+    }
+  }
+}

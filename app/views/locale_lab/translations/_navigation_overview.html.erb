@@ -10,15 +10,29 @@
         <% end %>
       </li>
 
-      <dialog data-header-target="newTranslationDialog">
+      <dialog class="dialog" data-header-target="newTranslationDialog">
         <%= render 'locale_lab/translations/dialog_flash' %>
         <%= form_with url: locale_lab.translations_path, method: :post, data: { turbo_frame: '_top' } do |f| %>
-          <%= f.label      :new_id, t('.path') %>
-          <%= f.text_field :new_id, value: current_path, data: { header_target: 'input' } %>
-          <%= f.label      :force,  t('.force') %>
-          <%= f.check_box  :force %>
-          <%= f.submit t('.create'), class: 'button primary-button' %>
-          <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->header#hideCreateForm' } %>
+          <ul class="inputs">
+            <li>
+              <%= f.label      :new_id, t('.path') %>
+              <%= f.text_field :new_id, value: current_path, data: { header_target: 'input' } %>
+            </li>
+
+            <li class="choice">
+              <%= f.check_box :force, id: "force_checkbox" %>
+              <%= f.label :force, t('.force'), for: "force_checkbox" %>
+            </li>
+          </ul>
+
+          <ul class="actions">
+            <li>
+              <%= f.submit t('.create'), class: 'button primary-button' %>
+            </li>
+            <li>
+              <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->header#hideCreateForm' } %>
+            </li>
+          </ul>
         <% end %>
       </dialog>
 

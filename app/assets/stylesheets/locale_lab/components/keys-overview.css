@@ -13,11 +13,15 @@
   }
 
   .actions { 
+    display: flex;
     width: 100%;
   }
 
-  .actions, .actions ul {
-    display: flex;
+  .yaml-locales {
+
+    ul {
+      display: flex;
+    }
   }
 
   .actions li {
