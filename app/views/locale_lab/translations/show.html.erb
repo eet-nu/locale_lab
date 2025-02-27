@@ -29,14 +29,25 @@
   </div>
 </div>
 
-<dialog data-controller="editor" class="editor" data-editor-hidden-class="display-none">
+<dialog data-controller="editor" class="dialog editor" data-editor-hidden-class="display-none">
   <%= render 'locale_lab/translations/dialog_flash' %>
   <%= form_with method: :put, data: { editor_target: 'form', action: 'submit->editor#submit' } do |f| %>
     <div data-editor-target="wrapper">
-      <%= f.hidden_field :locale, data: { editor_target: 'locale' } %>
-      <%= f.text_area    :value,  data: { editor_target: 'textarea' }, class: 'display-none' %>
-      <%= f.submit(class: 'button primary-button') %>
-      <%= f.button       t('.discard'), type: 'button', class: 'button secondary-button', data: { action: 'click->editor#close' } %>
+      <ul class="inputs">
+        <li>
+          <%= f.hidden_field :locale, data: { editor_target: 'locale' } %>
+          <%= f.text_area    :value,  data: { editor_target: 'textarea' }, class: 'display-none' %>
+        </li>
+      </ul>
+
+      <ul class="actions">
+        <li>
+          <%= f.submit(class: 'button primary-button') %>
+        </li>
+        <li>
+          <%= f.button       t('.discard'), type: 'button', class: 'button secondary-button', data: { action: 'click->editor#close' } %>
+        </li>
+      </ul>
     </div>
   <% end %>
 </dialog>

@@ -122,43 +122,73 @@
     <% end %>
   </ul>
 
-<% if navigation.path.present? %>
-  <% navigation_path_id = navigation.path.gsub('.', '_') %>
+  <% if navigation.path.present? %>
+    <% navigation_path_id = navigation.path.gsub('.', '_') %>
 
-  <dialog data-navigation-target="duplicateForm">
-    <%= render 'locale_lab/translations/dialog_flash' %>
-    <%= form_with url: locale_lab.duplicate_translation_path(navigation.path, is_folder: true), method: :put, data: { turbo_frame: '_top' } do |f| %>
-      <%= t('.duplicate') %>
-      <%=
-        f.text_field :new_id, value: "#{navigation.path}_copy",
-                     id:    "duplicate_#{navigation_path_id}_input",
-                     style: 'width: 500px;'
-      %>
-      <%= f.label      :force,  t('.force') %>
-      <%= f.check_box  :force %>
-      <%= f.submit(class: 'button primary-button') %>
-      <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideDuplicateForm' } %>
-    <% end %>
-  </dialog>
+    <dialog class="dialog" data-navigation-target="duplicateForm">
+      <%= render 'locale_lab/translations/dialog_flash' %>
+      <%= form_with url: locale_lab.duplicate_translation_path(navigation.path, is_folder: true), method: :put, data: { turbo_frame: '_top' } do |f| %>
+        
+        <ul class="inputs">
+          <li>
+            <label><%= t('.duplicate') %></label>
+            <%=
+              f.text_field :new_id, value: "#{navigation.path}_copy",
+                           id:    "duplicate_#{navigation_path_id}_input"
+            %>
+          </li>
 
-  <dialog data-navigation-target="moveForm">
-    <%= render 'locale_lab/translations/dialog_flash' %>
-    <%= form_with url: locale_lab.move_translation_path(navigation.path, is_folder: true), method: :put, data: { turbo_frame: '_top' } do |f| %>
-      <%= t('.move') %>
-      <%=
-        f.text_field :new_id, value: navigation.path,
-                     id:    "rename_#{navigation_path_id}_input",
-                     style: 'width: 500px;',
-                     data: {
-                       translation_key_target: 'input'
-                     }
-      %>
-      <%= f.label      :force,  t('.force') %>
-      <%= f.check_box  :force %>
-      <%= f.submit(class: 'button primary-button') %>
-      <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideMoveForm' } %>
-    <% end %>
-  </dialog>
-<% end %>
+          <li class="choice">
+            <%= label_tag do %>
+              <%= f.check_box :force %> <%= t('.force') %>
+            <% end %>
+          </li>
+        </ul>
 
+        <ul class="actions">
+          <li>
+            <%= f.submit(class: 'button primary-button') %>
+          </li>
+          <li>
+            <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideDuplicateForm' } %>
+          </li>
+        </ul>
+      <% end %>
+    </dialog>
+
+    <dialog class="dialog" data-navigation-target="moveForm">
+      <%= render 'locale_lab/translations/dialog_flash' %>
+      <%= form_with url: locale_lab.move_translation_path(navigation.path, is_folder: true), method: :put, data: { turbo_frame: '_top' } do |f| %>
+        
+        <ul class="inputs">
+          <li>
+            <label><%= t('.move') %></label>
+            <%=
+              f.text_field :new_id, value: navigation.path,
+                           id:    "rename_#{navigation_path_id}_input",
+                           data: {
+                             translation_key_target: 'input'
+                           }
+            %>
+          </li>
+
+          <li class="choice">
+            <%= label_tag do %>
+              <%= f.check_box :force %> <%= t('.force') %>
+            <% end %>
+          </li>
+        </ul>
+
+        <ul class="actions">
+          <li>
+            <%= f.submit(class: 'button primary-button') %>
+          </li>
+
+          <li>
+            <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->navigation#hideMoveForm' } %>
+          </li>
+        </ul>
+      <% end %>
+    </dialog>
+  <% end %>
 </nav>

@@ -20,8 +20,9 @@
             </li>
 
             <li class="choice">
-              <%= f.check_box :force, id: "force_checkbox" %>
-              <%= f.label :force, t('.force'), for: "force_checkbox" %>
+              <%= label_tag do %>
+                <%= f.check_box :force %> <%= t('.force') %>
+              <% end %>
             </li>
           </ul>
 

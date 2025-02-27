@@ -15,20 +15,20 @@
   .actions { 
     display: flex;
     width: 100%;
+
+    & > li {
+      margin-right: var(--base-size-16);
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
   }
 
   .yaml-locales {
 
     ul {
       display: flex;
-    }
-  }
-
-  .actions li {
-    margin-right: var(--base-size-16);
-
-    &:last-child {
-      margin-right: 0;
     }
   }
 

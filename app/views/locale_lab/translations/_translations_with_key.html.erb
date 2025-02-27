@@ -60,38 +60,66 @@
       </li>
     </ul>
 
-    <dialog data-translation-key-target="moveForm">
+    <dialog class="dialog" data-translation-key-target="moveForm">
       <%= render 'locale_lab/translations/dialog_flash' %>
       <%= form_with url: locale_lab.move_translation_path(key), method: :put, data: { turbo_frame: '_top' } do |f| %>
-        <%= t('.move') %>
-        <%=
-          f.text_field :new_id, value: key,
-                      id:    "rename_#{key_id}_input",
-                      style: 'width: 500px;',
-                      data: {
-                        translation_key_target: 'input'
-                      }
-        %>
-        <%= f.label      :force,  t('.force') %>
-        <%= f.check_box  :force %>
-        <%= f.submit(class: 'button primary-button') %>
-        <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideMoveForm' } %>
+        <ul class="inputs">
+          <li>
+            <label><%= t('.move') %></label>
+            <%=
+              f.text_field :new_id, value: key,
+                          id:    "rename_#{key_id}_input",
+                          data: {
+                            translation_key_target: 'input'
+                          }
+            %>
+          </li>
+
+          <li class="choice">
+            <%= label_tag do %>
+              <%= f.check_box :force %> <%= t('.force') %>
+            <% end %>
+          </li>
+        </ul>
+
+        <ul class="actions">
+          <li>
+            <%= f.submit(class: 'button primary-button') %>
+          </li>
+          <li>
+            <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideMoveForm' } %>
+          </li>
+        </ul>
       <% end %>
     </dialog>
 
-    <dialog data-translation-key-target="duplicateForm">
+    <dialog class="dialog" data-translation-key-target="duplicateForm">
       <%= render 'locale_lab/translations/dialog_flash' %>
       <%= form_with url: locale_lab.duplicate_translation_path(key), method: :put, data: { turbo_frame: '_top' } do |f| %>
-        <%= t('.duplicate') %>
-        <%=
-          f.text_field :new_id, value: "#{key}_copy",
-                      id:    "duplicate_#{key_id}_input",
-                      style: 'width: 500px;'
-        %>
-        <%= f.label      :force,  t('.force') %>
-        <%= f.check_box  :force %>
-        <%= f.submit(class: 'button primary-button') %>
-        <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideDuplicateForm' } %>
+        <ul class="inputs">
+          <li>
+            <label><%= t('.duplicate') %></label>
+            <%=
+              f.text_field :new_id, value: "#{key}_copy",
+                          id:    "duplicate_#{key_id}_input"
+            %>
+          </li>
+
+          <li class="choice">
+            <%= label_tag do %>
+              <%= f.check_box :force %> <%= t('.force') %>
+            <% end %>
+          </li>
+        </ul>
+
+        <ul class="actions">
+          <li>
+            <%= f.submit(class: 'button primary-button') %>
+          </li>
+          <li>
+            <%= f.button t('.discard'), class: 'button secondary-button', type: 'button', data: { action: 'click->translation-key#hideDuplicateForm' } %>
+          </li>
+        </ul>
       <% end %>
     </dialog>
 
