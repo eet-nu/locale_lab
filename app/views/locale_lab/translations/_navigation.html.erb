@@ -96,15 +96,13 @@
       <%
         label = folder.split('.').last
       %>
-      <% turbo_frame_tag "sidebar_item:#{folder}" do %>
-        <li class="folder">
-          <%= link_to locale_lab.translation_path(folder) do %>
-            <svg class="folder-icon" width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.044 1.677H4.78c-.176 0-.401-.378-.693-.726-.267-.317-.552-.496-.77-.496h-2.26C.476.455 0 .795 0 1.383v8.96c0 .592.476 1.112 1.058 1.112h9.986c.581 0 .956-.52.956-1.112V2.624c0-.592-.375-.947-.956-.947Zm-9.987-.611h2.067c.146 0 .322.061.536.317.454.546.581.905 1.121.905h6.263c.247 0 .356.084.356.336v.886H.6V1.383c0-.344.386-.317.458-.317Zm9.987 9.778H1.057c-.243 0-.457-.237-.457-.5V4.121h10.8v6.221c0 .23-.098.5-.356.5Z"/></svg>
-            <span><%= label %></span>
-            <svg class="arrow-icon" width="9" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m1 13.218 6-6-6-6" stroke="#595959" stroke-width="2" stroke-linecap="round"/></svg>
-          <% end %>
-        </li>
-      <% end %>
+      <li class="folder">
+        <%= link_to locale_lab.translation_path(folder) do %>
+          <svg class="folder-icon" width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.044 1.677H4.78c-.176 0-.401-.378-.693-.726-.267-.317-.552-.496-.77-.496h-2.26C.476.455 0 .795 0 1.383v8.96c0 .592.476 1.112 1.058 1.112h9.986c.581 0 .956-.52.956-1.112V2.624c0-.592-.375-.947-.956-.947Zm-9.987-.611h2.067c.146 0 .322.061.536.317.454.546.581.905 1.121.905h6.263c.247 0 .356.084.356.336v.886H.6V1.383c0-.344.386-.317.458-.317Zm9.987 9.778H1.057c-.243 0-.457-.237-.457-.5V4.121h10.8v6.221c0 .23-.098.5-.356.5Z"/></svg>
+          <span><%= label %></span>
+          <svg class="arrow-icon" width="9" height="15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="m1 13.218 6-6-6-6" stroke="#595959" stroke-width="2" stroke-linecap="round"/></svg>
+        <% end %>
+      </li>
     <% end %>
 
     <% keys(with_current_folder: true).each do |key| %>
@@ -112,13 +110,11 @@
         label = key.split('.').last
         label = content_tag(:strong, label) if key == local_assigns[:path]
       %>
-      <%= turbo_frame_tag "sidebar_item:#{key}" do %>
-        <li class="key">
-          <%= link_to locale_lab.translation_path(key) do %>
-            <span><%= label %></span>
-          <% end %>
-        </li>
-      <% end %>
+      <li class="key">
+        <%= link_to locale_lab.translation_path(key) do %>
+          <span><%= label %></span>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 
