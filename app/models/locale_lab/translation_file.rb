@@ -102,8 +102,14 @@ module LocaleLab
       result
     end
 
+    def deep_sort_hash(hash)
+      hash.each_with_object({}) do |(k, v), sorted|
+        sorted[k] = v.is_a?(Hash) ? deep_sort_hash(v) : v
+      end.sort.to_h
+    end
+
     def to_yaml
-      to_hash.to_yaml(line_width: 1024 * 1024)
+      deep_sort_hash(to_hash).to_yaml(line_width: 1024 * 1024)
     end
 
     def save
