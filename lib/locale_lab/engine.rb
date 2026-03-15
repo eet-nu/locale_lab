@@ -6,6 +6,10 @@ module LocaleLab
   class Engine < ::Rails::Engine
     isolate_namespace LocaleLab
 
+    config.generators do |g|
+      g.test_framework :rspec
+    end
+
     initializer 'locale_lab.assets' do |app|
       app.config.assets.paths << root.join('app/javascript')
       app.config.assets.paths << root.join('vendor/javascript')
